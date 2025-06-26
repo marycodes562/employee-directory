@@ -1,0 +1,45 @@
+# .github/workflows/commit-message-check.yml
+
+name: Check Commit Messages
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  commit-message-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit messages
+        run: |
+          echo "🔍 Checking commit messages..."
+          commits=$(git log origin/master..HEAD --pretty=format:"%s")
+
+          pattern="^(feat|fix|chore|docs|style|refactor|test|perf)(\([a-zA-Z0-9\-]+\))?: .{1,}"
+
+          valid=true
+
+          while IFS= read -r commit_msg; do
+            echo "• $commit_msg"
+            if [[ ! $commit_msg =~ $pattern ]]; then
+              echo "Commit message does not follow Conventional Commits: $commit_msg"
+              valid=false
+            fi
+          done <<< "$commits"
+
+          if [ "$valid" = false ]; then
+            echo "All commit messages must follow the Conventional Commits format."
+            echo "Examples:"
+            echo "  - feat: Add login page"
+            echo "  - fix(auth): Handle login failure"
+            echo "  - chore: Update dependencies"
+            exit 1
+          fi
+
+          echo "All commit messages are valid!"
