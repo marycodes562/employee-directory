@@ -6,63 +6,124 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
+
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function SignUp() {
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 
-	const [signedUp, setSignedUp] = useState(false);
+	const router = useRouter();
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const [formSignUp, setformSignUp] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: ''
+	});
 
-		if (firstName && lastName) {
-			alert('You are logged in')
+	const formik = useFormik({
+		initialValues: {
+			firstName: '',
+			lastName: '',
+			email: '',
+			password: ''	
+		},
+		validationSchema: Yup.object({
+			firstName: Yup.string().required("Required"),
+			lastName: Yup.string().required("Required"),
+			email: Yup.string().email("Invalid email address").required("Required"),
+			password: Yup.string().required("Required")
+		}),
+		onSubmit: values => {
+			console.log(values);
+			setformSignUp(values);
+			router.push('/login');
 		}
-	}
+	})
 
 	return (
 		<div className={styles.page}>
-			<Card border="primary" className={styles.form} style={{ width: '20rem' }}>
-				
-						<Form onSubmit={handleSubmit}>
-																	
+			<Card className={styles.form} style={{ width: '25rem' }}>
+					{/*Greeting Header */}
+					<h2 className={styles.header}>Great to meet you!</h2>
+						<Form onSubmit={formik.handleSubmit}>
+									{/*First Name */}									
 									<FloatingLabel
 									controlId="floatingInput"
 									label="First Name"
 									className="mb-3"
 									>
-									<Form.Control type="text" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)}/>
+									<Form.Control 
+										name="firstName"
+										type="text" 
+										placeholder="First Name" 
+										onChange={formik.handleChange}
+										value={formik.values.firstName}
+									/>
 									</FloatingLabel>
+									{formik.touched.firstName && formik.errors.firstName ? (
+										<p className={styles.errors}>{formik.errors.firstName}</p>
+									) : null
+									}
 									
+									{/*Last Name */}
 									<FloatingLabel
 									controlId="floatingInput"
 									label="Last Name"
 									className="mb-3"
 									>
-									<Form.Control type="text" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
+									<Form.Control 
+										name="lastName"
+										type="text" 
+										placeholder="Last Name" 
+										onChange={formik.handleChange} 
+										value={formik.values.lastName}
+									/>
 									</FloatingLabel>
+									{formik.touched.lastName && formik.errors.lastName ? (
+										<span className='text-danger'>{formik.errors.lastName}</span>
+									) : null}
 									
+									{/*Email Address */}
 									<FloatingLabel
 									controlId="floatingInput"
 									label="Email address"
 									className="mb-3"
 									>
-									<Form.Control type="email" placeholder="name@example.com" onChange={(e) => e.target.value}/>
+									<Form.Control 
+										name="email"
+										type="email" 
+										placeholder="name@example.com" 
+										onChange={formik.handleChange}
+										value={formik.values.email}
+									/>
 									</FloatingLabel>
+									{formik.touched.email && formik.errors.lastName ? (
+										<span className='text-danger'>{formik.errors.email}</span>
+									) : null}
 									
+									{/*Password */}
 									<FloatingLabel
 									controlId="floatingPassword"
 									label="Password"
 									className="mb-3"
 									>
-									<Form.Control type="password" placeholder="Password" />
+									<Form.Control 
+										name="password"
+										type="password" 
+										placeholder="Password" 
+										onChange={formik.handleChange}
+										value={formik.values.password}
+									/>
 									</FloatingLabel>
-			
+									{formik.touched.password && formik.errors.password ? (
+										<span className='text-danger'>{formik.errors.password}</span>
+									) : null}
+
+									{/*Sign Up Button */}
 									<Button type="submit" className={styles.signUpButton}>Sign Up</Button>
 						</Form>
 					</Card>
