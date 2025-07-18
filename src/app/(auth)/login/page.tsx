@@ -1,35 +1,53 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel';
+import { useRouter } from 'next/navigation';
+
+import styles from './page.module.css';
 
 export default function LoginPage() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	const router = useRouter();
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (!email || !password) {
+			alert('Please input a username and password');
+		} else {
+			router.push('/signUp');
+		}
+
+	} 
+
 	return (
 		<div>
-		<Card border="primary" className="d-flex justify-content-center p-4" style={{ width: '20rem' }}>
-			<Form >
+		<Card border="primary" className={styles.form} style={{ width: '20rem' }}>
+			<Form onSubmit={handleSubmit}>
 						<FloatingLabel
 						controlId="floatingInput"
 						label="Email address"
 						className="mb-3"
 						>
-						<Form.Control type="email" placeholder="name@example.com" />
+						<Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" />
 						</FloatingLabel>
+
 						<FloatingLabel
 						controlId="floatingPassword"
 						label="Password"
 						className="mb-3"
 						>
-						<Form.Control type="password" placeholder="Password" />
+						<Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
 						</FloatingLabel>
-						
-						<Form.Check aria-label="option 1" /><p>Remember me?</p>
-						<div>
-							<a href="#">Don't have an account, sign up here</a>
-						</div><br />
 
-						<Button type="submit">Sign in</Button>
+						<Button type="submit" >Sign in</Button><br /><br />
+
+						<a href="/signUp">Create an account</a>
 			</Form>
 		</Card>
 	</div>

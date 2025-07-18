@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
 import SignUp from "./(auth)/signUp/page";
@@ -10,6 +12,7 @@ export default function Home() {
 		<div className={styles.page}>
 			<main className={styles.main}>
 				<LoginPage />
+				
 			</main>
 			<footer className={styles.footer}>
 				
