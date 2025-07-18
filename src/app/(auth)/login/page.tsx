@@ -26,7 +26,7 @@ export default function LoginPage() {
 	} 
 
 	return (
-		<div>
+		<div className={styles.page}>
 		<Card border="primary" className={styles.form} style={{ width: '20rem' }}>
 			<Form onSubmit={handleSubmit}>
 						<FloatingLabel
@@ -45,7 +45,7 @@ export default function LoginPage() {
 						<Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
 						</FloatingLabel>
 
-						<Button type="submit" >Sign in</Button><br /><br />
+						<Button type="submit" className={styles.signInButton}>Sign in</Button><br /><br />
 
 						<a href="/signUp">Create an account</a>
 			</Form>
