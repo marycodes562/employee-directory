@@ -84,7 +84,7 @@ export default function SignUp() {
 									/>
 									</FloatingLabel>
 									{formik.touched.lastName && formik.errors.lastName ? (
-										<span className='text-danger'>{formik.errors.lastName}</span>
+										<p className={styles.errors}>{formik.errors.lastName}</p>
 									) : null}
 									
 									{/*Email Address */}
@@ -102,7 +102,7 @@ export default function SignUp() {
 									/>
 									</FloatingLabel>
 									{formik.touched.email && formik.errors.lastName ? (
-										<span className='text-danger'>{formik.errors.email}</span>
+										<p className={styles.errors}>{formik.errors.email}</p>
 									) : null}
 									
 									{/*Password */}
@@ -120,7 +120,7 @@ export default function SignUp() {
 									/>
 									</FloatingLabel>
 									{formik.touched.password && formik.errors.password ? (
-										<span className='text-danger'>{formik.errors.password}</span>
+										<p className={styles.errors}>{formik.errors.password}</p>
 									) : null}
 
 									{/*Sign Up Button */}

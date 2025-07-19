@@ -30,7 +30,7 @@ export default function LoginPage() {
 		onSubmit: values => {
 			console.log(values);
 			setFormData(values);
-			router.push('/signUp');
+			router.push('/');
 		}
 	})
 
