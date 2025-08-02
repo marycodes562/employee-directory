@@ -4,3 +4,8 @@
     display: flex;
     justify-content: space-between
 }
+
+.container {
+    background-color: rgb(225, 234, 243);
+}
+

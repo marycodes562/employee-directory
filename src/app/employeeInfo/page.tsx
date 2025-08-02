@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import employees from '@/Data/personnelData';
 import AddUserForm from '@/components/profile/addUserForm';
-import Button from 'react-bootstrap/Button';
-import styles from './page.module.css';
 import EditUserForm from '@/components/profile/editUserForm';
 import DeleteUser from '@/components/profile/deleteUserForm';
+import NavBar from '../navBar';
 
-
+import Button from 'react-bootstrap/Button';
+import styles from './page.module.css';
+import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -25,7 +26,10 @@ export default function EmployeeInfo() {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
+            <div>
+                <NavBar />
+            </div>
             <div className={styles.header}>
                 {/*------------------------- Employee List Header ----------------------------------*/}
                 <h4>Employee List</h4>
@@ -57,7 +61,7 @@ export default function EmployeeInfo() {
 
             {/*------------------------- Employee Table ----------------------------------*/}
 
-            <table id='employeeTable' className='table table-striped responsive'>
+            <Table className={styles.table} responsive>
                 <thead>
                     <tr>
                         <th>Employee ID</th>
@@ -66,6 +70,8 @@ export default function EmployeeInfo() {
                         <th>Email</th>
                         <th>Location</th>
                         <th>Department</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead> 
                 <tbody>
@@ -82,7 +88,7 @@ export default function EmployeeInfo() {
                         </tr>
                     ))}
                 </tbody> 
-            </table>
+            </Table>
         </div>
     )
 }
