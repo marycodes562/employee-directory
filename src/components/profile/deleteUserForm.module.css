@@ -8,9 +8,9 @@
 }
 
 .modal {
-    width: '10rem';
-    margin: '20px auto';
-    padding: '1rem';
+    width: auto;
+    margin: 20px auto;
+    padding: 1rem;
 }
 
 .form {
