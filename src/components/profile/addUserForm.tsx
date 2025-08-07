@@ -111,7 +111,7 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
                     >
                     <Form.Control
                         type="email"
-                        value={formData.lastName}
+                        value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
                 </FloatingLabel>
