@@ -24,5 +24,6 @@ export const getEmployees = async() =>  {
 }
 
 export const addEmployees = async(employeeData) => {
-	return await addDoc(employeesRef, employeeData);
+	const docRef = await addDoc(employeesRef, employeeData);
+	return docRef;
 }
