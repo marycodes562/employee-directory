@@ -1,9 +1,11 @@
 "use client"
 
 import React, { useState } from 'react';
-import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 import locations from '@/Data/locationData';
+import Card from 'react-bootstrap/Card';
 
+import styles from "./sideFilter.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function SideFilter() {
@@ -12,12 +14,13 @@ function SideFilter() {
 
 
     return (
-        <div>
-            <ul>
+        <div className={styles.list}>
+            <h5>Locations</h5>
+            <ListGroup className={styles.list}>
                 {location.map((loc, index) => (
-                    <li key={loc.id}>{loc.name}</li>
+                    <ListGroup.Item action  key={loc.id}><Card className={styles.tableData}>{loc.name}</Card></ListGroup.Item>
                 ))}
-            </ul>
+            </ListGroup>
 
         </div>
     )

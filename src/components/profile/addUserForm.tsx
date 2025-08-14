@@ -10,7 +10,6 @@ import Modal from 'react-bootstrap/Modal';
 import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -52,7 +51,9 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
                  size= "lg"
                  className={styles.modal} 
                  aria-labelledby="contained-modal-title-vcenter"
-                 centered>
+                 centered
+                 scrollable
+            >
             <Modal.Body>
              {/*------------------------- Modal Title ----------------------------------*/}
              <Modal.Header closeButton>

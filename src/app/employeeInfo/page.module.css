@@ -1,17 +1,52 @@
 .header {
-    padding: 1rem 1rem 0 1rem;
+    padding: 0.5rem 0.5rem 0 0.5rem;
     width: 100%;
     display: flex;
-    justify-content: space-between
+    justify-content: flex-end;
 }
 
 .container {
-    background-color: rgb(225, 234, 243);
+   background-color: rgb(244, 244, 245);
+   height: auto;
+   background: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
+   backdrop-filter: blur(8px); /* Frosted glass effect */
+   -webkit-backdrop-filter: blur(8px); /* Safari support */
+   border-radius: 12px;
+   padding: 1rem;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    
 }
 
 .main {
-     display: flex;
-     flex-direction: row;
-     justify-content: space-evenly;
+  display: flex;
+  gap: 1rem;
+  
 }
+
+/* Side filter container */
+.side {
+  width: auto;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-left: 1rem;
+}
+
+/* Table container */
+.table {
+  flex: 1; /* Take up remaining space */
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  margin-right: 1rem;
+}
+
+.personId {
+    display: none;
+}
+
+
 
