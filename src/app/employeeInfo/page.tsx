@@ -17,10 +17,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import toast from "react-hot-toast";
 
 export default function EmployeeInfo() {
-	const [personnel, setPersonnel] = useState([]);
+	const [personnel, setPersonnel] = useState([
+		{
+			employeeId: "",
+			firstName: "",
+			lastName: "",
+			email: "",
+			location: "",
+			department: "",
+		},
+	]);
 	const [showAddUserForm, setShowAddUserForm] = useState(false);
 	const [showEditUserForm, setShowEditUserForm] = useState(false);
-	const [showDeleteUser, setShowDeleteUser] = useState(false);
+	const [showDeleteUserForm, setShowDeleteUserForm] = useState(false);
 	const [selectedEmployee, setSelectedEmployee] = useState(null);
 
 	async function loadEmployees() {
@@ -79,8 +88,10 @@ export default function EmployeeInfo() {
 
 			{/*------------------------- Delete User Form ----------------------------------*/}
 			<DeleteUser
-				show={showDeleteUser}
-				onHide={() => setShowDeleteUser(false)}
+				show={showDeleteUserForm}
+				onHide={() => setShowDeleteUserForm(false)}
+				employee={selectedEmployee}
+				onDeleted={loadEmployees}
 			/>
 
 			{/*------------------------- Employee Table ----------------------------------*/}
@@ -110,7 +121,10 @@ export default function EmployeeInfo() {
 							</td>
 							<td>
 								<Button
-									onClick={() => setShowDeleteUser(true)}
+									onClick={() => {
+										setSelectedEmployee(person);
+										setShowDeleteUserForm(true);
+									}}
 									variant="danger"
 								>
 									Delete

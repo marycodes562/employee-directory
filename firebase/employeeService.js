@@ -31,8 +31,8 @@ export const updateEmployee = async (id, updatedData) => {
 
 // Delete employee
 export const deleteEmployee = async (id) => {
-	const empDoc = doc(db, "employees", id);
-	return await deleteDoc(empDoc);
+	const emptyDoc = doc(db, "employees", id);
+	return await deleteDoc(emptyDoc);
 };
 
 // (Optional) Check for duplicate email or employeeId
