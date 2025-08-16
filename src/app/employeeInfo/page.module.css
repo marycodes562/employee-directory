@@ -9,3 +9,9 @@
     background-color: rgb(225, 234, 243);
 }
 
+.main {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-evenly;
+}
+
