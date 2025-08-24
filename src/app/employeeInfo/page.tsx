@@ -20,10 +20,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function EmployeeInfo() {
 
-    const [personnel, setPersonnel] = useState([]);
+    const [personnel, setPersonnel] = useState([{  
+        employeeId: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        location: '',
+        department: ''
+    }]);
     const [showAddUserForm, setShowAddUserForm] = useState(false);
     const [showEditUserForm, setShowEditUserForm] = useState(false);
     const [showDeleteUser, setShowDeleteUser] = useState(false);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     async function loadEmployees() {
          const data = await getEmployees();
@@ -70,7 +78,8 @@ export default function EmployeeInfo() {
                 {/*------------------------- Edit User Form ----------------------------------*/}
                 <EditUserForm 
                     show={showEditUserForm}
-
+                    employee={selectedEmployee}
+                    onEdited={loadEmployees}
                     onHide={() => setShowEditUserForm(false)}
                 />
 
@@ -78,6 +87,8 @@ export default function EmployeeInfo() {
                 <DeleteUser
                     show={showDeleteUser}
                     onHide={() => setShowDeleteUser(false)}
+                    employee={selectedEmployee}
+                    onDeleted={loadEmployees}
                 />
 
             <div className={styles.main}>
@@ -112,7 +123,7 @@ export default function EmployeeInfo() {
                                 <td>{person.location}</td>
                                 <td>{person.department}</td>
                                 <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                <td><Button onClick={() => setShowDeleteUser(true)} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                             </tr>
                         ))}
                     </tbody> 

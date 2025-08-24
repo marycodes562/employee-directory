@@ -27,3 +27,8 @@ export const addEmployees = async(employeeData) => {
 	const docRef = await addDoc(employeesRef, employeeData);
 	return docRef;
 }
+
+export const deleteEmployees = async(id) => {
+	const emptyDoc = doc(db, 'employees', id);
+	return await deleteDoc(emptyDoc);
+}
