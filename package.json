@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@deemlol/next-icons": "^0.1.9",
     "bootstrap": "^5.3.7",
     "firebase": "^12.0.0",
     "formik": "^2.4.6",

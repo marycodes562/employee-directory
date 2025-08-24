@@ -12,6 +12,9 @@ import { getEmployees, addEmployees } from '../../../firebase/employeeService';
 import Button from 'react-bootstrap/Button';
 import styles from './page.module.css';
 import Table from 'react-bootstrap/Table';
+import { Edit3 } from "@deemlol/next-icons";
+import { Trash2 } from "@deemlol/next-icons";
+import { Plus } from "@deemlol/next-icons";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -38,18 +41,22 @@ export default function EmployeeInfo() {
         loadEmployees();
     }
 
+    const handleEditEmployee = async(user: any) => {
+        const employee = await getEmployees();
+    }
+
     return (
         <div className={styles.container}>
-            <div>
+            <header>
                 <NavBar />
-            </div>
+            </header>
             <div className={styles.header}>
-                {/*------------------------- Employee List Header ----------------------------------*/}
-                <h4>Employee List</h4>
+                {/*------------------------- Employee List Header ----------------------------------
+                <h5>Employee List</h5>*/}
 
-                {/*------------------------- Add User Button ----------------------------------*/}
+                {/*------------------------- Add Employee Button ----------------------------------*/}
                 <Button variant="primary" onClick={() => setShowAddUserForm(true)}>
-                    Add New Employee
+                    <Plus size={24} color="#FFFFFF" /> Add New Employee
                 </Button>
             </div>
 
@@ -63,6 +70,7 @@ export default function EmployeeInfo() {
                 {/*------------------------- Edit User Form ----------------------------------*/}
                 <EditUserForm 
                     show={showEditUserForm}
+
                     onHide={() => setShowEditUserForm(false)}
                 />
 
@@ -73,15 +81,18 @@ export default function EmployeeInfo() {
                 />
 
             <div className={styles.main}>
-                <SideFilter />
-                
+                 {/* Side Filter */}
+                <div className={styles.side}>
+                    <SideFilter />
+                </div>
+                                
 
                 {/*------------------------- Employee Table ----------------------------------*/}
-
-                <Table className={styles.table} responsive>
+                <div className={styles.table} >
+                <Table responsive>
                     <thead>
                         <tr>
-                            <th>Employee ID</th>
+                            <th className={styles.personId}>Employee ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
@@ -94,18 +105,19 @@ export default function EmployeeInfo() {
                     <tbody>
                         {personnel.map((person, index) => (
                             <tr key={person.employeeId}>
-                                <td>{person.employeeId}</td>
+                                <td className={styles.personId}>{person.employeeId}</td>
                                 <td>{person.firstName}</td>
                                 <td>{person.lastName}</td>
                                 <td>{person.email}</td>
                                 <td>{person.location}</td>
                                 <td>{person.department}</td>
-                                <td><Button onClick={() => setShowEditUserForm(true)}>Edit</Button></td>
-                                <td><Button onClick={() => setShowDeleteUser(true)} variant='danger'>Delete</Button></td>
+                                <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                <td><Button onClick={() => setShowDeleteUser(true)} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                             </tr>
                         ))}
                     </tbody> 
                 </Table>
+                </div>
             </div>
         </div>
     )

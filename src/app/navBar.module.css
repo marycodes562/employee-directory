@@ -2,8 +2,6 @@
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: white;
-    
 }
 
 .buttonsContainer {
@@ -11,9 +9,5 @@
 }
 
 .button {
-    margin: 0.7rem;
-}
-
-.dateDay {
-    padding-top: 1rem;
+    margin-right: 0.7rem;
 }

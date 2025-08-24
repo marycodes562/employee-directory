@@ -11,18 +11,19 @@ function DeleteUser({show, onHide}: any)  {
     return (
         <div>
             <Modal
-                className={styles.modal}
+                className={styles.modalContent}
                 size='lg'
                 aria-labelledby='contained-modal-title-vcenter'
-                centered
                 show={show}
                 onHide={onHide}
+                centered
             >
 
                 <Form className={styles.form}>
-                    <Modal.Header closeButton>Delete User</Modal.Header>
-                    <p>Are you sure you want to delete this user?</p>
-
+                    <Modal.Header closeButton>Delete User </Modal.Header>
+                    <Modal.Body>
+                        <p>Are you sure you want to delete this user?</p>
+                    </Modal.Body>
                     <Modal.Footer>
                         {/*------------------------- Close Button ----------------------------------*/}
                         <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
