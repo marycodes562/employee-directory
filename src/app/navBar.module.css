@@ -11,3 +11,9 @@
 .button {
     margin-right: 0.7rem;
 }
+
+.dateDay {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
