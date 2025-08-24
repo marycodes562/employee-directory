@@ -12,7 +12,6 @@ function DeleteUser({show, onHide}: any)  {
         <div>
             <Modal
                 className={styles.modalContent}
-                size='lg'
                 aria-labelledby='contained-modal-title-vcenter'
                 show={show}
                 onHide={onHide}
@@ -20,7 +19,9 @@ function DeleteUser({show, onHide}: any)  {
             >
 
                 <Form className={styles.form}>
-                    <Modal.Header closeButton>Delete User </Modal.Header>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Delete User</Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <p>Are you sure you want to delete this user?</p>
                     </Modal.Body>

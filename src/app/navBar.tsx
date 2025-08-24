@@ -4,6 +4,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 import { Sun } from "@deemlol/next-icons";
 import { Settings } from "@deemlol/next-icons";
@@ -25,9 +26,9 @@ function NavBar() {
             <Navbar className={styles.navBar}>
 
               {/*---------------- Date / Day -------------------- */}
-                <div className={styles.dateDay}>
+                <Card className={styles.dateDay}>
                     <p>{`${date} / ${month} / ${year}`}</p>
-                </div>
+                </Card>
 
                 {/*---------------- Search Bar -------------------- */}
                 <Form className={styles.form}>
