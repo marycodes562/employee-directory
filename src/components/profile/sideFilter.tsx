@@ -26,9 +26,21 @@ function SideFilter({ onCountryChange }) {
             try {
                 toast.success("Location successfully selected");
                 setlocationFilter(locationValue)
-                await onCountryChange(locationValue);
+                await onCountryChange(locationValue, departmentFilter);
             } catch(error) { 
                 toast.error("Error selecting location")
+            }
+        }
+
+        const handleDepartmentChange = async(e: React.ChangeEvent<HTMLSelectElement>) => {
+            e.preventDefault()
+            const departmentValue = e.target.value;
+            try {
+                toast.success("Department selected successfully");
+                setdepartmentFilter(departmentValue);
+                await onCountryChange(locationFilter, departmentValue);
+            } catch(error) {
+                toast.error("Error selecting department");
             }
         }
 
@@ -41,7 +53,7 @@ function SideFilter({ onCountryChange }) {
             {/* Locations Filter */}
             
             <Form.Select aria-label="Default select example" onChange={handleLocationChange}>
-                <option>Select Location</option>
+                <option value="">Select Location</option>
                 {location.map((loc, index) => (
                     <option key={loc.id} value={loc.name} className={styles.tableData} >{loc.name}</option>
                 ))}
@@ -49,16 +61,18 @@ function SideFilter({ onCountryChange }) {
 
              {/* Departments Filter */}
            
-            <Form.Select aria-label="Default select example">
-                <option>Select Department</option>
+            <Form.Select aria-label="Default select example" onChange={handleDepartmentChange}>
+                <option value="">Select Department</option>
                {department.map((dep, index) => (
-                    <option key={dep.id} className={styles.tableData}>{dep.name}</option>
+                    <option key={dep.id} value={dep.name} className={styles.tableData}>{dep.name}</option>
                 ))}
             </Form.Select>
 
             {/* Filter Option */}
 
             <div>{locationFilter}</div>
+
+            <div>{departmentFilter}</div>
 
         </div>
     )

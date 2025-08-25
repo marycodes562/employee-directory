@@ -54,8 +54,8 @@ export default function EmployeeInfo() {
         const employee = await getEmployees();
     }
 
-    const handleCountryChange = async(country: any) => {
-        const countries = await findByCountry(country);
+    const handleCountryChange = async(country: any, department: any) => {
+        const countries = await findByCountry(country, department);
         setFilteredLocation(countries);
         console.log(countries);
         return countries

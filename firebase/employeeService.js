@@ -7,6 +7,7 @@ import {
 	deleteDoc,
 	query,
 	where,
+	and
 } from "firebase/firestore";
 
 import { db } from './firebase';
@@ -33,8 +34,21 @@ export const deleteEmployees = async(id) => {
 	return await deleteDoc(emptyDoc);
 }
 
-export const findByCountry = async(location) => {
-	const q = query(employeesRef, where("location", "==", location));
+export const findByCountry = async(location, department) => {
+	let q;
+	let locationQuery = query(employeesRef, where("location", "==", location));
+	let departmentQuery = query(employeesRef, where("department", "==", department));
+	let landDQuery = query(employeesRef, and(where("location", "==", location), where("department", "==", department)));
+
+	if (location && department) {
+		q = landDQuery;
+	} else if (location) {
+		q = locationQuery;
+	} else if (department) {
+		q = departmentQuery;
+	} else {
+		q = employeesRef
+	}
 
 	const qResponse = await getDocs(q);
 	const result = [];
