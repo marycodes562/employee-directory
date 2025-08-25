@@ -32,3 +32,19 @@ export const deleteEmployees = async(id) => {
 	const emptyDoc = doc(db, 'employees', id);
 	return await deleteDoc(emptyDoc);
 }
+
+export const findByCountry = async(location) => {
+	const q = query(employeesRef, where("location", "==", location));
+
+	const qResponse = await getDocs(q);
+	const result = [];
+
+	qResponse.docs.forEach((country) => {
+		result.push({
+			id: country.id,
+			...country.data()
+		})
+	})
+
+	return result;
+}
