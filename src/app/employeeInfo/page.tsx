@@ -7,7 +7,7 @@ import EditUserForm from '@/components/profile/editUserForm';
 import DeleteUser from '@/components/profile/deleteUserForm';
 import NavBar from '../navBar';
 import SideFilter from '@/components/profile/sideFilter';
-import { getEmployees, addEmployees } from '../../../firebase/employeeService';
+import { getEmployees, addEmployees, findByCountry } from '../../../firebase/employeeService';
 
 import Button from 'react-bootstrap/Button';
 import styles from './page.module.css';
@@ -32,6 +32,7 @@ export default function EmployeeInfo() {
     const [showEditUserForm, setShowEditUserForm] = useState(false);
     const [showDeleteUser, setShowDeleteUser] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
+    const [filteredLocations, setFilteredLocation] = useState([]);
 
     async function loadEmployees() {
          const data = await getEmployees();
@@ -51,6 +52,85 @@ export default function EmployeeInfo() {
 
     const handleEditEmployee = async(user: any) => {
         const employee = await getEmployees();
+    }
+
+    const handleCountryChange = async(country: any, department: any) => {
+        const countries = await findByCountry(country, department);
+        setFilteredLocation(countries);
+        console.log(countries);
+        return countries
+    }
+
+    const content = () => {
+        
+    if (filteredLocations.length > 0) {
+        return (
+            < div className={styles.table} >
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th className={styles.personId}>Employee ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Department</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {filteredLocations.map((person, index) => (
+                            <tr key={person.employeeId}>
+                                <td className={styles.personId}>{person.employeeId}</td>
+                                <td>{person.firstName}</td>
+                                <td>{person.lastName}</td>
+                                <td>{person.email}</td>
+                                <td>{person.location}</td>
+                                <td>{person.department}</td>
+                                <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                            </tr>
+                        ))}
+                    </tbody> 
+                </Table>
+                </div>
+        )
+    } else {
+        return (
+            < div className={styles.table} >
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th className={styles.personId}>Employee ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Department</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {personnel.map((person, index) => (
+                            <tr key={person.employeeId}>
+                                <td className={styles.personId}>{person.employeeId}</td>
+                                <td>{person.firstName}</td>
+                                <td>{person.lastName}</td>
+                                <td>{person.email}</td>
+                                <td>{person.location}</td>
+                                <td>{person.department}</td>
+                                <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                            </tr>
+                        ))}
+                    </tbody> 
+                </Table>
+                </div>
+        )
+    }
+
     }
 
     return (
@@ -94,42 +174,17 @@ export default function EmployeeInfo() {
             <div className={styles.main}>
                  {/* Side Filter */}
                 <div className={styles.side}>
-                    <SideFilter />
+                    <SideFilter 
+                        onCountryChange={handleCountryChange}
+                    />
                 </div>
                                 
 
                 {/*------------------------- Employee Table ----------------------------------*/}
-                <div className={styles.table} >
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th className={styles.personId}>Employee ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Location</th>
-                            <th>Department</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead> 
-                    <tbody>
-                        {personnel.map((person, index) => (
-                            <tr key={person.employeeId}>
-                                <td className={styles.personId}>{person.employeeId}</td>
-                                <td>{person.firstName}</td>
-                                <td>{person.lastName}</td>
-                                <td>{person.email}</td>
-                                <td>{person.location}</td>
-                                <td>{person.department}</td>
-                                <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
-                            </tr>
-                        ))}
-                    </tbody> 
-                </Table>
-                </div>
+                
+               {content()}
             </div>
+                        
         </div>
     )
 }

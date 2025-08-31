@@ -1,58 +1,78 @@
 "use client"
 
-import React, { useState } from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
+import React, { useState, useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
 import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
 import Card from 'react-bootstrap/Card';
-import Dropdown from 'react-bootstrap/Dropdown'
+import toast from 'react-hot-toast';
 
 import styles from "./sideFilter.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { findByCountry } from '../../../firebase/employeeService';
 
 
-function SideFilter() {
+function SideFilter({ onCountryChange }) {
 
         const [location, setLocation] = useState(locations);
         const [department, setDepartments] = useState(departments);
 
-        const [locationFilter, setlocationFilter] = useState([]);
-        const [departmentFilter, setdepartmentFilter] = useState([]);
+        const [locationFilter, setlocationFilter] = useState("");
+        const [departmentFilter, setdepartmentFilter] = useState("");
+
+        const handleLocationChange = async(e: React.ChangeEvent<HTMLSelectElement>) => {
+            e.preventDefault()
+            const locationValue = e.target.value;
+            try {
+                toast.success("Location successfully selected");
+                setlocationFilter(locationValue)
+                await onCountryChange(locationValue, departmentFilter);
+            } catch(error) { 
+                toast.error("Error selecting location")
+            }
+        }
+
+        const handleDepartmentChange = async(e: React.ChangeEvent<HTMLSelectElement>) => {
+            e.preventDefault()
+            const departmentValue = e.target.value;
+            try {
+                toast.success("Department selected successfully");
+                setdepartmentFilter(departmentValue);
+                await onCountryChange(locationFilter, departmentValue);
+            } catch(error) {
+                toast.error("Error selecting department");
+            }
+        }
+
 
 
     return (
         <div className={styles.dropdown}>
             <h5>Filter</h5>
 
-            {/* Locations Filter Dropdown */}
-            <Dropdown>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                    Locations
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    {location.map((loc, index) => (
-                    <Dropdown.Item key={loc.id}><Card className={styles.tableData}>{loc.name}</Card></Dropdown.Item>
+            {/* Locations Filter */}
+            
+            <Form.Select aria-label="Default select example" onChange={handleLocationChange}>
+                <option value="">Select Location</option>
+                {location.map((loc, index) => (
+                    <option key={loc.id} value={loc.name} className={styles.tableData} >{loc.name}</option>
                 ))}
-                </Dropdown.Menu>
-            </Dropdown>
+            </Form.Select>
 
-             {/* Departments Filter Dropdown */}
-            <Dropdown>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                    Departments
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    {department.map((dep, index) => (
-                    <Dropdown.Item key={dep.id}><Card className={styles.tableData}>{dep.name}</Card></Dropdown.Item>
+             {/* Departments Filter */}
+           
+            <Form.Select aria-label="Default select example" onChange={handleDepartmentChange}>
+                <option value="">Select Department</option>
+               {department.map((dep, index) => (
+                    <option key={dep.id} value={dep.name} className={styles.tableData}>{dep.name}</option>
                 ))}
-                </Dropdown.Menu>
-            </Dropdown>
+            </Form.Select>
 
             {/* Filter Option */}
 
-            <div></div>
+            <div>{locationFilter}</div>
+
+            <div>{departmentFilter}</div>
 
         </div>
     )
