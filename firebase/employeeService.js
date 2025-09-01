@@ -47,3 +47,41 @@ export const isEmailOrIdTaken = async (email, employeeId) => {
 	);
 	return !snapshot2.empty;
 };
+
+export const findByCountry = async (location, department) => {
+	let q;
+	let locationQuery = query(employeesRef, where("location", "==", location));
+	let departmentQuery = query(
+		employeesRef,
+		where("department", "==", department)
+	);
+	let landDQuery = query(
+		employeesRef,
+		and(
+			where("location", "==", location),
+			where("department", "==", department)
+		)
+	);
+
+	if (location && department) {
+		q = landDQuery;
+	} else if (location) {
+		q = locationQuery;
+	} else if (department) {
+		q = departmentQuery;
+	} else {
+		q = employeesRef;
+	}
+
+	const qResponse = await getDocs(q);
+	const result = [];
+
+	qResponse.docs.forEach((country) => {
+		result.push({
+			id: country.id,
+			...country.data(),
+		});
+	});
+
+	return result;
+};

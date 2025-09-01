@@ -1,6 +1,6 @@
 "use client";
-
 import styles from "./page.module.css";
+
 import EmployeeInfo from "./employeeInfo/page";
 
 import "bootstrap/dist/css/bootstrap.min.css";
