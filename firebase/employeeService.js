@@ -7,6 +7,7 @@ import {
 	deleteDoc,
 	query,
 	where,
+	and,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -20,7 +21,8 @@ export const getEmployees = async () => {
 
 // Add a new employee
 export const addEmployee = async (employeeData) => {
-	return await addDoc(employeesRef, employeeData);
+	const docRef = await addDoc(employeesRef, employeeData);
+	return { id: docRef.id, ...employeeData };
 };
 
 // Update employee

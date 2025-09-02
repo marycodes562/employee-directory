@@ -21,21 +21,24 @@ import { Plus } from "@deemlol/next-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import toast from "react-hot-toast";
 
+const Employee = [
+	{
+		firstName: "",
+		lastName: "",
+		email: "",
+		location: "",
+		department: "",
+	},
+];
+
 export default function EmployeeInfo() {
-	const [personnel, setPersonnel] = useState([
-		{
-			employeeId: "",
-			firstName: "",
-			lastName: "",
-			email: "",
-			location: "",
-			department: "",
-		},
-	]);
+	const [personnel, setPersonnel] = useState(Employee);
 	const [showAddUserForm, setShowAddUserForm] = useState(false);
 	const [showEditUserForm, setShowEditUserForm] = useState(false);
 	const [showDeleteUser, setShowDeleteUser] = useState(false);
-	const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+	const [selectedEmployee, setSelectedEmployee] =
+		useState<typeof Employee>(Employee);
 
 	async function loadEmployees() {
 		const data = await getEmployees();
@@ -50,13 +53,13 @@ export default function EmployeeInfo() {
 	const handleAddUser = async (newUser: typeof personnel) => {
 		//setPersonnel([...personnel, newUser]);
 		await addEmployee(newUser);
+		toast.success("Employee added successfully.");
 		loadEmployees();
 	};
 
-	const handleEditUser = (emp) => {
-		setSelectedEmployee(emp);
-		setShowEditUserForm(true);
-	};
+	// const handleEditEmployee = async(user: any) => {
+	//     const employee = await getEmployees();
+	// }
 
 	const handleCountryChange = async (country: any, department: any) => {
 		const countries = await findByCountry(country, department);
@@ -90,15 +93,20 @@ export default function EmployeeInfo() {
 						</thead>
 						<tbody>
 							{personnel.map((person, index) => (
-								<tr key={person.employeeId}>
-									<td className={styles.personId}>{person.employeeId}</td>
+								<tr key={index}>
+									{/* <td className={styles.personId}>{person.employeeId}</td> */}
 									<td>{person.firstName}</td>
 									<td>{person.lastName}</td>
 									<td>{person.email}</td>
 									<td>{person.location}</td>
 									<td>{person.department}</td>
 									<td>
-										<Button onClick={() => handleEditUser(person)}>
+										<Button
+											onClick={() => {
+												setSelectedEmployee(person);
+												setShowEditUserForm(true);
+											}}
+										>
 											<Edit3 size={20} color="#FFFFFF" />
 										</Button>
 									</td>
@@ -154,7 +162,7 @@ export default function EmployeeInfo() {
 			<EditUserForm
 				show={showEditUserForm}
 				employee={selectedEmployee}
-				onEdited={loadEmployees}
+				onUpdateUser={loadEmployees}
 				onHide={() => setShowEditUserForm(false)}
 			/>
 

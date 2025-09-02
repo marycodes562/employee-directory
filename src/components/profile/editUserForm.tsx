@@ -12,23 +12,25 @@ import departments from "@/Data/departmentsData";
 import { updateEmployee } from "../../../firebase/employeeService";
 import toast from "react-hot-toast";
 
+const initialFormData = {
+	firstName: "",
+	lastName: "",
+	email: "",
+	location: "",
+	department: "",
+};
+
 function EditUserForm({ show, onHide, employee, onUpdateUser }: any) {
-	const [formData, setFormData] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		location: "",
-		department: "",
-	});
+	const [formData, setFormData] = useState(initialFormData);
 
 	useEffect(() => {
 		if (employee) {
 			setFormData({
-				firstName: employee.firstName,
-				lastName: employee.lastName,
-				email: employee.email,
-				location: employee.location,
-				department: employee.department,
+				firstName: employee.firstName || "",
+				lastName: employee.lastName || "",
+				email: employee.email || "",
+				location: employee.location || "",
+				department: employee.department || "",
 			});
 		}
 	}, [employee]);
@@ -115,20 +117,13 @@ function EditUserForm({ show, onHide, employee, onUpdateUser }: any) {
 						<br />
 
 						{/*------------------------- Location ----------------------------------*/}
-						<Form.Select value="{formData.location}">
-							<option>Location</option>
-							{locations.map((loc) => (
-								<option key={loc.id} value={loc.name}>
-									{loc.name}
-								</option>
-							))}
-						</Form.Select>
+
 						<Form.Select
 							name="location"
 							value={formData.location}
 							onChange={handleChange}
 						>
-							<option>Location</option>
+							<option>Select Location</option>
 							{locations.map((loc) => (
 								<option key={loc.id} value={loc.name}>
 									{loc.name}
@@ -144,7 +139,7 @@ function EditUserForm({ show, onHide, employee, onUpdateUser }: any) {
 							value={formData.department}
 							onChange={handleChange}
 						>
-							<option>Department</option>
+							<option>Select Department</option>
 							{departments.map((dep) => (
 								<option key={dep.id} value={dep.name}>
 									{dep.name}
@@ -159,7 +154,10 @@ function EditUserForm({ show, onHide, employee, onUpdateUser }: any) {
 								{/*------------------------- Close Button ----------------------------------*/}
 								<Button
 									variant="secondary"
-									onClick={onHide}
+									onClick={() => {
+										setFormData(initialFormData);
+										onHide();
+									}}
 									className={styles.button}
 								>
 									Close
