@@ -34,6 +34,11 @@ export const deleteEmployees = async(id) => {
 	return await deleteDoc(emptyDoc);
 }
 
+export const updateEmployee = async(id, updatedData) => {
+	const editDoc = doc(db, 'employees', id);
+	return await updateDoc(editDoc, updatedData);
+}
+
 export const findByCountry = async(location, department) => {
 	let q;
 	let locationQuery = query(employeesRef, where("location", "==", location));

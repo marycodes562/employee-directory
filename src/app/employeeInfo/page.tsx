@@ -88,7 +88,7 @@ export default function EmployeeInfo() {
                                 <td>{person.email}</td>
                                 <td>{person.location}</td>
                                 <td>{person.department}</td>
-                                <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                 <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                             </tr>
                         ))}
@@ -121,7 +121,7 @@ export default function EmployeeInfo() {
                                 <td>{person.email}</td>
                                 <td>{person.location}</td>
                                 <td>{person.department}</td>
-                                <td><Button onClick={() => setShowEditUserForm(true)}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                 <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                             </tr>
                         ))}
@@ -144,6 +144,7 @@ export default function EmployeeInfo() {
 
                 {/*------------------------- Add Employee Button ----------------------------------*/}
                 <Button variant="primary" onClick={() => setShowAddUserForm(true)}>
+                    
                     <Plus size={24} color="#FFFFFF" /> Add New Employee
                 </Button>
             </div>
@@ -159,7 +160,7 @@ export default function EmployeeInfo() {
                 <EditUserForm 
                     show={showEditUserForm}
                     employee={selectedEmployee}
-                    onEdited={loadEmployees}
+                    onAddUser={loadEmployees}
                     onHide={() => setShowEditUserForm(false)}
                 />
 
