@@ -30,12 +30,13 @@ export default function LoginPage() {
 		onSubmit: values => {
 			console.log(values);
 			setFormData(values);
-			router.push('/');
+			router.push('/employeeInfo');
 		}
 	})
 
 	return (
 		<div className={styles.page}>
+		<div className={styles.overlay}></div>
 		<Card className={styles.form} style={{ width: '25rem' }}>
 			{/*Greeting Header */}
 			<h2 className={styles.header}>Nice to see you again</h2>

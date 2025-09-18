@@ -135,18 +135,19 @@ export default function EmployeeInfo() {
 
     return (
         <div className={styles.container}>
-            <header>
-                <NavBar />
-            </header>
-            <div className={styles.header}>
-                {/*------------------------- Employee List Header ----------------------------------
-                <h5>Employee List</h5>*/}
 
-                {/*------------------------- Add Employee Button ----------------------------------*/}
-                <Button variant="primary" onClick={() => setShowAddUserForm(true)}>
-                    
-                    <Plus size={24} color="#FFFFFF" /> Add New Employee
-                </Button>
+            <div className={styles.headerContainer}>
+                <NavBar />
+            
+                <div className={styles.header}>
+                    {/*------------------------- Employee List Header ----------------------------------*/}
+
+                    {/*------------------------- Add Employee Button ----------------------------------*/}
+                    <Button className={styles.addEmployeeBtn} variant="primary" onClick={() => setShowAddUserForm(true)}>
+                        
+                        <Plus size={24} color="#FFFFFF" /> Add New Employee
+                    </Button>
+                </div>
             </div>
 
                 {/*------------------------- Add User Form ----------------------------------*/}
