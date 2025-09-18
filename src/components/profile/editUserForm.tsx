@@ -40,9 +40,9 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
 
     const handleChange = (e) => {
    
-        setformData({...formData, [
-        e.target.name    
-        ] : e.target.value})
+        setformData({...formData, 
+            [ e.target.name ] 
+        : e.target.value})
     }
 
     const handleSubmit = async(e) => {
@@ -76,14 +76,14 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                         {/*------------------------- First Name ----------------------------------*/}
                         <FloatingLabel
                             controlId='floatingInput'
-                            label='FirstName'
+                            label='First Name'
                             className='mb-1'
                         >
                             <Form.Control
                                 type="text"
                                 value={formData.firstName}
                                 onChange={handleChange}
-                                name='FirstName'
+                                name='firstName'
                                 required
                             />
                         </FloatingLabel>
@@ -99,7 +99,7 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                                 type="text"
                                 value={formData.lastName}
                                 onChange={handleChange}
-                                name='Last Name'
+                                name='lastName'
                                 required
                             />
                         </FloatingLabel>
@@ -115,7 +115,7 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                                 type="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                name='Email'
+                                name='email'
                                 required
                             />
                         </FloatingLabel>

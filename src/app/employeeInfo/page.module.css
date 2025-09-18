@@ -12,7 +12,7 @@
    backdrop-filter: blur(8px); /* Frosted glass effect */
    -webkit-backdrop-filter: blur(8px); /* Safari support */
    border-radius: 12px;
-   padding: 1rem;
+   padding: 2rem;
    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     
 }
