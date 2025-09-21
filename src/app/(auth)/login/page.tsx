@@ -82,10 +82,10 @@ export default function LoginPage() {
 							>
 							Sign in
 						</Button><br /><br />
-
+			</Form>
+			
 						{/*Create an account link */}
 						<a href="/signUp" className={styles.createAccount}>Create an account</a>
-			</Form>
 		</Card>
 	</div>
 	);

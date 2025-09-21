@@ -40,7 +40,7 @@ export default function SignUp() {
 		onSubmit: values => {
 			console.log(values);
 			setformSignUp(values);
-			router.push('/login');
+			router.push('/employeeInfo');
 		}
 	})
 
@@ -125,7 +125,10 @@ export default function SignUp() {
 									) : null}
 
 									{/*Sign Up Button */}
-									<Button type="submit" className={styles.signUpButton}>Sign Up</Button>
+									<Button type="submit" className={styles.signUpButton}>Sign Up</Button><br/><br/>
+
+									{/*Sign in link */}
+									<p>Already have an account? <a href="/login" className={styles.createAccount}>Sign in</a></p>
 						</Form>
 					</Card>
 		</div>

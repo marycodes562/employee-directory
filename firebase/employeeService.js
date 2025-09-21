@@ -67,3 +67,24 @@ export const findByCountry = async(location, department) => {
 
 	return result;
 }
+
+export const searchQuery = async(queryInput) => {
+	let searchQ = query(employeesRef, 
+		or(where("firstName", "==", queryInput),
+		   where("lastName", "==", queryInput),
+		   where("email", "==", queryInput),
+		   where("location", "==", queryInput), 
+		   where("department", "==", queryInput)));
+
+	const queryResponse = await getDocs(searchQ);
+	const results = [];
+	
+	queryResponse.docs.forEach((q) => {
+		results.push({
+			id: q.id,
+			...q.data()
+		})
+	})
+
+	return results;
+}

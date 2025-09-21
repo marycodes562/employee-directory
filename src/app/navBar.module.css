@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
-    z-index: 3;
 }
 
 .buttonsContainer {

@@ -16,12 +16,9 @@
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   position: relative; /* REQUIRED for z-index to work */
-  z-index: 9999;
+  z-index: 1;
 }
 
-.navBar {
-  z-index: 3;
-}
 
 .container {
   position: relative;
