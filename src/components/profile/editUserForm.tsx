@@ -1,16 +1,63 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import Modal from 'react-bootstrap/Modal';
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel';
 import styles from './editUserForm.module.css';
+import { updateEmployee } from '../../../firebase/employeeService';
+import toast from 'react-hot-toast';
 
 import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
 
-function EditUserForm ({ show, onHide, onAddUser }: any)  {
+function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
+
+    const initialFormData = {
+            employeeId: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            location: '',
+            department: ''
+        };
+
+    const [formData, setformData] = useState(initialFormData);
+
+    useEffect(() => {
+        if(employee) {
+            setformData({
+            employeeId: employee.id || '',
+            firstName: employee.firstName || '',
+            lastName: employee.lastName || '',
+            email: employee.email || '',
+            location: employee.location || '',
+            department: employee.department || ''
+            })
+        }
+    }, [employee])
+
+    const handleChange = (e) => {
+   
+        setformData({...formData, 
+            [ e.target.name ] 
+        : e.target.value})
+    }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        try {
+            await updateEmployee(employee.id, formData)
+            onAddUser()
+            onHide()
+            toast.success('Employee details updated successfully')
+        } catch(error) {
+        
+        }
+
+        console.log(formData);
+    }
 
     return (
         <div>
@@ -25,7 +72,7 @@ function EditUserForm ({ show, onHide, onAddUser }: any)  {
                     <Modal.Title id="contained-modal-title-vcenter">Edit Employee</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         {/*------------------------- First Name ----------------------------------*/}
                         <FloatingLabel
                             controlId='floatingInput'
@@ -34,8 +81,9 @@ function EditUserForm ({ show, onHide, onAddUser }: any)  {
                         >
                             <Form.Control
                                 type="text"
-                                value=''
-
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                name='firstName'
                                 required
                             />
                         </FloatingLabel>
@@ -49,8 +97,9 @@ function EditUserForm ({ show, onHide, onAddUser }: any)  {
                         >
                             <Form.Control
                                 type="text"
-                                value=''
-
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                name='lastName'
                                 required
                             />
                         </FloatingLabel>
@@ -64,8 +113,9 @@ function EditUserForm ({ show, onHide, onAddUser }: any)  {
                         >
                             <Form.Control
                                 type="email"
-                                value=''
-
+                                value={formData.email}
+                                onChange={handleChange}
+                                name='email'
                                 required
                             />
                         </FloatingLabel>
@@ -73,8 +123,9 @@ function EditUserForm ({ show, onHide, onAddUser }: any)  {
 
                         {/*------------------------- Location ----------------------------------*/}
                         <Form.Select
-                            value='{formData.location}'
-
+                            value={formData.location}
+                            onChange={handleChange}
+                            name="location"
                         >
                             <option>Location</option>
                             {locations.map((loc) => (
@@ -85,8 +136,9 @@ function EditUserForm ({ show, onHide, onAddUser }: any)  {
 
                         {/*------------------------- Department ----------------------------------*/}
                         <Form.Select
-                            value=''
-
+                            value={formData.department}
+                            onChange={handleChange}
+                            name="department"
                         >
                             <option>Department</option>
                             {departments.map((dep) => (

@@ -46,6 +46,7 @@ export default function SignUp() {
 
 	return (
 		<div className={styles.page}>
+			<div className={styles.overlay}></div>
 			<Card className={styles.form} style={{ width: '25rem' }}>
 					{/*Greeting Header */}
 					<h2 className={styles.header}>Great to meet you!</h2>

@@ -19,8 +19,6 @@ function NavBar() {
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
 
-
-
     return (
         <div>
             <Navbar className={styles.navBar}>
