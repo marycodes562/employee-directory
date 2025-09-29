@@ -10,9 +10,11 @@ import {
 	and
 } from "firebase/firestore";
 
-import { db } from './firebase';
+import { app, db } from './firebase';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const employeesRef = collection(db, 'employees');
+const auth = getAuth(app);
 
 export const getEmployees = async() =>  {
     const snapshot = await getDocs(employeesRef);
@@ -87,4 +89,12 @@ export const searchQuery = async(queryInput) => {
 	})
 
 	return results;
+}
+
+export const signUp = async(email, password) => {
+	return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const login = async(email, password) => {
+	return await signInWithEmailAndPassword(auth, email, password);
 }

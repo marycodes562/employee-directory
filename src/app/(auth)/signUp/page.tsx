@@ -7,11 +7,16 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { signUp } from '../../../../firebase/employeeService';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import toast from 'react-hot-toast';
+
 
 export default function SignUp() {
 
@@ -35,12 +40,37 @@ export default function SignUp() {
 			firstName: Yup.string().required("Required"),
 			lastName: Yup.string().required("Required"),
 			email: Yup.string().email("Invalid email address").required("Required"),
-			password: Yup.string().required("Required")
+			password: Yup.string().min(6, "Password must be at least 6 characters").required("Required")
 		}),
-		onSubmit: values => {
-			console.log(values);
-			setformSignUp(values);
-			router.push('/employeeInfo');
+		onSubmit: async(values) => {
+			try {
+				const userCredential = await signUp(values.email, values.password);
+				const user = userCredential.user;
+
+				const db = getFirestore()
+				await setDoc(doc(db, "users", user.uid), {
+					firstName: values.firstName,
+					lastName: values.lastName,
+					email: values.email,
+					role: "user"
+				})
+
+				toast.success("Account created successfully, please login");
+				router.push("/login");
+
+			} catch(error: unknown) {
+				const firebaseError = error as {code?:string};
+				let errorMessage = "Error creating account";
+
+				if (firebaseError.code === "auth/email-already-exists") {
+					errorMessage = "This email is already registered, please use a different email";
+				}
+
+				toast.error(errorMessage);
+				
+				console.log(firebaseError);
+				console.log(firebaseError.code);
+			}
 		}
 	})
 
@@ -48,8 +78,16 @@ export default function SignUp() {
 		<div className={styles.page}>
 			<div className={styles.overlay}></div>
 			<Card className={styles.form} style={{ width: '25rem' }}>
+					{/*Logo */}
+					<Image 
+						src="/logo2.png"
+						alt="logo"
+						width={320}
+						height={120}
+					/>
+					
 					{/*Greeting Header */}
-					<h2 className={styles.header}>Great to meet you!</h2>
+					<h4 className={styles.header}>Great to meet you!</h4>
 						<Form onSubmit={formik.handleSubmit}>
 									{/*First Name */}									
 									<FloatingLabel
