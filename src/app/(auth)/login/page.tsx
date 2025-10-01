@@ -10,8 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Image from 'next/image';
 
 import styles from './page.module.css';
+import { login } from '../../../../firebase/employeeService';
+import toast from 'react-hot-toast';
 
 export default function LoginPage() {
 	const [formData, setFormData] = useState({email: '', password: ''});
@@ -24,13 +27,27 @@ export default function LoginPage() {
 			password: ''
 		},
 		validationSchema: Yup.object({
-			email: Yup.string().email("Invalid email address").required("Required"),
-			password: Yup.string().required("Required"),
+			email: Yup.string().email("Invalid email address").required("Email is required"),
+			password: Yup.string().required("Password is required"),
 		}),
-		onSubmit: values => {
-			console.log(values);
-			setFormData(values);
-			router.push('/employeeInfo');
+		onSubmit: async(values) => {
+			try {
+				await login(values.email, values.password);
+				toast.success("login successful");
+				router.push("/employeeInfo");
+			} catch(error) {
+				const firebaseError = error as {code?:string};
+				let errorMessage = "Error occurred during login";
+
+				if (firebaseError.code === "auth/invalid-credential") {
+					errorMessage = "Invalid email or password, please try again.";
+				}
+
+				toast.error(errorMessage);
+
+				console.log(firebaseError);
+				console.log(firebaseError.code);
+			}
 		}
 	})
 
@@ -38,8 +55,17 @@ export default function LoginPage() {
 		<div className={styles.page}>
 		<div className={styles.overlay}></div>
 		<Card className={styles.form} style={{ width: '25rem' }}>
+
+			{/*Logo */}
+			<Image 
+				src="/logo2.png"
+				alt="logo"
+				width={320}
+				height={120}
+			/>
+
 			{/*Greeting Header */}
-			<h2 className={styles.header}>Nice to see you again</h2>
+			<h4 className={styles.header}>Nice to see you again</h4>
 			<Form onSubmit={formik.handleSubmit}>
 						{/*Email Address */}
 						<FloatingLabel
@@ -82,10 +108,10 @@ export default function LoginPage() {
 							>
 							Sign in
 						</Button><br /><br />
-
+			</Form>
+			
 						{/*Create an account link */}
 						<a href="/signUp" className={styles.createAccount}>Create an account</a>
-			</Form>
 		</Card>
 	</div>
 	);

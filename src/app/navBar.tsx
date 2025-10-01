@@ -12,12 +12,21 @@ import { Search } from "@deemlol/next-icons";
 import { Moon } from "@deemlol/next-icons";
 import styles from './navBar.module.css';
 
+import { searchQuery } from '../../firebase/employeeService';
+
 function NavBar() {
     const today = new Date();
 
     const date = today.getDate();
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
+
+    const handleChange = (e: any) => {
+        e.preventDefault();
+        let value = e.target.value;
+        searchQuery(value);
+        
+    }
 
     return (
         <div>
@@ -28,14 +37,16 @@ function NavBar() {
                     <p>{`${date} / ${month} / ${year}`}</p>
                 </Card>
 
-                {/*---------------- Search Bar -------------------- */}
+                {/*---------------- Search Bar -------------------- 
+                <Search size={20}/>*/}
+
                 <Form className={styles.form}>
                     
                     <Form.Control 
                         type="text"
                         placeholder="Search"
+                        onChange={handleChange}
                     />
-                    
                 </Form>
 
                 {/*---------------- Light / Dark Mode + Profile Picture -------------------- */}

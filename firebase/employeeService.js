@@ -10,9 +10,11 @@ import {
 	and
 } from "firebase/firestore";
 
-import { db } from './firebase';
+import { app, db } from './firebase';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const employeesRef = collection(db, 'employees');
+const auth = getAuth(app);
 
 export const getEmployees = async() =>  {
     const snapshot = await getDocs(employeesRef);
@@ -66,4 +68,33 @@ export const findByCountry = async(location, department) => {
 	})
 
 	return result;
+}
+
+export const searchQuery = async(queryInput) => {
+	let searchQ = query(employeesRef, 
+		or(where("firstName", "==", queryInput),
+		   where("lastName", "==", queryInput),
+		   where("email", "==", queryInput),
+		   where("location", "==", queryInput), 
+		   where("department", "==", queryInput)));
+
+	const queryResponse = await getDocs(searchQ);
+	const results = [];
+	
+	queryResponse.docs.forEach((q) => {
+		results.push({
+			id: q.id,
+			...q.data()
+		})
+	})
+
+	return results;
+}
+
+export const signUp = async(email, password) => {
+	return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const login = async(email, password) => {
+	return await signInWithEmailAndPassword(auth, email, password);
 }
