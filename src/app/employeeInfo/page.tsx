@@ -7,7 +7,7 @@ import EditUserForm from '@/components/profile/editUserForm';
 import DeleteUser from '@/components/profile/deleteUserForm';
 import NavBar from '../navBar';
 import SideFilter from '@/components/profile/sideFilter';
-import { getEmployees, addEmployees, findByCountry } from '../../../firebase/employeeService';
+import { getEmployees, addEmployees, findByCountry, searchQuery } from '../../../firebase/employeeService';
 
 import Button from 'react-bootstrap/Button';
 import styles from './page.module.css';
@@ -16,9 +16,14 @@ import { Edit3 } from "@deemlol/next-icons";
 import { Trash2 } from "@deemlol/next-icons";
 import { Plus } from "@deemlol/next-icons";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { isAdmin, useUserRole } from '@/hooks/useUserRole';
 
 
 export default function EmployeeInfo() {
+    const { userRole } = useUserRole();
+    const isUserAdmin = isAdmin(userRole);
+
+    console.log(isUserAdmin);
 
     const [personnel, setPersonnel] = useState([{  
         employeeId: '',
@@ -33,6 +38,7 @@ export default function EmployeeInfo() {
     const [showDeleteUser, setShowDeleteUser] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [filteredLocations, setFilteredLocation] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     async function loadEmployees() {
          const data = await getEmployees();
@@ -84,8 +90,14 @@ export default function EmployeeInfo() {
                                 <td>{person.email}</td>
                                 <td>{person.location}</td>
                                 <td>{person.department}</td>
-                                <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                {
+                                    isUserAdmin ? (
+                                        <div>
+                                            <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                        </div>
+                                    ) : null
+                                }
                             </tr>
                         ))}
                     </tbody> 
@@ -117,8 +129,15 @@ export default function EmployeeInfo() {
                                 <td>{person.email}</td>
                                 <td>{person.location}</td>
                                 <td>{person.department}</td>
-                                <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                {
+                                    isUserAdmin ? (
+                                        <div>
+                                            <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                        </div>
+                                    ) : null
+                                }
+                                
                             </tr>
                         ))}
                     </tbody> 
@@ -133,10 +152,10 @@ export default function EmployeeInfo() {
         <div className={styles.container}>
 
             <div className={styles.headerContainer}>
-                <NavBar />
+                {/*------------------------- NavBar component ----------------------------------*/}
+                <NavBar query={searchQuery}/>
             
                 <div className={styles.header}>
-                    {/*------------------------- Employee List Header ----------------------------------*/}
 
                     {/*------------------------- Add Employee Button ----------------------------------*/}
                     <Button className={styles.addEmployeeBtn} variant="primary" onClick={() => setShowAddUserForm(true)}>

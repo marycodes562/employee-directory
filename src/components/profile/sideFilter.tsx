@@ -6,13 +6,14 @@ import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
 import Card from 'react-bootstrap/Card';
 import toast from 'react-hot-toast';
+import Button from 'react-bootstrap/Button';
 
 import styles from "./sideFilter.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { findByCountry } from '../../../firebase/employeeService';
 
 
-function SideFilter({ onCountryChange }) {
+function SideFilter({ onCountryChange } : any) {
 
         const [location, setLocation] = useState(locations);
         const [department, setDepartments] = useState(departments);
@@ -44,7 +45,10 @@ function SideFilter({ onCountryChange }) {
             }
         }
 
-
+        const clearFilter = () => {
+            setlocationFilter('');
+            setdepartmentFilter('');
+        }
 
     return (
         <div className={styles.dropdown}>
@@ -70,9 +74,9 @@ function SideFilter({ onCountryChange }) {
 
             {/* Filter Option */}
 
-            <div>{locationFilter}</div>
+            <Button className={styles.button} onClick={clearFilter}>Clear</Button>
 
-            <div>{departmentFilter}</div>
+ 
 
         </div>
     )

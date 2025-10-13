@@ -24,15 +24,6 @@
   position: relative;
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
-  /* Background image */
-  background-image: url('./background1.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-
-  min-height: 100vh; /* allow at least one screen, but grows with content */
 }
 
 
@@ -74,6 +65,9 @@
 
 .addEmployeeBtn {
   z-index: 3;
+  background-color: #319795;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 

@@ -7,7 +7,8 @@ import {
 	deleteDoc,
 	query,
 	where,
-	and
+	and,
+	or
 } from "firebase/firestore";
 
 import { app, db } from './firebase';
@@ -87,7 +88,8 @@ export const searchQuery = async(queryInput) => {
 			...q.data()
 		})
 	})
-
+	console.log(results);
+	
 	return results;
 }
 
