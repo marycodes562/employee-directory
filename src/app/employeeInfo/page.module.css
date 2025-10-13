@@ -40,6 +40,9 @@
 
 /* Side filter container */
 .side {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   width: auto;
   background-color: #fff;
   padding: 0.5rem;

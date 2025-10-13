@@ -15,20 +15,14 @@ import styles from './navBar.module.css';
 
 import { searchQuery } from '../../firebase/employeeService';
 
-function NavBar() {
+function NavBar({onSearch}) {
     const today = new Date();
 
     const date = today.getDate();
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
 
-    const handleChange = (e: any) => {
-        e.target.value;
-        let value = e.target.value;
-        searchQuery(value);
-    }
-
-
+    
     return (
         <div>
             <Navbar className={styles.navBar}>
@@ -53,7 +47,7 @@ function NavBar() {
                     <Form.Control 
                         type="text"
                         placeholder="Search"
-                        onChange={handleChange}
+                        onChange={onSearch}
                     />
                 </Form>
 

@@ -23,7 +23,7 @@ export default function EmployeeInfo() {
     const { userRole } = useUserRole();
     const isUserAdmin = isAdmin(userRole);
 
-    console.log(isUserAdmin);
+    //console.log(isUserAdmin);
 
     const [personnel, setPersonnel] = useState([{  
         employeeId: '',
@@ -38,8 +38,9 @@ export default function EmployeeInfo() {
     const [showDeleteUser, setShowDeleteUser] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [filteredLocations, setFilteredLocation] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
+    /* Get Employee info using a firebase query */
     async function loadEmployees() {
          const data = await getEmployees();
          setPersonnel(data);
@@ -56,6 +57,7 @@ export default function EmployeeInfo() {
         loadEmployees();
     }
 
+    /*------------------------- Handle Filter Function ----------------------------------*/
     const handleCountryChange = async(country: any, department: any) => {
         const countries = await findByCountry(country, department);
         setFilteredLocation(countries);
@@ -63,8 +65,21 @@ export default function EmployeeInfo() {
         return countries
     }
 
+     /*------------------------- Handle Search Function ----------------------------------*/
+    const handleSearch = async(e: any) => {
+        e.target.value;
+        let value = e.target.value;
+        const searchRes = await searchQuery(value);
+        setSearchResults(searchRes);
+        console.log(searchRes);
+        return searchRes
+    }
+
+    /*------------------------- Table Data ----------------------------------*/
+
     const content = () => {
-        
+    
+    /*------------------------- Filtered Location /Department Data ----------------------------------*/
     if (filteredLocations.length > 0) {
         return (
             < div className={styles.table} >
@@ -104,7 +119,49 @@ export default function EmployeeInfo() {
                 </Table>
                 </div>
         )
+    /*------------------------- Search Result Data ----------------------------------*/
+    } else if(searchResults.length > 0) {
+        return (
+            < div className={styles.table} >
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th className={styles.personId}>Employee ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Department</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {searchResults.map((person, index) => (
+                            <tr key={person.employeeId}>
+                                <td className={styles.personId}>{person.employeeId}</td>
+                                <td>{person.firstName}</td>
+                                <td>{person.lastName}</td>
+                                <td>{person.email}</td>
+                                <td>{person.location}</td>
+                                <td>{person.department}</td>
+                                {
+                                    isUserAdmin ? (
+                                        <div>
+                                            <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                        </div>
+                                    ) : null
+                                }
+                                
+                            </tr>
+                        ))}
+                    </tbody> 
+                </Table>
+                </div>
+        )
     } else {
+        /*------------------------- All Employee Data ----------------------------------*/
         return (
             < div className={styles.table} >
                 <Table responsive>
@@ -153,16 +210,8 @@ export default function EmployeeInfo() {
 
             <div className={styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
-                <NavBar query={searchQuery}/>
+                <NavBar onSearch={handleSearch}/>
             
-                <div className={styles.header}>
-
-                    {/*------------------------- Add Employee Button ----------------------------------*/}
-                    <Button className={styles.addEmployeeBtn} variant="primary" onClick={() => setShowAddUserForm(true)}>
-                        
-                        <Plus size={24} color="#FFFFFF" /> Add New Employee
-                    </Button>
-                </div>
             </div>
 
                 {/*------------------------- Add User Form ----------------------------------*/}
@@ -194,6 +243,14 @@ export default function EmployeeInfo() {
                     <SideFilter 
                         onCountryChange={handleCountryChange}
                     />
+
+                    {  /*------------------------- Add Employee Button - Visible only when admin login ----------------------------------*/
+                    isUserAdmin ? 
+                    <Button className={styles.addEmployeeBtn} variant="primary" onClick={() => setShowAddUserForm(true)}>
+                        
+                        <Plus size={24} color="#FFFFFF" /> Add New Employee
+                    </Button> : null
+                    }
                 </div>
                                 
 

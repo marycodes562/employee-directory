@@ -10,8 +10,6 @@ import Button from 'react-bootstrap/Button';
 
 import styles from "./sideFilter.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { findByCountry } from '../../../firebase/employeeService';
-
 
 function SideFilter({ onCountryChange } : any) {
 
@@ -20,6 +18,8 @@ function SideFilter({ onCountryChange } : any) {
 
         const [locationFilter, setlocationFilter] = useState("");
         const [departmentFilter, setdepartmentFilter] = useState("");
+
+        /* Location Change Function */
 
         const handleLocationChange = async(e: React.ChangeEvent<HTMLSelectElement>) => {
             e.preventDefault()
@@ -33,6 +33,8 @@ function SideFilter({ onCountryChange } : any) {
             }
         }
 
+        /* Department Change Function */
+
         const handleDepartmentChange = async(e: React.ChangeEvent<HTMLSelectElement>) => {
             e.preventDefault()
             const departmentValue = e.target.value;
@@ -45,9 +47,11 @@ function SideFilter({ onCountryChange } : any) {
             }
         }
 
+        /* Clear Filter Function */
         const clearFilter = () => {
-            setlocationFilter('');
-            setdepartmentFilter('');
+            setlocationFilter("");
+            setdepartmentFilter("");
+            onCountryChange("", "");
         }
 
     return (
