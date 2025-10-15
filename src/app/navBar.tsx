@@ -10,7 +10,7 @@ import Card from 'react-bootstrap/Card';
 import { Sun } from "@deemlol/next-icons";
 import { Settings } from "@deemlol/next-icons";
 import { Search } from "@deemlol/next-icons";
-import { Moon } from "@deemlol/next-icons";
+import { Moon, Menu } from "@deemlol/next-icons";
 import styles from './navBar.module.css';
 
 import { searchQuery } from '../../firebase/employeeService';
@@ -22,7 +22,7 @@ function NavBar({onSearch}) {
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
 
-    
+
     return (
         <div>
             <Navbar className={styles.navBar}>
@@ -51,12 +51,17 @@ function NavBar({onSearch}) {
                     />
                 </Form>
 
-                {/*---------------- Light / Dark Mode -------------------- */}
+                {/*<Button className={styles.button}><Search size={20} color="#FFF" /></Button>*/}
+
+                {/*---------------- Buttons Container -------------------- */}
 
                 <div className={styles.buttonsContainer}>
 
                     {/*---------------- Light / Dark Mode -------------------- */}
                     <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>
+
+                    {/*---------------- Menu Button -------------------- */}
+                    <Button className={styles.button}><Menu size={20} color="#FFF" /></Button>
 
                 </div>
             </Navbar>

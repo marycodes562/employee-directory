@@ -13,13 +13,10 @@
 }
 
 .main {
-  background-color: rgb(244, 244, 245);
+  background-color: white;
   min-height: 15rem;
-  background: rgba(255, 255, 255, 0.9); /* White with 70% opacity */
-  backdrop-filter: blur(8px); /* Frosted glass effect */
-  -webkit-backdrop-filter: blur(8px); /* Safari support */
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1.5rem 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -47,3 +44,12 @@
   gap: 1rem;
 }
 
+.buttonsContainer button {
+  background-color: #319795;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.buttonsContainer button:hover {
+  background-color: #277e7d; /* darker hover */
+}

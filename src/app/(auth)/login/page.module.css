@@ -30,6 +30,10 @@
     border: none;
 }
 
+.signInButton:hover {
+  background-color: #277e7d;
+}
+
 .createAccount {
   margin-left: 33%;
 }

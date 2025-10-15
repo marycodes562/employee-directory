@@ -107,7 +107,7 @@ export default function EmployeeInfo() {
                                 <td>{person.department}</td>
                                 {
                                     isUserAdmin ? (
-                                        <div>
+                                        <div className={styles.buttonContainer}>
                                             <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                             <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                                         </div>
@@ -147,7 +147,7 @@ export default function EmployeeInfo() {
                                 <td>{person.department}</td>
                                 {
                                     isUserAdmin ? (
-                                        <div>
+                                        <div className={styles.buttonContainer}>
                                             <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                             <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                                         </div>
@@ -188,8 +188,8 @@ export default function EmployeeInfo() {
                                 <td>{person.department}</td>
                                 {
                                     isUserAdmin ? (
-                                        <div>
-                                            <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                        <div className={styles.buttonContainer}>
+                                            <td><Button className={styles.loginButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                             <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                                         </div>
                                     ) : null
@@ -207,6 +207,8 @@ export default function EmployeeInfo() {
 
     return (
         <div className={styles.container}>
+
+            <div className={styles.contentContainer}>
 
             <div className={styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
@@ -257,8 +259,9 @@ export default function EmployeeInfo() {
                 {/*------------------------- Employee Table ----------------------------------*/}
                 
                {content()}
-            </div>
+            </div>{/*main div end*/}
+            </div> 
                         
-        </div>
+        </div> 
     )
 }
