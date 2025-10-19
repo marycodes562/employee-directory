@@ -13,26 +13,26 @@
   backdrop-filter: blur(8px); /* Frosted glass effect */
   -webkit-backdrop-filter: blur(8px); /* Safari support */
   border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);*/
   position: relative; /* REQUIRED for z-index to work */
   z-index: 1;
 }
 
+.contentContainer {
+  background-color: #ffffff;
+}
 
 .container {
   position: relative;
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
-  /* Background image */
   background-image: url('./background1.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center;
-  background-attachment: fixed;
-
-  min-height: 100vh; /* allow at least one screen, but grows with content */
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
 }
 
 
@@ -49,6 +49,9 @@
 
 /* Side filter container */
 .side {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   width: auto;
   background-color: #fff;
   padding: 0.5rem;
@@ -74,9 +77,19 @@
 
 .addEmployeeBtn {
   z-index: 3;
+  background-color: #319795;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+.loginButton {
+  background-color: #319795;
+  border: none;
+}
 
+.buttonContainer button {
+  margin: 0 0.5rem;
+}
 
 
 

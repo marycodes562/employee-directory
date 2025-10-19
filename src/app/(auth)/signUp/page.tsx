@@ -26,7 +26,7 @@ export default function SignUp() {
 		firstName: '',
 		lastName: '',
 		email: '',
-		password: ''
+		password: '',
 	});
 
 	const formik = useFormik({
@@ -34,13 +34,15 @@ export default function SignUp() {
 			firstName: '',
 			lastName: '',
 			email: '',
-			password: ''	
+			password: '',
+			role: ''	
 		},
 		validationSchema: Yup.object({
 			firstName: Yup.string().required("Required"),
 			lastName: Yup.string().required("Required"),
 			email: Yup.string().email("Invalid email address").required("Required"),
-			password: Yup.string().min(6, "Password must be at least 6 characters").required("Required")
+			password: Yup.string().min(6, "Password must be at least 6 characters").required("Required"),
+			role: Yup.string().required("Select a role")
 		}),
 		onSubmit: async(values) => {
 			try {
@@ -52,7 +54,7 @@ export default function SignUp() {
 					firstName: values.firstName,
 					lastName: values.lastName,
 					email: values.email,
-					role: "user"
+					role: values.role
 				})
 
 				toast.success("Account created successfully, please login");
@@ -162,6 +164,26 @@ export default function SignUp() {
 										<p className={styles.errors}>{formik.errors.password}</p>
 									) : null}
 
+									{/*Role*/}
+									<FloatingLabel
+									controlId="floatingRole"
+									label="Role"
+									className="mb-3"
+									>
+									<Form.Select 
+										name="role"
+										onChange={formik.handleChange}
+										value={formik.values.role}
+									>
+										<option value="">Select a role</option>
+										<option value="user">User</option>
+										<option value="admin">Admin</option>
+									</Form.Select>
+									</FloatingLabel>
+									{formik.touched.role && formik.errors.role ? (
+										<p className={styles.errors}>{formik.errors.role}</p>
+									) : null}
+									
 									{/*Sign Up Button */}
 									<Button type="submit" className={styles.signUpButton}>Sign Up</Button><br/><br/>
 

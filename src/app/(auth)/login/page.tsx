@@ -60,7 +60,7 @@ export default function LoginPage() {
 			<Image 
 				src="/logo2.png"
 				alt="logo"
-				width={320}
+				width={310}
 				height={120}
 			/>
 
@@ -106,7 +106,7 @@ export default function LoginPage() {
 							type="submit" 
 							className={styles.signInButton}
 							>
-							Sign in
+							Login
 						</Button><br /><br />
 			</Form>
 			

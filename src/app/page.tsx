@@ -1,5 +1,6 @@
 "use client";
 import styles from "./page.module.css";
+import Image from 'next/image';
 
 import Button from 'react-bootstrap/Button';
 import { useRouter } from "next/navigation";
@@ -15,8 +16,17 @@ export default function Home() {
 			<div className={styles.overlay}></div>
 			
 			<main className={styles.main}>
-				<h1>Welcome!</h1>
+					{/*Logo */}
+					<Image 
+						src="/logo2.png"
+						alt="logo"
+						width={310}
+						height={120}
+					/>
+				{/*--------- Slogan -------------- */}
 				<p>Search, update, and manage employees in one place.</p>
+
+				{/*--------- Login and Sign up buttons -------------- */}
 				<div className={styles.buttonsContainer}>
 					<Button className={styles.buttons} onClick={() => router.push("/login")}>Login</Button>
 					<Button className={styles.buttons} onClick={() => router.push("/signUp")}>Sign Up</Button>
