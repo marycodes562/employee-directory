@@ -83,6 +83,16 @@ export default function EmployeeInfo() {
         return searchRes
     }
 
+    /* ------------ Clear search -------------- */
+
+    const clearSearch = async () => {
+        setSearch("");
+        setIsFiltering(false);
+        setIsSearching(false);
+        setSearchResults([]);
+        await loadEmployees();
+    }
+
     /*------------------------- Table Data ----------------------------------*/
 
     const content = () => {
@@ -230,7 +240,7 @@ export default function EmployeeInfo() {
 
             <div className={styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
-                <NavBar onSearch={handleSearch} searchValue={search}/>
+                <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
             
             </div>
 

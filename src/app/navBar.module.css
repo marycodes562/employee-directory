@@ -20,3 +20,18 @@
     border: none;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
+
+.form {
+    position: relative;
+    display: inline-block;
+}
+
+.searchx {
+   position: absolute;
+   right: 10px; /* move the X to the right edge */
+   top: 50%;
+   transform: translateY(-50%); /* center vertically */
+   cursor: pointer;
+   background: none;
+   border: none;
+}
