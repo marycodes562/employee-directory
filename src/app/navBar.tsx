@@ -4,6 +4,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import ButtonComp from '@/components/profile/button';
 import Image from 'next/image';
 import Card from 'react-bootstrap/Card';
 
@@ -15,7 +16,7 @@ import styles from './navBar.module.css';
 
 import { searchQuery } from '../../firebase/employeeService';
 
-function NavBar({onSearch}) {
+function NavBar({onSearch, searchValue}) {
     const today = new Date();
 
     const date = today.getDate();
@@ -45,8 +46,9 @@ function NavBar({onSearch}) {
                 <Form className={styles.form}>
                     
                     <Form.Control 
+                        value={searchValue}
                         type="text"
-                        placeholder="Search"
+                        placeholder="Search..."
                         onChange={onSearch}
                     />
                 </Form>
@@ -57,11 +59,13 @@ function NavBar({onSearch}) {
 
                 <div className={styles.buttonsContainer}>
 
-                    {/*---------------- Light / Dark Mode -------------------- */}
-                    <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>
+                    {/*---------------- Light / Dark Mode -------------------- 
+                    <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>*/}
 
                     {/*---------------- Menu Button -------------------- */}
                     <Button className={styles.button}><Menu size={20} color="#FFF" /></Button>
+
+                    
 
                 </div>
             </Navbar>
