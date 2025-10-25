@@ -185,15 +185,17 @@ export default function EmployeeInfo() {
         )
     } else if ((isFiltering && filteredLocations.length === 0) || (isSearching && searchResults.length === 0)) {
     return (
-        <div>
-            <p>No results found</p>
-        </div>
+        <>
+            <div className={styles.noresults}>
+                <h3>No results found</h3>
+            </div>
+        </>
     );
 
     } else {
         /*------------------------- All Employee Data ----------------------------------*/
         if (isloading) {
-            
+
             return <Loading />
 
         } else {
