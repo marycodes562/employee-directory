@@ -38,9 +38,12 @@ export default function EmployeeInfo() {
     const [showDeleteUser, setShowDeleteUser] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [filteredLocations, setFilteredLocation] = useState([]);
+    const [isFiltering, setIsFiltering] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
-    /* Get Employee info using a firebase query */
+    /* ------------- Get Employee info using a firebase query -------------- */
     async function loadEmployees() {
          const data = await getEmployees();
          setPersonnel(data);
@@ -59,6 +62,8 @@ export default function EmployeeInfo() {
 
     /*------------------------- Handle Filter Function ----------------------------------*/
     const handleCountryChange = async(country: any, department: any) => {
+        setIsFiltering(true);
+        setIsSearching(true);
         const countries = await findByCountry(country, department);
         setFilteredLocation(countries);
         console.log(countries);
@@ -69,7 +74,10 @@ export default function EmployeeInfo() {
     const handleSearch = async(e: any) => {
         e.target.value;
         let value = e.target.value;
+        setSearch(value);
         const searchRes = await searchQuery(value);
+        setIsFiltering(false);
+        setIsSearching(true);
         setSearchResults(searchRes);
         console.log(searchRes);
         return searchRes
@@ -80,7 +88,8 @@ export default function EmployeeInfo() {
     const content = () => {
     
     /*------------------------- Filtered Location /Department Data ----------------------------------*/
-    if (filteredLocations.length > 0) {
+    if (isFiltering && filteredLocations.length > 0) {
+        
         return (
             < div className={styles.table} >
                 <Table responsive>
@@ -108,7 +117,7 @@ export default function EmployeeInfo() {
                                 {
                                     isUserAdmin ? (
                                         <div className={styles.buttonContainer}>
-                                            <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button className={styles.editButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                             <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                                         </div>
                                     ) : null
@@ -120,7 +129,7 @@ export default function EmployeeInfo() {
                 </div>
         )
     /*------------------------- Search Result Data ----------------------------------*/
-    } else if(searchResults.length > 0) {
+    } else if(isSearching && searchResults.length > 0) {
         return (
             < div className={styles.table} >
                 <Table responsive>
@@ -148,7 +157,7 @@ export default function EmployeeInfo() {
                                 {
                                     isUserAdmin ? (
                                         <div className={styles.buttonContainer}>
-                                            <td><Button onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button className={styles.editButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
                                             <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                                         </div>
                                     ) : null
@@ -160,6 +169,13 @@ export default function EmployeeInfo() {
                 </Table>
                 </div>
         )
+    } else if ((isFiltering && filteredLocations.length === 0) || (isSearching && searchResults.length === 0)) {
+    return (
+        <div>
+            <p>No results found</p>
+        </div>
+    );
+
     } else {
         /*------------------------- All Employee Data ----------------------------------*/
         return (
@@ -189,8 +205,8 @@ export default function EmployeeInfo() {
                                 {
                                     isUserAdmin ? (
                                         <div className={styles.buttonContainer}>
-                                            <td><Button className={styles.loginButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                            <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button className={styles.editButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><Button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
                                         </div>
                                     ) : null
                                 }
@@ -200,19 +216,21 @@ export default function EmployeeInfo() {
                     </tbody> 
                 </Table>
                 </div>
-        )
-    }
+            )
+        } 
 
     }
 
     return (
+           
         <div className={styles.container}>
+            <div className={styles.overlay}></div>
 
             <div className={styles.contentContainer}>
 
             <div className={styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
-                <NavBar onSearch={handleSearch}/>
+                <NavBar onSearch={handleSearch} searchValue={search}/>
             
             </div>
 

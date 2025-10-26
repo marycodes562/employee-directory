@@ -7,6 +7,7 @@ import departments from '@/Data/departmentsData';
 import Card from 'react-bootstrap/Card';
 import toast from 'react-hot-toast';
 import Button from 'react-bootstrap/Button';
+import ButtonComp from './button';
 
 import styles from "./sideFilter.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,8 +50,18 @@ function SideFilter({ onCountryChange } : any) {
 
         /* Clear Filter Function */
         const clearFilter = () => {
-            setlocationFilter("");
-            setdepartmentFilter("");
+
+            /*Location Dropdown */
+            let loc = document.getElementById('locDrop') as HTMLSelectElement | null; 
+            if(loc && loc.value !== "") {
+                loc.value = ""
+            }
+
+             /*Department Dropdown */
+            let dep = document.getElementById('depDrop') as HTMLSelectElement | null;
+            if(dep && dep.value !== "") {
+                dep.value = ""
+            }
             onCountryChange("", "");
         }
 
@@ -60,7 +71,7 @@ function SideFilter({ onCountryChange } : any) {
 
             {/* Locations Filter */}
             
-            <Form.Select aria-label="Default select example" onChange={handleLocationChange}>
+            <Form.Select aria-label="Default select example" onChange={handleLocationChange} id="locDrop">
                 <option value="">Select Location</option>
                 {location.map((loc, index) => (
                     <option key={loc.id} value={loc.name} className={styles.tableData} >{loc.name}</option>
@@ -69,18 +80,16 @@ function SideFilter({ onCountryChange } : any) {
 
              {/* Departments Filter */}
            
-            <Form.Select aria-label="Default select example" onChange={handleDepartmentChange}>
+            <Form.Select aria-label="Default select example" onChange={handleDepartmentChange} id="depDrop">
                 <option value="">Select Department</option>
                {department.map((dep, index) => (
                     <option key={dep.id} value={dep.name} className={styles.tableData}>{dep.name}</option>
                 ))}
             </Form.Select>
 
-            {/* Filter Option */}
+            {/* Clear Filter button */}
 
-            <Button className={styles.button} onClick={clearFilter}>Clear</Button>
-
- 
+            <ButtonComp text="Clear" style={{width: "4rem" , height: "auto"}} onClick={clearFilter}/>
 
         </div>
     )
