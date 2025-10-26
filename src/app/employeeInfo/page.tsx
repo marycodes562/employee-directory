@@ -18,6 +18,7 @@ import { Plus } from "@deemlol/next-icons";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { isAdmin, useUserRole } from '@/hooks/useUserRole';
 import Loading from '@/components/profile/loading';
+import ButtonComp from '@/components/profile/button';
 
 
 export default function EmployeeInfo() {
@@ -131,8 +132,8 @@ export default function EmployeeInfo() {
                                 {
                                     isUserAdmin ? (
                                         <div className={styles.buttonContainer}>
-                                            <td><Button className={styles.editButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                            <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/></td>
+                                            <td><button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></button></td>
                                         </div>
                                     ) : null
                                 }
@@ -171,8 +172,8 @@ export default function EmployeeInfo() {
                                 {
                                     isUserAdmin ? (
                                         <div className={styles.buttonContainer}>
-                                            <td><Button className={styles.editButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                            <td><Button onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/></td>
+                                            <td><button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></button></td>
                                         </div>
                                     ) : null
                                 }
@@ -212,8 +213,7 @@ export default function EmployeeInfo() {
                             <th>Email</th>
                             <th>Location</th>
                             <th>Department</th>
-                            <th></th>
-                            <th></th>
+                            
                         </tr>
                     </thead> 
                     <tbody>
@@ -228,8 +228,9 @@ export default function EmployeeInfo() {
                                 {
                                     isUserAdmin ? (
                                         <div className={styles.buttonContainer}>
-                                            <td><Button className={styles.editButton} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}}><Edit3 size={20} color="#FFFFFF"/></Button></td>
-                                            <td><Button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></Button></td>
+                                            <td><ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/></td>
+                                            <td><button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></button></td>
+                                                                                    
                                         </div>
                                     ) : null
                                 }

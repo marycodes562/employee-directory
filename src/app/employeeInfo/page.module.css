@@ -62,11 +62,12 @@
 .table {
   flex: 1; /* Take up remaining space */
   background-color: #fff;
-  padding: 1rem;
+  padding: 0.1rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   overflow-x: auto;
   z-index: 3;
+  width: 100%;
 }
 
 .personId {
@@ -92,12 +93,21 @@
 /* Delete button */
 
 .deleteButton {
-  background-color: #F97316;
+  background-color: #858483;
   border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .deleteButton:hover {
-  background-color: #EA580C;
+  background-color: #575656;
 }
 
 .buttonContainer button {
