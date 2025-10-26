@@ -17,6 +17,7 @@ import { Trash2 } from "@deemlol/next-icons";
 import { Plus } from "@deemlol/next-icons";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { isAdmin, useUserRole } from '@/hooks/useUserRole';
+import Loading from '@/components/profile/loading';
 
 
 export default function EmployeeInfo() {
@@ -43,10 +44,13 @@ export default function EmployeeInfo() {
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
+    const [isloading, setIsLoading] = useState(true);
+
     /* ------------- Get Employee info using a firebase query -------------- */
     async function loadEmployees() {
          const data = await getEmployees();
          setPersonnel(data);
+         setIsLoading(false);
     }
 
     useEffect(() => {
@@ -81,6 +85,16 @@ export default function EmployeeInfo() {
         setSearchResults(searchRes);
         console.log(searchRes);
         return searchRes
+    }
+
+    /* ------------ Clear search -------------- */
+
+    const clearSearch = async () => {
+        setSearch("");
+        setIsFiltering(false);
+        setIsSearching(false);
+        setSearchResults([]);
+        await loadEmployees();
     }
 
     /*------------------------- Table Data ----------------------------------*/
@@ -178,7 +192,14 @@ export default function EmployeeInfo() {
 
     } else {
         /*------------------------- All Employee Data ----------------------------------*/
+        if (isloading) {
+            
+            return <Loading />
+
+        } else {
+
         return (
+            
             < div className={styles.table} >
                 <Table responsive>
                     <thead>
@@ -218,6 +239,7 @@ export default function EmployeeInfo() {
                 </div>
             )
         } 
+    }
 
     }
 
@@ -230,7 +252,7 @@ export default function EmployeeInfo() {
 
             <div className={styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
-                <NavBar onSearch={handleSearch} searchValue={search}/>
+                <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
             
             </div>
 

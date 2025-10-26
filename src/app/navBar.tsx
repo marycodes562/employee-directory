@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
@@ -10,13 +10,15 @@ import Card from 'react-bootstrap/Card';
 
 import { Sun } from "@deemlol/next-icons";
 import { Settings } from "@deemlol/next-icons";
-import { Search } from "@deemlol/next-icons";
+import { XCircle } from "@deemlol/next-icons";
 import { Moon, Menu } from "@deemlol/next-icons";
 import styles from './navBar.module.css';
 
 import { searchQuery } from '../../firebase/employeeService';
 
-function NavBar({onSearch, searchValue}) {
+function NavBar({onSearch, searchValue, clear}) {
+    const [showX, setShowX] = useState(false);
+
     const today = new Date();
 
     const date = today.getDate();
@@ -40,20 +42,28 @@ function NavBar({onSearch, searchValue}) {
                     <p>{`${date} / ${month} / ${year}`}</p>
                 </Card>*/}
 
-                {/*---------------- Search Bar -------------------- 
-                <Search size={20}/>*/}
+                {/*---------------- Search Bar -------------------- */}
 
-                <Form className={styles.form}>
-                    
-                    <Form.Control 
-                        value={searchValue}
-                        type="text"
-                        placeholder="Search..."
-                        onChange={onSearch}
-                    />
-                </Form>
+                <div>
+                        <Form className={styles.form}>
+                            
+                            <Form.Control 
+                                value={searchValue}
+                                type="text"
+                                placeholder="Search..."
+                                onChange={onSearch}
+                            />
+                            {searchValue ? 
+                                <button 
+                                    type='button'
+                                    className={styles.searchx} 
+                                    onClick={clear}><XCircle size={20} color="#090909ff" /></button> : ""
+                            }
+                            
+                        </Form>
 
-                {/*<Button className={styles.button}><Search size={20} color="#FFF" /></Button>*/}
+
+                </div>
 
                 {/*---------------- Buttons Container -------------------- */}
 
