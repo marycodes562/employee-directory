@@ -20,6 +20,51 @@ import { isAdmin, useUserRole } from '@/hooks/useUserRole';
 import Loading from '@/components/profile/loading';
 import ButtonComp from '@/components/profile/button';
 
+const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserForm, setShowDeleteUser}: {data: any; isUserAdmin: boolean; setSelectedEmployee: any; setShowEditUserForm: any; setShowDeleteUser: any }) => 
+        (
+           < div className={styles.table} >
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th className={styles.personId}>Employee ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Department</th>
+                            <th></th>
+                            
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {data.map((person, index) => (
+                            <tr key={person.employeeId}>
+                                <td className={styles.personId}>{person.employeeId}</td>
+                                <td>{person.firstName}</td>
+                                <td>{person.lastName}</td>
+                                <td>{person.email}</td>
+                                <td>{person.location}</td>
+                                <td>{person.department}</td>
+                                {
+                                    isUserAdmin ? (
+                                    <td>
+                                        <div className={styles.buttonContainer}>
+                                            <ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/>
+                                            <button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}}><Trash2 size={20} color="#FFFFFF"/></button>
+                                        </div>
+                                    </td>
+                                    ) : null
+                                }
+                            </tr>
+                        ))}
+                    </tbody> 
+                </Table>
+            </div>
+        )
+
+
+
+
 
 export default function EmployeeInfo() {
     const { userRole } = useUserRole();
@@ -45,13 +90,13 @@ export default function EmployeeInfo() {
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
-    const [isloading, setIsLoading] = useState(true);
+    const [employeeInfoLoading, setEmployeeInfoLoading] = useState(true);
 
     /* ------------- Get Employee info using a firebase query -------------- */
     async function loadEmployees() {
          const data = await getEmployees();
          setPersonnel(data);
-         setIsLoading(false);
+         setEmployeeInfoLoading(false);
     }
 
     useEffect(() => {
@@ -68,9 +113,15 @@ export default function EmployeeInfo() {
     /*------------------------- Handle Filter Function ----------------------------------*/
     const handleCountryChange = async(country: any, department: any) => {
         setIsFiltering(true);
-        setIsSearching(true);
+        setIsSearching(false);
         const countries = await findByCountry(country, department);
         setFilteredLocation(countries);
+        if (!country && !department) {
+            setIsFiltering(false);
+            setIsSearching(false);
+            await loadEmployees();
+            return 
+        }
         console.log(countries);
         return countries
     }
@@ -83,7 +134,7 @@ export default function EmployeeInfo() {
         const searchRes = await searchQuery(value);
         setIsFiltering(false);
         setIsSearching(true);
-        setSearchResults(searchRes);
+        setSearchResults(searchRes); 
         console.log(searchRes);
         return searchRes
     }
@@ -100,150 +151,35 @@ export default function EmployeeInfo() {
 
     /*------------------------- Table Data ----------------------------------*/
 
-    const content = () => {
     
-    /*------------------------- Filtered Location /Department Data ----------------------------------*/
-    if (isFiltering && filteredLocations.length > 0) {
-        
-        return (
-            < div className={styles.table} >
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th className={styles.personId}>Employee ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Location</th>
-                            <th>Department</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead> 
-                    <tbody>
-                        {filteredLocations.map((person, index) => (
-                            <tr key={person.employeeId}>
-                                <td className={styles.personId}>{person.employeeId}</td>
-                                <td>{person.firstName}</td>
-                                <td>{person.lastName}</td>
-                                <td>{person.email}</td>
-                                <td>{person.location}</td>
-                                <td>{person.department}</td>
-                                {
-                                    isUserAdmin ? (
-                                        <div className={styles.buttonContainer}>
-                                            <td><ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/></td>
-                                            <td><button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></button></td>
-                                        </div>
-                                    ) : null
-                                }
-                            </tr>
-                        ))}
-                    </tbody> 
-                </Table>
-                </div>
-        )
-    /*------------------------- Search Result Data ----------------------------------*/
-    } else if(isSearching && searchResults.length > 0) {
-        return (
-            < div className={styles.table} >
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th className={styles.personId}>Employee ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Location</th>
-                            <th>Department</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead> 
-                    <tbody>
-                        {searchResults.map((person, index) => (
-                            <tr key={person.employeeId}>
-                                <td className={styles.personId}>{person.employeeId}</td>
-                                <td>{person.firstName}</td>
-                                <td>{person.lastName}</td>
-                                <td>{person.email}</td>
-                                <td>{person.location}</td>
-                                <td>{person.department}</td>
-                                {
-                                    isUserAdmin ? (
-                                        <div className={styles.buttonContainer}>
-                                            <td><ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/></td>
-                                            <td><button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></button></td>
-                                        </div>
-                                    ) : null
-                                }
-                                
-                            </tr>
-                        ))}
-                    </tbody> 
-                </Table>
-                </div>
-        )
-    } else if ((isFiltering && filteredLocations.length === 0) || (isSearching && searchResults.length === 0)) {
-    return (
-        <>
-            <div className={styles.noresults}>
-                <h3>No results found</h3>
-            </div>
-        </>
-    );
 
-    } else {
-        /*------------------------- All Employee Data ----------------------------------*/
-        if (isloading) {
+    const content = () => {
+        let dataToRender = [];
 
+        if (employeeInfoLoading) {
             return <Loading />
+        }
 
+        if (isFiltering && filteredLocations.length > 0) {
+            dataToRender = filteredLocations;
+        } else if(isSearching && searchResults.length > 0) {
+            dataToRender = searchResults;
         } else {
+            dataToRender = personnel
+        }
 
-        return (
-            
-            < div className={styles.table} >
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th className={styles.personId}>Employee ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Location</th>
-                            <th>Department</th>
-                            
-                        </tr>
-                    </thead> 
-                    <tbody>
-                        {personnel.map((person, index) => (
-                            <tr key={person.employeeId}>
-                                <td className={styles.personId}>{person.employeeId}</td>
-                                <td>{person.firstName}</td>
-                                <td>{person.lastName}</td>
-                                <td>{person.email}</td>
-                                <td>{person.location}</td>
-                                <td>{person.department}</td>
-                                {
-                                    isUserAdmin ? (
-                                        <div className={styles.buttonContainer}>
-                                            <td><ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/></td>
-                                            <td><button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}} variant='danger'><Trash2 size={20} color="#FFFFFF"/></button></td>
-                                                                                    
-                                        </div>
-                                    ) : null
-                                }
-                                
-                            </tr>
-                        ))}
-                    </tbody> 
-                </Table>
+        if ((isFiltering && filteredLocations.length === 0) || (isSearching && searchResults.length === 0)) {
+            return (
+                <div className={styles.noresults}>
+                    <h3>No results found</h3>
                 </div>
             )
         } 
-    }
 
+        return (
+            
+            <EmployeeTable data={dataToRender} isUserAdmin={isUserAdmin} setSelectedEmployee={setSelectedEmployee} setShowEditUserForm={setShowEditUserForm} setShowDeleteUser={setShowDeleteUser}/>
+        )
     }
 
     return (

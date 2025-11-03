@@ -10,25 +10,4 @@
     width: 70%;
 }
 
-.button {
-    color: #ffffff;
-    border-radius: 10px;
-    padding: 0 1rem;
-    height: 2.5rem;
-    width: 5rem;
-    background-color: #319795;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.button:hover {
-    background-color: #277e7d;
-    color: #ffffff;
-}
-
-.button:active,
-.button:focus {
-    background-color: #319795;
-    color: #ffffff;
-}
 

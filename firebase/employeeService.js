@@ -19,6 +19,7 @@ const auth = getAuth(app);
 
 export const getEmployees = async() =>  {
     const snapshot = await getDocs(employeesRef);
+	
     return snapshot.docs.map((doc) => (
         {
             id: doc.id,

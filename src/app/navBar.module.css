@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 0.5rem;
+    border-radius: 10px;
 }
 
 .buttonsContainer {
@@ -13,6 +14,7 @@
     background-color: #319795;
     border: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .dateDay {
