@@ -75,7 +75,7 @@
     display: none;
 }
 
-/* Add employee button*/
+/* Add employee button */
 
 .addEmployeeBtn {
   z-index: 3;
@@ -84,6 +84,10 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
+
+/* Add employee modal */
+
+
 
 /* Delete button */
 

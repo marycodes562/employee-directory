@@ -64,8 +64,6 @@ const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserF
 
 
 
-
-
 export default function EmployeeInfo() {
     const { userRole } = useUserRole();
     const isUserAdmin = isAdmin(userRole);
@@ -149,9 +147,7 @@ export default function EmployeeInfo() {
         await loadEmployees();
     }
 
-    /*------------------------- Table Data ----------------------------------*/
-
-    
+    /*------------------------- Table Data ----------------------------------*/    
 
     const content = () => {
         let dataToRender = [];
@@ -227,10 +223,10 @@ export default function EmployeeInfo() {
 
                     {  /*------------------------- Add Employee Button - Visible only when admin login ----------------------------------*/
                     isUserAdmin ? 
-                    <Button className={styles.addEmployeeBtn} variant="primary" onClick={() => setShowAddUserForm(true)}>
+                    <ButtonComp text="Add New Employee" onClick={() => setShowAddUserForm(true)} style={{width: "auto"}} />
                         
-                        <Plus size={24} color="#FFFFFF" /> Add New Employee
-                    </Button> : null
+                        
+                     : null
                     }
                 </div>
                                 

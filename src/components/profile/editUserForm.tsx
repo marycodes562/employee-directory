@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 
 import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
+import ButtonComp from './button';
 
 function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
 
@@ -144,19 +145,20 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                             {departments.map((dep) => (
                                 <option key={dep.id} value={dep.name}>{dep.name}</option>
                             ))}
-                        </Form.Select><br/>
-
-                        <Modal.Footer>
-                            <div className={styles.buttonsContainer}>
-                                    {/*------------------------- Close Button ----------------------------------*/}
-                                    <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
-                                    {/*------------------------- Add User Button ----------------------------------*/}
-                                    <Button type="submit">Save Changes</Button>
-                            </div>
-                        </Modal.Footer>
+                        </Form.Select>
 
                     </Form>
                 </Modal.Body>
+                
+                <Modal.Footer>
+                    <div className={styles.buttonsContainer}>
+                        {/*------------------------- Close Button ----------------------------------*/}
+                        <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
+                        {/*------------------------- Add User Button ----------------------------------*/}
+                        <ButtonComp text="Save Changes" onClick={handleSubmit} style={{width: "auto"}}/>
+                    </div>
+                </Modal.Footer>
+
 
             </Modal>
         </div>

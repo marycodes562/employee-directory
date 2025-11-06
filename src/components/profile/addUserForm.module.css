@@ -12,3 +12,8 @@
     margin: 20px auto;
     padding: 1rem;
 }
+
+.modalHead {
+    border-bottom: none;
+    text-align: center;
+}
