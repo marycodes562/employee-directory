@@ -75,6 +75,10 @@
     display: none;
 }
 
+.tableHead {
+  background-color: #28807E;
+}
+
 /* Add employee button */
 
 .addEmployeeBtn {

@@ -69,7 +69,7 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                 aria-labelledby='contained-modal-title-vcenter'
                 centered
             >
-                <Modal.Header closeButton>
+                <Modal.Header className={styles.header} closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">Edit Employee</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

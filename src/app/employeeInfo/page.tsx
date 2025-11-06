@@ -10,7 +10,7 @@ import SideFilter from '@/components/profile/sideFilter';
 import { getEmployees, addEmployees, findByCountry, searchQuery } from '../../../firebase/employeeService';
 
 import Button from 'react-bootstrap/Button';
-import styles from './page.module.css';
+import Styles from './page.module.css';
 import Table from 'react-bootstrap/Table';
 import { Edit3 } from "@deemlol/next-icons";
 import { Trash2 } from "@deemlol/next-icons";
@@ -22,11 +22,11 @@ import ButtonComp from '@/components/profile/button';
 
 const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserForm, setShowDeleteUser}: {data: any; isUserAdmin: boolean; setSelectedEmployee: any; setShowEditUserForm: any; setShowDeleteUser: any }) => 
         (
-           < div className={styles.table} >
-                <Table responsive>
-                    <thead>
+           < div className={Styles.table} >
+                <Table striped responsive>
+                    <thead className={Styles.tableHead}>
                         <tr>
-                            <th className={styles.personId}>Employee ID</th>
+                            <th className={Styles.personId}>Employee ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
@@ -39,7 +39,7 @@ const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserF
                     <tbody>
                         {data.map((person, index) => (
                             <tr key={person.employeeId}>
-                                <td className={styles.personId}>{person.employeeId}</td>
+                                <td className={Styles.personId}>{person.employeeId}</td>
                                 <td>{person.firstName}</td>
                                 <td>{person.lastName}</td>
                                 <td>{person.email}</td>
@@ -48,9 +48,9 @@ const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserF
                                 {
                                     isUserAdmin ? (
                                     <td>
-                                        <div className={styles.buttonContainer}>
+                                        <div className={Styles.buttonContainer}>
                                             <ButtonComp text={<Edit3 size={20} color="#FFFFFF"/>} onClick={() => {setSelectedEmployee(person); setShowEditUserForm(true)}} style={{height: '2.2rem'}}/>
-                                            <button className={styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}}><Trash2 size={20} color="#FFFFFF"/></button>
+                                            <button className={Styles.deleteButton} onClick={() => {setSelectedEmployee(person) ;setShowDeleteUser(true)}}><Trash2 size={20} color="#FFFFFF"/></button>
                                         </div>
                                     </td>
                                     ) : null
@@ -166,7 +166,7 @@ export default function EmployeeInfo() {
 
         if ((isFiltering && filteredLocations.length === 0) || (isSearching && searchResults.length === 0)) {
             return (
-                <div className={styles.noresults}>
+                <div className={Styles.noresults}>
                     <h3>No results found</h3>
                 </div>
             )
@@ -180,12 +180,12 @@ export default function EmployeeInfo() {
 
     return (
            
-        <div className={styles.container}>
-            <div className={styles.overlay}></div>
+        <div className={Styles.container}>
+            <div className={Styles.overlay}></div>
 
-            <div className={styles.contentContainer}>
+            <div className={Styles.contentContainer}>
 
-            <div className={styles.headerContainer}>
+            <div className={Styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
                 <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
             
@@ -214,9 +214,9 @@ export default function EmployeeInfo() {
                     onDeleted={loadEmployees}
                 />
 
-            <div className={styles.main}>
+            <div className={Styles.main}>
                  {/* Side Filter */}
-                <div className={styles.side}>
+                <div className={Styles.side}>
                     <SideFilter 
                         onCountryChange={handleCountryChange}
                     />

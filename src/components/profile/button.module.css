@@ -1,5 +1,5 @@
 .button {
-  background-color: #319795;
+  background-color: #28807E;
   border: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   color: #fff;
@@ -14,11 +14,11 @@
 }
 
 .button:hover {
-    background-color: #277e7d;
+    background-color: #1D5D5A;
     color: #ffffff;
 }
 
 .button:active {
-    background-color: #319795;
+    background-color: #28807E;
     color: #ffffff;
 }
