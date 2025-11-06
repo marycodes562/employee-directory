@@ -22,7 +22,8 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
         lastName: '',
         email: '',
         location: '',
-        department: ''
+        department: '',
+        role: ''
     });
 
     const handleSubmit = (e: any) => {
@@ -38,7 +39,8 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
             lastName: '',
             email: '',
             location: '',
-            department: ''
+            department: '',
+            role: ''
         });
         
         onHide(); // Close the modal after submission
@@ -146,13 +148,29 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
 
                 {/*------------------------------------------------------------------------*/}
                 <br />
+                {/*--------------------------- Role -------------------------*/}
+                <FloatingLabel
+                        controlId="floatingRole"
+                        label="Role"
+                       className="mb-3"
+                >
+                <Form.Select 
+                    name="role"
+                    onChange={(e) => setFormData({...formData, role: e.target.value})}
+                    value={formData.role}
+                >
+                        <option value="">Select a role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                </Form.Select>
+                </FloatingLabel>
                 
             </Form>
           </Modal.Body>
           <Modal.Footer>
             <div className={styles.buttonsContainer}>
                     {/*------------------------- Close Button ----------------------------------*/}
-                    <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
+                    <button onClick={onHide} className={styles.button}>Close</button>
                     {/*------------------------- Add User Button ----------------------------------*/}
                     <ButtonComp text="Add" style={{width: "auto"}} onClick={handleSubmit}/>
             </div>

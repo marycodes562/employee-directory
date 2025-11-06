@@ -23,7 +23,7 @@ import ButtonComp from '@/components/profile/button';
 const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserForm, setShowDeleteUser}: {data: any; isUserAdmin: boolean; setSelectedEmployee: any; setShowEditUserForm: any; setShowDeleteUser: any }) => 
         (
            < div className={Styles.table} >
-                <Table striped responsive>
+                <Table hover responsive>
                     <thead className={Styles.tableHead}>
                         <tr>
                             <th className={Styles.personId}>Employee ID</th>
@@ -130,11 +130,18 @@ export default function EmployeeInfo() {
         let value = e.target.value;
         setSearch(value);
         const searchRes = await searchQuery(value);
+        const allEmployees = await getEmployees();
         setIsFiltering(false);
         setIsSearching(true);
-        setSearchResults(searchRes); 
+
         console.log(searchRes);
-        return searchRes
+        if (isSearching && value === "") {
+            setSearchResults(allEmployees); 
+            return allEmployees
+        } else {
+            setSearchResults(searchRes);
+            return searchRes
+        }
     }
 
     /* ------------ Clear search -------------- */

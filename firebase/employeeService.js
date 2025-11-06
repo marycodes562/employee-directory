@@ -8,7 +8,8 @@ import {
 	query,
 	where,
 	and,
-	or
+	or,
+	orderBy
 } from "firebase/firestore";
 
 import { app, db } from './firebase';
@@ -17,8 +18,12 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 const employeesRef = collection(db, 'employees');
 const auth = getAuth(app);
 
+/*-------------------- Get all employees ----------------------- */
+
 export const getEmployees = async() =>  {
-    const snapshot = await getDocs(employeesRef);
+    const q = query(employeesRef, orderBy("firstName"));
+
+  	const snapshot = await getDocs(q);
 	
     return snapshot.docs.map((doc) => (
         {
@@ -28,21 +33,25 @@ export const getEmployees = async() =>  {
     ))
 }
 
+/*-------------------- Add Employee ----------------------- */
 export const addEmployees = async(employeeData) => {
 	const docRef = await addDoc(employeesRef, employeeData);
 	return docRef;
 }
 
+/*-------------------- Delete Employee ----------------------- */
 export const deleteEmployees = async(id) => {
 	const emptyDoc = doc(db, 'employees', id);
 	return await deleteDoc(emptyDoc);
 }
 
+/*-------------------- Update Employee ----------------------- */
 export const updateEmployee = async(id, updatedData) => {
 	const editDoc = doc(db, 'employees', id);
 	return await updateDoc(editDoc, updatedData);
 }
 
+/*-------------------- Filter by country results ----------------------- */
 export const findByCountry = async(location, department) => {
 	let q;
 	let locationQuery = query(employeesRef, where("location", "==", location));
@@ -51,9 +60,9 @@ export const findByCountry = async(location, department) => {
 
 	if (location && department) {
 		q = landDQuery;
-	} else if (location) {
+	} else if (location && department == "") {
 		q = locationQuery;
-	} else if (department) {
+	} else if (department && location == "") {
 		q = departmentQuery;
 	} else {
 		q = employeesRef
@@ -61,16 +70,21 @@ export const findByCountry = async(location, department) => {
 
 	const qResponse = await getDocs(q);
 	const result = [];
-
+	
 	qResponse.docs.forEach((country) => {
 		result.push({
 			id: country.id,
 			...country.data()
 		})
 	})
-
-	return result;
+	const sortedResult = result.sort((a, b) =>
+		a.firstName.localeCompare(b.firstName)
+	);
+	
+	return sortedResult;
 }
+
+/*-------------------- Search query results ----------------------- */
 
 export const searchQuery = async(queryInput) => {
 	let searchQ = query(employeesRef, 
@@ -89,15 +103,16 @@ export const searchQuery = async(queryInput) => {
 			...q.data()
 		})
 	})
-	console.log(results);
-	
+
 	return results;
 }
 
+/*-------------------- Sign Up ----------------------- */
 export const signUp = async(email, password) => {
 	return await createUserWithEmailAndPassword(auth, email, password);
 };
 
+/*-------------------- Login ----------------------- */
 export const login = async(email, password) => {
 	return await signInWithEmailAndPassword(auth, email, password);
 }

@@ -27,6 +27,7 @@ export default function SignUp() {
 		lastName: '',
 		email: '',
 		password: '',
+		role: ''
 	});
 
 	const formik = useFormik({

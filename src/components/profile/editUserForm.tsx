@@ -21,7 +21,8 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
             lastName: '',
             email: '',
             location: '',
-            department: ''
+            department: '',
+            role: ''
         };
 
     const [formData, setformData] = useState(initialFormData);
@@ -34,7 +35,8 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
             lastName: employee.lastName || '',
             email: employee.email || '',
             location: employee.location || '',
-            department: employee.department || ''
+            department: employee.department || '',
+            role: employee.role || ''
             })
         }
     }, [employee])
@@ -145,7 +147,24 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                             {departments.map((dep) => (
                                 <option key={dep.id} value={dep.name}>{dep.name}</option>
                             ))}
-                        </Form.Select>
+                        </Form.Select><br/>
+
+                        {/*--------------------------- Role -------------------------*/}
+						<FloatingLabel
+							controlId="floatingRole"
+								label="Role"
+								className="mb-3"
+						>
+						<Form.Select 
+								name="role"
+								onChange={handleChange}
+								value={formData.role}
+						>
+								<option value="">Select a role</option>
+								<option value="user">User</option>
+								<option value="admin">Admin</option>
+						</Form.Select>
+						</FloatingLabel>
 
                     </Form>
                 </Modal.Body>
