@@ -1,3 +1,8 @@
+.header {
+    background-color: #C64D24;
+    color: #fff;
+}
+
 .buttonsContainer {
     display: flex;
     justify-content: center;

@@ -4,9 +4,10 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import styles from './deleteUserForm.module.css';
+import Styles from './deleteUserForm.module.css';
 import { deleteEmployees } from '../../../firebase/employeeService';
 import toast from 'react-hot-toast';
+import ButtonComp from './button';
 
 function DeleteUser({show, onHide, employee, onDeleted}: any)  {
 
@@ -27,30 +28,31 @@ function DeleteUser({show, onHide, employee, onDeleted}: any)  {
     return (
         <div>
             <Modal
-                className={styles.modalContent}
+                className={Styles.modalContent}
                 aria-labelledby='contained-modal-title-vcenter'
                 show={show}
                 onHide={onHide}
                 centered
             >
-
-                <Form className={styles.form} onSubmit={handleDelete}>
-                    <Modal.Header closeButton>
+                    <Modal.Header className={Styles.header} closeButton>
                         <Modal.Title>Delete User</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                    <Form className={Styles.form} onSubmit={handleDelete}>    
 
                         <p>Are you sure you want to delete {' '}
                             <strong>{employee?.firstName} {employee?.lastName}</strong>?</p>
 
+                    </Form>        
+
                     </Modal.Body>
                     <Modal.Footer>
                         {/*------------------------- Close Button ----------------------------------*/}
-                        <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
+                        <Button variant='secondary' onClick={onHide} className={Styles.button}>Close</Button>
                         {/*------------------------- Delete User Button ----------------------------------*/}
-                        <Button variant='danger' type="submit">Delete</Button>
+                        <ButtonComp text="Delete" onClick={handleDelete} style={{width: "auto", backgroundColor: "#C64D24"}}/>
                     </Modal.Footer>
-                </Form>
+                
             </Modal>
         </div>
     )

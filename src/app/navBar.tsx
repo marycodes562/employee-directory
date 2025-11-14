@@ -33,8 +33,8 @@ function NavBar({onSearch, searchValue, clear}) {
                         <Image 
                             src="/logo2.png"
                             alt="logo"
-                            width={180}
-                            height={80}
+                            width={190}
+                            height={85}
                         />
 
               {/*---------------- Date / Day -------------------- 
@@ -73,8 +73,7 @@ function NavBar({onSearch, searchValue, clear}) {
                     <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>*/}
 
                     {/*---------------- Menu Button -------------------- */}
-                    <Button className={styles.button}><Menu size={20} color="#FFF" /></Button>
-
+                    <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/>
                     
 
                 </div>

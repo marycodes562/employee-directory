@@ -4,11 +4,39 @@
 }
 
 .button {
-    margin-right: 1rem;
+  margin-right: 1rem;
+  background-color: #767474;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.button:hover {
+    background-color: #525151;
+    color: #ffffff;
+}
+
+.button:active {
+    background-color: #767474;
+    color: #ffffff;
+}
+
 
 .modal {
     width: 10rem;
     margin: 20px auto;
     padding: 1rem;
+}
+
+.modalHead {
+    background-color: #28807E;
+    color: #fff;
 }

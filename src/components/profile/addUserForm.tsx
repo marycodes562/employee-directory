@@ -11,6 +11,7 @@ import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ButtonComp from './button';
 
 
 export default function AddUserForm({ show, onHide, onAddUser }: any) {
@@ -21,7 +22,8 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
         lastName: '',
         email: '',
         location: '',
-        department: ''
+        department: '',
+        role: ''
     });
 
     const handleSubmit = (e: any) => {
@@ -37,7 +39,8 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
             lastName: '',
             email: '',
             location: '',
-            department: ''
+            department: '',
+            role: ''
         });
         
         onHide(); // Close the modal after submission
@@ -54,11 +57,13 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
                  centered
                  scrollable
             >
+            
+            {/*------------------------- Modal Title ----------------------------------*/}
+            <Modal.Header className={styles.modalHead} closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">Add Employee</Modal.Title>
+            </Modal.Header>
+
             <Modal.Body>
-             {/*------------------------- Modal Title ----------------------------------*/}
-             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">Add Employee</Modal.Title>
-             </Modal.Header>
                 {/*------------------------- Add User Form ----------------------------------*/}
               <Form onSubmit={handleSubmit}>
                 {/*------------------------- Employee ID ----------------------------------*/}
@@ -143,14 +148,33 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
 
                 {/*------------------------------------------------------------------------*/}
                 <br />
-                <div className={styles.buttonsContainer}>
-                    {/*------------------------- Close Button ----------------------------------*/}
-                    <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
-                    {/*------------------------- Add User Button ----------------------------------*/}
-                    <Button type="submit">Add User</Button>
-                </div>
+                {/*--------------------------- Role -------------------------*/}
+                <FloatingLabel
+                        controlId="floatingRole"
+                        label="Role"
+                       className="mb-3"
+                >
+                <Form.Select 
+                    name="role"
+                    onChange={(e) => setFormData({...formData, role: e.target.value})}
+                    value={formData.role}
+                >
+                        <option value="">Select a role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                </Form.Select>
+                </FloatingLabel>
+                
             </Form>
           </Modal.Body>
+          <Modal.Footer>
+            <div className={styles.buttonsContainer}>
+                    {/*------------------------- Close Button ----------------------------------*/}
+                    <button onClick={onHide} className={styles.button}>Close</button>
+                    {/*------------------------- Add User Button ----------------------------------*/}
+                    <ButtonComp text="Add" style={{width: "auto"}} onClick={handleSubmit}/>
+            </div>
+          </Modal.Footer>
         </Modal>
             <br />
         </div>

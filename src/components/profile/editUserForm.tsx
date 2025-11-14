@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 
 import locations from '@/Data/locationData';
 import departments from '@/Data/departmentsData';
+import ButtonComp from './button';
 
 function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
 
@@ -20,7 +21,8 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
             lastName: '',
             email: '',
             location: '',
-            department: ''
+            department: '',
+            role: ''
         };
 
     const [formData, setformData] = useState(initialFormData);
@@ -33,7 +35,8 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
             lastName: employee.lastName || '',
             email: employee.email || '',
             location: employee.location || '',
-            department: employee.department || ''
+            department: employee.department || '',
+            role: employee.role || ''
             })
         }
     }, [employee])
@@ -68,7 +71,7 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                 aria-labelledby='contained-modal-title-vcenter'
                 centered
             >
-                <Modal.Header closeButton>
+                <Modal.Header className={styles.header} closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">Edit Employee</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -146,17 +149,35 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                             ))}
                         </Form.Select><br/>
 
-                        <Modal.Footer>
-                            <div className={styles.buttonsContainer}>
-                                    {/*------------------------- Close Button ----------------------------------*/}
-                                    <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
-                                    {/*------------------------- Add User Button ----------------------------------*/}
-                                    <Button type="submit">Save Changes</Button>
-                            </div>
-                        </Modal.Footer>
+                        {/*--------------------------- Role -------------------------*/}
+						<FloatingLabel
+							controlId="floatingRole"
+								label="Role"
+								className="mb-3"
+						>
+						<Form.Select 
+								name="role"
+								onChange={handleChange}
+								value={formData.role}
+						>
+								<option value="">Select a role</option>
+								<option value="user">User</option>
+								<option value="admin">Admin</option>
+						</Form.Select>
+						</FloatingLabel>
 
                     </Form>
                 </Modal.Body>
+                
+                <Modal.Footer>
+                    <div className={styles.buttonsContainer}>
+                        {/*------------------------- Close Button ----------------------------------*/}
+                        <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
+                        {/*------------------------- Add User Button ----------------------------------*/}
+                        <ButtonComp text="Save Changes" onClick={handleSubmit} style={{width: "auto"}}/>
+                    </div>
+                </Modal.Footer>
+
 
             </Modal>
         </div>
