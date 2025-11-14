@@ -15,6 +15,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import { login } from '../../../../firebase/employeeService';
 import toast from 'react-hot-toast';
+import ButtonComp from '@/components/profile/button';
 
 export default function LoginPage() {
 	const [formData, setFormData] = useState({email: '', password: ''});
@@ -102,12 +103,14 @@ export default function LoginPage() {
 						: null}
 
 						{/*Sign in button */}
-						<Button 
-							type="submit" 
-							className={styles.signInButton}
-							>
-							Login
-						</Button><br /><br />
+						<div className={styles.buttonContainer}>
+							<ButtonComp 
+								type='submit'
+								text="login"
+								style={{width: '8rem'}}
+							/>
+						</div>
+						<br /><br />
 			</Form>
 			
 						{/*Create an account link */}
