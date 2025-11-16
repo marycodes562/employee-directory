@@ -72,10 +72,10 @@ function NavBar({onSearch, searchValue, clear}) {
                     {/*---------------- Light / Dark Mode -------------------- 
                     <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>*/}
 
-                    {/*---------------- Menu Button -------------------- */}
-                    <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/>
+                    {/*---------------- Menu Button -------------------- 
+                    <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/><br />*/}
                     
-
+                    <button className={styles.logout}>Logout</button>
                 </div>
             </Navbar>
         </div>
