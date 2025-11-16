@@ -31,7 +31,8 @@
     justify-content: center;
 }
 
-.createAccount {
+.createAccount, 
+.forgotPassword {
   margin-left: 33%;
 }
 

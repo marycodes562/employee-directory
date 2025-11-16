@@ -19,6 +19,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { isAdmin, useUserRole } from '@/hooks/useUserRole';
 import Loading from '@/components/profile/loading';
 import ButtonComp from '@/components/profile/button';
+import SideMenu from '@/components/profile/sideMenu';
 
 const EmployeeTable = ({data, isUserAdmin, setSelectedEmployee, setShowEditUserForm, setShowDeleteUser}: {data: any; isUserAdmin: boolean; setSelectedEmployee: any; setShowEditUserForm: any; setShowDeleteUser: any }) => 
         (
@@ -136,7 +137,7 @@ export default function EmployeeInfo() {
 
         console.log(searchRes);
         if (isSearching && value === "") {
-            setSearchResults(allEmployees); 
+            setSearchResults(searchRes); 
             return allEmployees
         } else {
             setSearchResults(searchRes);
@@ -188,16 +189,16 @@ export default function EmployeeInfo() {
     return (
            
         <div className={Styles.container}>
-            <div className={Styles.overlay}></div>
-
-            <div className={Styles.contentContainer}>
-
-            <div className={Styles.headerContainer}>
+              <div className={Styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
                 <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
             
             </div>
 
+
+            <div className={Styles.contentContainer}>
+
+          
                 {/*------------------------- Add User Form ----------------------------------*/}
                 <AddUserForm 
                     onAddUser={handleAddUser}
@@ -222,25 +223,35 @@ export default function EmployeeInfo() {
                 />
 
             <div className={Styles.main}>
-                 {/* Side Filter */}
-                <div className={Styles.side}>
-                    <SideFilter 
-                        onCountryChange={handleCountryChange}
-                    />
-
-                    {  /*------------------------- Add Employee Button - Visible only when admin login ----------------------------------*/
-                    isUserAdmin ? 
-                    <ButtonComp text="Add New Employee" onClick={() => setShowAddUserForm(true)} style={{width: "auto"}} />
-                        
-                        
-                     : null
-                    }
-                </div>
-                                
-
-                {/*------------------------- Employee Table ----------------------------------*/}
                 
-               {content()}
+
+
+
+                <div className={Styles.sideMainContent}>
+
+                    <SideMenu />
+                                    
+                    <div>
+                                
+                        {/* Side Filter */}
+                        <div className={Styles.side}>
+                            <SideFilter 
+                                onCountryChange={handleCountryChange}
+                            />
+
+                            {  /*------------------------- Add Employee Button - Visible only when admin login ----------------------------------*/
+                            isUserAdmin ? 
+                            <ButtonComp text="Add New Employee" onClick={() => setShowAddUserForm(true)} style={{width: "auto"}} />
+                                
+                                
+                            : null
+                            }
+                        </div>
+                    {/*------------------------- Employee Table ----------------------------------*/}
+                    
+                    {content()}
+                    </div>
+               </div>
             </div>{/*main div end*/}
             </div> 
                         

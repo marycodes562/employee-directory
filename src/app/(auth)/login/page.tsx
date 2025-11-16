@@ -114,7 +114,11 @@ export default function LoginPage() {
 			</Form>
 			
 						{/*Create an account link */}
-						<a href="/signUp" className={styles.createAccount}>Create an account</a>
+						<a href="/signUp" className={styles.createAccount}>Create an account</a><br/>
+
+						
+						{/*Forgot password link */}
+						<a href="/" className={styles.forgotPassword}>Forgot Password</a>
 		</Card>
 	</div>
 	);
