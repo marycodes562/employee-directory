@@ -1,8 +1,8 @@
 .navBar {
     display: flex;
-    justify-content: space-between;
-    padding: 0 0.5rem;
-    border-radius: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 1rem;
 }
 
 .buttonsContainer {
@@ -20,9 +20,13 @@
 .logout {
   border: none;
   padding: 0.5rem;
-  background-color: grey;
+  background-color: rgb(85, 85, 85);
   color: #fff;
   border-radius: 16px;
+}
+
+.logout:hover {
+  background-color: rgb(49, 49, 49);
 }
 
 .dateDay {

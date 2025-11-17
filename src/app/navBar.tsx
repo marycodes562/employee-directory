@@ -30,12 +30,7 @@ function NavBar({onSearch, searchValue, clear}) {
         <div>
             <Navbar className={styles.navBar}>
               {/*Logo */}
-                        <Image 
-                            src="/logo2.png"
-                            alt="logo"
-                            width={190}
-                            height={85}
-                        />
+              <div></div>
 
               {/*---------------- Date / Day -------------------- 
                 <Card className={styles.dateDay}>

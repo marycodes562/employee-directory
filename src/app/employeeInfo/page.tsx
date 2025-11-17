@@ -189,12 +189,6 @@ export default function EmployeeInfo() {
     return (
            
         <div className={Styles.container}>
-              <div className={Styles.headerContainer}>
-                {/*------------------------- NavBar component ----------------------------------*/}
-                <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
-            
-            </div>
-
 
             <div className={Styles.contentContainer}>
 
@@ -229,12 +223,19 @@ export default function EmployeeInfo() {
 
                 <div className={Styles.sideMainContent}>
 
-                    <SideMenu />
+                    <div className={Styles.sideMenu}>
+                        <SideMenu />
+                    </div>
                                     
-                    <div>
-                                
+                    <div className={Styles.contentandfilter}>
+                        <div className={Styles.headerContainer}>
+                        {/*------------------------- NavBar component ----------------------------------*/}
+                        <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
+                    
+                        </div>
+
                         {/* Side Filter */}
-                        <div className={Styles.side}>
+                        <div className={Styles.filter}>
                             <SideFilter 
                                 onCountryChange={handleCountryChange}
                             />
@@ -249,7 +250,7 @@ export default function EmployeeInfo() {
                         </div>
                     {/*------------------------- Employee Table ----------------------------------*/}
                     
-                    {content()}
+                        {content()}
                     </div>
                </div>
             </div>{/*main div end*/}
