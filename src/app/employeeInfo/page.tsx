@@ -138,6 +138,8 @@ export default function EmployeeInfo() {
         console.log(searchRes);
         if (isSearching && value === "") {
             setSearchResults(searchRes); 
+            setIsSearching(false);
+            setIsFiltering(false);
             return allEmployees
         } else {
             setSearchResults(searchRes);
