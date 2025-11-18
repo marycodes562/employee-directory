@@ -30,7 +30,9 @@ function NavBar({onSearch, searchValue, clear}) {
         <div>
             <Navbar className={styles.navBar}>
               {/*Logo */}
-              <div></div>
+              <div>
+                <h4>Dashboard</h4>
+              </div>
 
               {/*---------------- Date / Day -------------------- 
                 <Card className={styles.dateDay}>

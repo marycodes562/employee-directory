@@ -102,6 +102,12 @@ export default function EmployeeInfo() {
         loadEmployees();
     }, [])
 
+    useEffect(() => {
+        addEmployees();
+    }, []);
+
+    
+
     /*------------------------- Handle Add User Function ----------------------------------*/
     const handleAddUser = async(newUser: any) => {
         //setPersonnel([...personnel, newUser]);

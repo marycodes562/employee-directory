@@ -67,7 +67,6 @@ function SideFilter({ onCountryChange } : any) {
 
     return (
         <div className={styles.dropdown}>
-            <h5>Filter</h5>
 
             {/* Locations Filter */}
             
