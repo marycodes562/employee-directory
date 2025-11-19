@@ -1,0 +1,27 @@
+.dashContainer {
+    border: solid 1px black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.employees,
+.departments,
+.locations {
+     border: solid 1px black;
+     margin: 1rem;
+     padding: 1rem;
+}
+
+.employees,
+.locations {
+    background-color: #28807E;
+    color: #fff;
+    border-radius: 14px;
+}
+
+.departments {
+        background-color: #d1651e;
+    color: #fff;
+    border-radius: 14px;
+}

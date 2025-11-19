@@ -8,6 +8,7 @@ import DeleteUser from '@/components/profile/deleteUserForm';
 import NavBar from '../navBar';
 import SideFilter from '@/components/profile/sideFilter';
 import { getEmployees, addEmployees, findByCountry, searchQuery } from '../../../firebase/employeeService';
+import DashboardStats from '@/components/profile/dashboardStats';
 
 import Button from 'react-bootstrap/Button';
 import Styles from './page.module.css';
@@ -105,7 +106,7 @@ export default function EmployeeInfo() {
     useEffect(() => {
         addEmployees();
     }, []);
-
+    
     
 
     /*------------------------- Handle Add User Function ----------------------------------*/
@@ -241,6 +242,8 @@ export default function EmployeeInfo() {
                         <NavBar onSearch={handleSearch} searchValue={search} clear={clearSearch}/>
                     
                         </div>
+
+                        <DashboardStats />
 
                         {/* Side Filter */}
                         <div className={Styles.filter}>
