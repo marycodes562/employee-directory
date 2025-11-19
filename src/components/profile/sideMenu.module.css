@@ -2,7 +2,11 @@
     border: solid 1px black;
     background-color: #03283b;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
-    height: 100vh; 
+    height: 100%; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-right: 1rem
 }
 
 .listContainer {
@@ -17,7 +21,7 @@
     padding: 0.8rem;
     border-radius: 14px;
     margin: 0.5rem auto;
-    width: 90%;
+    width: 80%;
     color: #fff;
 }
 

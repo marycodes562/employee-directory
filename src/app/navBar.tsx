@@ -13,11 +13,15 @@ import { Settings } from "@deemlol/next-icons";
 import { XCircle } from "@deemlol/next-icons";
 import { Moon, Menu } from "@deemlol/next-icons";
 import styles from './navBar.module.css';
+import toast from 'react-hot-toast';
 
-import { searchQuery } from '../../firebase/employeeService';
+import { logout, searchQuery } from '../../firebase/employeeService';
+import { useRouter } from 'next/navigation';
 
 function NavBar({onSearch, searchValue, clear}) {
     const [showX, setShowX] = useState(false);
+
+    const router = useRouter();
 
     const today = new Date();
 
@@ -25,6 +29,16 @@ function NavBar({onSearch, searchValue, clear}) {
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
 
+    /*------------------------------- Handle Logout ------------------------*/
+     const handleLogout = async() => {
+        try {
+            await logout();
+            toast.success("User is logged out successfully")
+            router.push("/login");
+        } catch(error) {
+            toast.error("Unable to logout");
+        }
+     }
 
     return (
         <div>
@@ -72,7 +86,7 @@ function NavBar({onSearch, searchValue, clear}) {
                     {/*---------------- Menu Button -------------------- 
                     <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/><br />*/}
                     
-                    <button className={styles.logout}>Logout</button>
+                    <button className={styles.logout} onClick={handleLogout}>Logout</button>
                 </div>
             </Navbar>
         </div>

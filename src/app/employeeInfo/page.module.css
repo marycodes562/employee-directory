@@ -3,7 +3,7 @@
   height: auto;
   position: relative;
   z-index: 3;
-  width: 100%;
+  width: auto;
   border: 1px solid black;
 }
 
@@ -14,8 +14,8 @@
 .container {
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: 100vh;
+  width: auto;
+  height: 100%;
   z-index: 3;
   background-color: #f8fafa;
 }
@@ -33,12 +33,12 @@
 }
 
 .sideMenu {
-  width: 15%;
+  width: 10%;
   height: 100%;
 }
 
 .contentandfilter {
-  width: 80%;
+  width: 70%;
 }
 /* Side filter container */
 .filter {

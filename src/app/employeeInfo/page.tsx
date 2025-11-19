@@ -106,7 +106,7 @@ export default function EmployeeInfo() {
     useEffect(() => {
         addEmployees();
     }, []);
-    
+
     
 
     /*------------------------- Handle Add User Function ----------------------------------*/
@@ -194,6 +194,7 @@ export default function EmployeeInfo() {
             <EmployeeTable data={dataToRender} isUserAdmin={isUserAdmin} setSelectedEmployee={setSelectedEmployee} setShowEditUserForm={setShowEditUserForm} setShowDeleteUser={setShowDeleteUser}/>
         )
     }
+
 
     return (
            

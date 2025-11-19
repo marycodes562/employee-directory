@@ -16,9 +16,12 @@ import styles from './page.module.css';
 import { login } from '../../../../firebase/employeeService';
 import toast from 'react-hot-toast';
 import ButtonComp from '@/components/profile/button';
+import ForgotPassword from '@/components/profile/forgotPasssword';
+import ForgotPasswordModal from '@/components/profile/forgotPasssword';
 
 export default function LoginPage() {
 	const [formData, setFormData] = useState({email: '', password: ''});
+	const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
 	const router = useRouter();
 
@@ -118,8 +121,10 @@ export default function LoginPage() {
 
 						
 						{/*Forgot password link */}
-						<a href="/" className={styles.forgotPassword}>Forgot Password</a>
+						<a  className={styles.forgotPassword} onClick={() => setShowForgotPasswordModal(true)}>Forgot Password</a>
 		</Card>
+
+		<ForgotPasswordModal show={showForgotPasswordModal} handleClose={() => setShowForgotPasswordModal(false)} />
 	</div>
 	);
 }

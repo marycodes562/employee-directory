@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 
 import { app, db } from './firebase';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 const employeesRef = collection(db, 'employees');
 const auth = getAuth(app);
@@ -115,4 +115,21 @@ export const signUp = async(email, password) => {
 /*-------------------- Login ----------------------- */
 export const login = async(email, password) => {
 	return await signInWithEmailAndPassword(auth, email, password);
+}
+
+/*------------------------------- Handle Logout ------------------------*/
+
+export const logout = async() => {
+	return await signOut(auth);
+}
+
+/*------------------------------- Forgot Password ------------------------*/
+
+export const forgotPassword = async(email) => {
+	try {
+		await sendPasswordResetEmail(auth, email);
+		return {success: true, message: "Password reset link sent successfully"};
+	} catch(error) {
+		return {success: false, message: error.message};
+	}
 }
