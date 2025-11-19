@@ -30,12 +30,7 @@ function NavBar({onSearch, searchValue, clear}) {
         <div>
             <Navbar className={styles.navBar}>
               {/*Logo */}
-                        <Image 
-                            src="/logo2.png"
-                            alt="logo"
-                            width={190}
-                            height={85}
-                        />
+              <div></div>
 
               {/*---------------- Date / Day -------------------- 
                 <Card className={styles.dateDay}>
@@ -72,10 +67,10 @@ function NavBar({onSearch, searchValue, clear}) {
                     {/*---------------- Light / Dark Mode -------------------- 
                     <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>*/}
 
-                    {/*---------------- Menu Button -------------------- */}
-                    <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/>
+                    {/*---------------- Menu Button -------------------- 
+                    <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/><br />*/}
                     
-
+                    <button className={styles.logout}>Logout</button>
                 </div>
             </Navbar>
         </div>
