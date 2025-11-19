@@ -102,6 +102,12 @@ export default function EmployeeInfo() {
         loadEmployees();
     }, [])
 
+    useEffect(() => {
+        addEmployees();
+    }, []);
+
+    
+
     /*------------------------- Handle Add User Function ----------------------------------*/
     const handleAddUser = async(newUser: any) => {
         //setPersonnel([...personnel, newUser]);
@@ -138,6 +144,8 @@ export default function EmployeeInfo() {
         console.log(searchRes);
         if (isSearching && value === "") {
             setSearchResults(searchRes); 
+            setIsSearching(false);
+            setIsFiltering(false);
             return allEmployees
         } else {
             setSearchResults(searchRes);
