@@ -45,7 +45,7 @@ function NavBar({onSearch, searchValue, clear}) {
             <Navbar className={styles.navBar}>
               {/*Logo */}
               <div>
-                <h4>Dashboard</h4>
+                <h3>Dashboard</h3>
               </div>
 
               {/*---------------- Date / Day -------------------- 
@@ -63,6 +63,7 @@ function NavBar({onSearch, searchValue, clear}) {
                                 type="text"
                                 placeholder="Search..."
                                 onChange={onSearch}
+                                className={styles.searchBar}
                             />
                             {searchValue ? 
                                 <button 

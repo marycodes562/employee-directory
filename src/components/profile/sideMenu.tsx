@@ -14,11 +14,10 @@ export default function SideMenu() {
               <img src='/logo3nobg.png' className={Styles.logo}/>
             
               <ul className={Styles.listContainer}>
-                <li>Dashboard</li>
-                <li>Profile</li>
-                <li>Employees</li>
-                <li>Calender</li>
-                <li>Documents</li>  
+                <li><img src="/icons8-home-24.png"/> Dashboard</li>
+                <li><img src="/icons8-profile-24.png"/> Profile</li>
+                <li><img src="/icons8-date-24.png"/> Calender</li>
+                <li><img src="/icons8-document-24.png"/> Documents</li>  
               </ul>      
         </div>
     )

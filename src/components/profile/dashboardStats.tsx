@@ -10,16 +10,25 @@ export default function DashboardStats() {
     return (
         <div className={Styles.dashContainer}>
             <div className={Styles.employees}>
-                <p>10</p>
-                <p>Employees</p>
+                <img src="/icons8-employees-48.png" className={Styles.logo}/>
+                <div>
+                    <h3>7</h3>
+                    <p>Employees</p>
+                </div>
             </div>
             <div className={Styles.departments}>
-                <p>12</p>
-                <p>Departments</p>
+                <img src="/icons8-department-48.png" className={Styles.logo}/>
+                <div>
+                    <h3>7</h3>
+                    <p>Departments</p>
+                </div>
             </div>
             <div className={Styles.locations}>
-                <p>20</p>
-                <p>Locations</p>
+                <img src="/icons8-location-48.png" className={Styles.logo}/>
+                <div>
+                    <h3>9</h3>
+                    <p>Locations</p>
+                </div>
             </div>
         </div>
     )
