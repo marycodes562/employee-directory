@@ -45,15 +45,14 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
   };
 
   return (
-    <div>
+    <div >
       <Modal
         show={show}
         onHide={onHide}
-        size="lg"
-        className={styles.modal}
         aria-labelledby="contained-modal-title-vcenter"
         centered
         scrollable
+        className={styles.modal}
       >
         {/*------------------------- Modal Title ----------------------------------*/}
         <Modal.Header className={styles.modalHead} closeButton>
@@ -192,7 +191,9 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
             {/*------------------------- Add User Button ----------------------------------*/}
             <ButtonComp
               text="Add"
-              style={{ width: "auto" }}
+              style={{ width: "auto",  height: "2.2rem",
+                      background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+                    }}
               onClick={handleSubmit}
             />
           </div>

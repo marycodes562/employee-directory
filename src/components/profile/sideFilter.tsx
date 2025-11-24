@@ -104,9 +104,9 @@ function SideFilter({ onCountryChange }: any) {
       <ButtonComp
         text="Clear"
         style={{
-          width: "4rem",
-          height: "auto",
-          background: "rgba(255, 255, 255, 0.18)",
+            width: "auto",
+            background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+            color: "#fff",
         }}
         onClick={clearFilter}
       />

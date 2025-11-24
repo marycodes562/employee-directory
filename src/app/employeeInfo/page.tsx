@@ -73,7 +73,7 @@ const EmployeeTable = ({
                     }}
                     style={{
                       height: "2.2rem",
-                      background: "linear-gradient(135deg, #3CAEA3, #7B6CF6)",
+                      background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
                     }}
                   />
                   <button
@@ -132,10 +132,6 @@ export default function EmployeeInfo() {
 
   useEffect(() => {
     loadEmployees();
-  }, []);
-
-  useEffect(() => {
-    addEmployees();
   }, []);
 
   /*------------------------- Handle Add User Function ----------------------------------*/
@@ -233,9 +229,9 @@ export default function EmployeeInfo() {
   };
 
   return (
-    <div className={Styles.container}>
-      <div className={Styles.contentContainer}>
-        {/*------------------------- Add User Form ----------------------------------*/}
+    <div>
+
+      {/*------------------------- Add User Form ----------------------------------*/}
         <AddUserForm
           onAddUser={handleAddUser}
           show={showAddUserForm}
@@ -258,6 +254,8 @@ export default function EmployeeInfo() {
           onDeleted={loadEmployees}
         />
 
+      <div className={Styles.contentContainer}>
+        
         <div className={Styles.main}>
           <div className={Styles.sideMainContent}>
             <div className={Styles.sideMenu}>
@@ -288,7 +286,7 @@ export default function EmployeeInfo() {
                       onClick={() => setShowAddUserForm(true)}
                       style={{
                         width: "auto",
-                        background: "linear-gradient(135deg, #3CAEA3, #7B6CF6)",
+                        background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
                         color: "#fff",
                       }}
                     />

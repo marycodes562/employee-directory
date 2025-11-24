@@ -42,7 +42,7 @@
 
 .employees {
     background: radial-gradient(
-        circle at top right,
+        circle at top left,
         rgba(49,151,149,0.55),
         rgba(40,128,126,0.25) 50%,
         rgba(255,255,255,0.10) 90%

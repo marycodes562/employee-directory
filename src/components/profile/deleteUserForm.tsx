@@ -29,6 +29,8 @@ function DeleteUser({ show, onHide, employee, onDeleted }: any) {
         aria-labelledby="contained-modal-title-vcenter"
         show={show}
         onHide={onHide}
+        restoreBody={false}   // prevent padding changes
+        autoFocus={false}
         centered
       >
         <Modal.Header className={Styles.header} closeButton>

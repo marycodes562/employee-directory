@@ -32,10 +32,20 @@
     background: linear-gradient(353deg,rgba(42, 123, 155, 1) 12%, rgba(40, 128, 126, 1) 76%);
     color: #fff;
     cursor: pointer;
+  backdrop-filter: blur(22px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.dash {
+    background: linear-gradient(353deg,rgba(42, 123, 155, 1) 12%, rgba(40, 128, 126, 1) 76%);
+    color: #fff;
+    cursor: pointer;
+  backdrop-filter: blur(22px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
 .logo {
-    width: 80%;
+    width: 85%;
     height: auto;
     padding: 0.5rem 0;
 }

@@ -67,9 +67,10 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
             <Modal
                 show={show}
                 onHide={onHide}
-                size='lg'
                 aria-labelledby='contained-modal-title-vcenter'
                 centered
+                scrollable
+                className={styles.modal}
             >
                 <Modal.Header className={styles.header} closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">Edit Employee</Modal.Title>
@@ -172,9 +173,13 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                 <Modal.Footer>
                     <div className={styles.buttonsContainer}>
                         {/*------------------------- Close Button ----------------------------------*/}
-                        <Button variant='secondary' onClick={onHide} className={styles.button}>Close</Button>
+                        <ButtonComp text="Close" onClick={onHide} style={{width: "auto", color: "#fff", height: "2.2rem",
+                      background: "grey",
+                    }}/>
                         {/*------------------------- Add User Button ----------------------------------*/}
-                        <ButtonComp text="Save Changes" onClick={handleSubmit} style={{width: "auto"}}/>
+                        <ButtonComp text="Save Changes" onClick={handleSubmit} style={{width: "auto", color: "#fff", height: "2.2rem",
+                      background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+                    }}/>
                     </div>
                 </Modal.Footer>
 
