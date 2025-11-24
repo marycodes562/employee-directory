@@ -3,40 +3,15 @@
     justify-content: center;
 }
 
-.button {
-  margin-right: 1rem;
-  background-color: #767474;
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.button:hover {
-    background-color: #525151;
-    color: #ffffff;
-}
-
-.button:active {
-    background-color: #767474;
-    color: #ffffff;
-}
-
-
 .modal {
     padding: 1rem;
 }
 
 .modalHead {
-background: linear-gradient(353deg,rgba(42, 123, 155, 1) 12%, rgba(40, 128, 126, 1) 76%);
+    background: linear-gradient(135deg, rgba(111,199,194,0.8), rgba(161,133,255,0.8));
     color: #fff;
-  backdrop-filter: blur(22px) saturate(200%);
+    backdrop-filter: blur(22px) saturate(200%);
+    -webkit-backdrop-filter: blur(22px) saturate(200%);
+    border-bottom: 1px solid rgba(255,255,255,0.35);
 
 }

@@ -49,13 +49,9 @@ function DeleteUser({ show, onHide, employee, onDeleted }: any) {
         </Modal.Body>
         <Modal.Footer>
           {/*------------------------- Close Button ----------------------------------*/}
-          <Button
-            variant="secondary"
-            onClick={onHide}
-            className={Styles.button}
-          >
-            Close
-          </Button>
+          <ButtonComp text="Close" onClick={onHide} style={{width: "auto", color: "#fff",
+              background: "grey",
+          }}/>
           {/*------------------------- Delete User Button ----------------------------------*/}
           <ButtonComp
             text="Delete"

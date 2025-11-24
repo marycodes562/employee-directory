@@ -185,13 +185,13 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
         <Modal.Footer>
           <div className={styles.buttonsContainer}>
             {/*------------------------- Close Button ----------------------------------*/}
-            <button onClick={onHide} className={styles.button}>
-              Close
-            </button>
+            <ButtonComp text="Close" onClick={onHide} style={{width: "auto", color: "#fff",
+                background: "grey",
+            }}/>
             {/*------------------------- Add User Button ----------------------------------*/}
             <ButtonComp
               text="Add"
-              style={{ width: "auto",  height: "2.2rem",
+              style={{ width: "auto", color: "#fff",
                       background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
                     }}
               onClick={handleSubmit}

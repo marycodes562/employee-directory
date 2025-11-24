@@ -19,15 +19,8 @@ import { logout, searchQuery } from '../../firebase/employeeService';
 import { useRouter } from 'next/navigation';
 
 function NavBar({onSearch, searchValue, clear}) {
-    const [showX, setShowX] = useState(false);
 
     const router = useRouter();
-
-    const today = new Date();
-
-    const date = today.getDate();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
 
     /*------------------------------- Handle Logout ------------------------*/
      const handleLogout = async() => {
@@ -43,15 +36,10 @@ function NavBar({onSearch, searchValue, clear}) {
     return (
         <div>
             <Navbar className={styles.navBar}>
-              {/*Logo */}
+              {/* Header */}
               <div>
                 <h3>Dashboard</h3>
               </div>
-
-              {/*---------------- Date / Day -------------------- 
-                <Card className={styles.dateDay}>
-                    <p>{`${date} / ${month} / ${year}`}</p>
-                </Card>*/}
 
                 {/*---------------- Search Bar -------------------- */}
 

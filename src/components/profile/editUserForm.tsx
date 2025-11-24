@@ -172,12 +172,13 @@ function EditUserForm ({ show, onHide, onAddUser, employee }: any)  {
                 
                 <Modal.Footer>
                     <div className={styles.buttonsContainer}>
-                        {/*------------------------- Close Button ----------------------------------*/}
-                        <ButtonComp text="Close" onClick={onHide} style={{width: "auto", color: "#fff", height: "2.2rem",
+                    {/*------------------------- Close Button ----------------------------------*/}
+                    <ButtonComp text="Close" onClick={onHide} style={{width: "auto", color: "#fff",
                       background: "grey",
                     }}/>
-                        {/*------------------------- Add User Button ----------------------------------*/}
-                        <ButtonComp text="Save Changes" onClick={handleSubmit} style={{width: "auto", color: "#fff", height: "2.2rem",
+
+                    {/*------------------------- Add User Button ----------------------------------*/}
+                    <ButtonComp text="Save Changes" onClick={handleSubmit} style={{width: "auto", color: "#fff",
                       background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
                     }}/>
                     </div>
