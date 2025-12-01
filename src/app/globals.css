@@ -14,8 +14,19 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #fff;
   text-decoration: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.children {
+  margin-left: 250px;
+  flex: 1;
 }
 
 

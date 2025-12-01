@@ -2,18 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 import employees from "@/Data/personnelData";
-import AddUserForm from "@/components/profile/addUserForm";
-import EditUserForm from "@/components/profile/editUserForm";
-import DeleteUser from "@/components/profile/deleteUserForm";
+import AddUserForm from "@/components/components/addUserForm";
+import EditUserForm from "@/components/components/editUserForm";
+import DeleteUser from "@/components/components/deleteUserForm";
 import NavBar from "../navBar";
-import SideFilter from "@/components/profile/sideFilter";
+import SideFilter from "@/components/components/sideFilter";
 import {
   getEmployees,
   addEmployees,
   findByCountry,
   searchQuery,
 } from "../../../firebase/employeeService";
-import DashboardStats from "@/components/profile/dashboardStats";
+import DashboardStats from "@/components/components/dashboardStats";
 
 import Button from "react-bootstrap/Button";
 import Styles from "./page.module.css";
@@ -23,9 +23,9 @@ import { Trash2 } from "@deemlol/next-icons";
 import { Plus } from "@deemlol/next-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { isAdmin, useUserRole } from "@/hooks/useUserRole";
-import Loading from "@/components/profile/loading";
-import ButtonComp from "@/components/profile/button";
-import SideMenu from "@/components/profile/sideMenu";
+import Loading from "@/components/components/loading";
+import ButtonComp from "@/components/components/button";
+import SideMenu from "@/components/components/sideMenu";
 
 const EmployeeTable = ({
   data,
@@ -258,9 +258,6 @@ export default function EmployeeInfo() {
         
         <div className={Styles.main}>
           <div className={Styles.sideMainContent}>
-            <div className={Styles.sideMenu}>
-              <SideMenu />
-            </div>
 
             <div className={Styles.contentandfilter}>
               <div className={Styles.headerContainer}>
