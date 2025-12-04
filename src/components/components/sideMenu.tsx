@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import Styles from "./sideMenu.module.css";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function SideMenu() {
-  const [isActive, setIsActive] = useState();
-
+  const pathname = usePathname();
 
   return (
     <div className={Styles.sideMenucontainer}>
@@ -15,21 +15,41 @@ export default function SideMenu() {
       <img src="/logo3nobg.png" className={Styles.logo} />
 
       <ul className={Styles.listContainer}>
-        <li className="nav-item active">
-          <img src="/icons8-home-24.png" />
-          <Link href="/employeeInfo"> Dashboard</Link>
+        <li>
+          <Link
+            className={`${pathname == "/employeeInfo" ? Styles.listItem : ""}`}
+            href="/employeeInfo"
+          >
+            <img src="/icons8-home-24.png" />
+            Dashboard
+          </Link>
         </li>
-        <li className="nav-item">
-          <img src="/icons8-profile-24.png" />
-          <Link href="/profile"> Profile</Link>
+        <li>
+          <Link
+            className={`${pathname == "/profile" ? Styles.listItem : ""}`}
+            href="/profile"
+          >
+            <img src="/icons8-profile-24.png" />
+            Profile
+          </Link>
         </li>
-        <li className="nav-item">
-          <img src="/icons8-date-24.png" />
-          <Link href="/calender"> Calender</Link>
+        <li>
+          <Link
+            className={`${pathname === "/calender" ? Styles.listItem : ""}`}
+            href="/calender"
+          >
+            <img src="/icons8-date-24.png" />
+            Calender
+          </Link>
         </li>
-        <li className="nav-item">
-          <img src="/icons8-document-24.png" />
-          <Link href="/documents"> Documents</Link>
+        <li>
+          <Link
+            className={`${pathname === "/documents" ? Styles.listItem : ""}`}
+            href="/documents"
+          >
+            <img src="/icons8-document-24.png" />
+            Documents
+          </Link>
         </li>
       </ul>
     </div>
