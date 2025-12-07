@@ -1,105 +1,138 @@
 .headerContainer {
-  background-color: #ffffff;
   height: auto;
   position: relative;
   z-index: 3;
-  width: 100%;
-  border: 1px solid black;
+  width: auto;
 }
 
 .contentContainer {
-  border-radius: 10px;  
-}
-
-.container {
-  position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  position: relative; 
+  background: transparent;
   z-index: 3;
-  background-color: #f8fafa;
 }
 
 .sideMainContent {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
-
 
 .mainContent {
   z-index: 3;
-  background-color: #ffffff;
-}
-
-.sideMenu {
-  width: 15%;
-  height: 100%;
+  background: linear-gradient(135deg, #e9f3f7 0%, #dbecef 100%);
 }
 
 .contentandfilter {
-  width: 80%;
+  min-width: 0;
+  overflow-x: auto;
+  width: 100%;
+  padding: 0.5rem;
 }
+
 /* Side filter container */
 .filter {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: auto;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  justify-content: space-between;
+  width: 100%;
   z-index: 3;
-  border: 1px black solid;
-  padding: 0.3em;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(22px);
+  border-radius: 18px;
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.1),
+    0 14px 28px rgba(0, 0, 0, 0.12),
+    inset 0 0 12px rgba(255, 255, 255, 0.15);
+  margin-top: 12px;
+  padding: 0.5rem 0.9rem;
 }
 
-/* Table container */
-.table {
-  flex: 1; /* Take up remaining space */
-  background-color: #fff;
-  padding: 0.1rem;
-  border: 1px solid black;
-  overflow-x: auto;
-  z-index: 3;
+/* Table container  */
+
+.tableContainer {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.1),
+    0 14px 28px rgba(0, 0, 0, 0.12),
+    inset 0 0 12px rgba(255, 255, 255, 0.15);
+  margin-top: 12px;
   width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table tr:hover {
+  background: linear-gradient(
+    254deg,
+    rgba(42, 123, 155, 1) 3%,
+    rgba(40, 128, 126, 1) 69%
+  );
+  color: #fff;
+}
+
+.table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #e6e9ef;
+}
+
+.table th {
+  padding: 14px 18px;
+  text-align: left;
+  color: black;
+  font-weight: 700;
+  border-bottom: 1px solid #e6e9ef;
+}
+
+.table th:hover {
+  color: #fff;
 }
 
 .personId {
-    display: none;
-}
-
-.tableHead {
-  background-color: #28807E;
-}
-
-/* Add employee button */
-
-.addEmployeeBtn {
-  z-index: 3;
-  background-color: #319795;
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
+  display: none;
 }
 
 /* Delete button */
 
 .deleteButton {
-  background-color: #767474;
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: none;
-  text-align: center;
+  height: 2.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #ff7a7a, #ff4e4e);
+  color: #fff;
+  padding: 0.45rem 1rem;
+  border-radius: 18px;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.12),
+    0 12px 28px rgba(0, 0, 0, 0.16),
+    inset 0 0 12px rgba(255, 255, 255, 0.25);
+
+  transition: 0.25s ease;
 }
 
 .deleteButton:hover {
-  background-color: #575656;
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    0 14px 32px rgba(0, 0, 0, 0.24),
+    inset 0 0 16px rgba(255, 255, 255, 0.3);
 }
 
 .buttonContainer {

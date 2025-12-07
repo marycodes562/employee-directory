@@ -16,9 +16,12 @@ import styles from './page.module.css';
 import { login } from '../../../../firebase/employeeService';
 import toast from 'react-hot-toast';
 import ButtonComp from '@/components/profile/button';
+import ForgotPassword from '@/components/profile/forgotPasssword';
+import ForgotPasswordModal from '@/components/profile/forgotPasssword';
 
 export default function LoginPage() {
 	const [formData, setFormData] = useState({email: '', password: ''});
+	const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
 	const router = useRouter();
 
@@ -58,10 +61,10 @@ export default function LoginPage() {
 		<Card className={styles.form} style={{ width: '25rem' }}>
 
 			{/*Logo */}
-			<Image 
-				src="/logo2.png"
+			<img 
+				src="/logo2nobg.png"
 				alt="logo"
-				width={310}
+				width={330}
 				height={120}
 			/>
 
@@ -107,7 +110,9 @@ export default function LoginPage() {
 							<ButtonComp 
 								type='submit'
 								text="login"
-								style={{width: '8rem'}}
+								style={{width: "10rem", color: "#fff",
+                      background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+                    }}
 							/>
 						</div>
 						<br /><br />
@@ -118,8 +123,10 @@ export default function LoginPage() {
 
 						
 						{/*Forgot password link */}
-						<a href="/" className={styles.forgotPassword}>Forgot Password</a>
+						<a  className={styles.forgotPassword} onClick={() => setShowForgotPasswordModal(true)}>Forgot Password</a>
 		</Card>
+
+		<ForgotPasswordModal show={showForgotPasswordModal} handleClose={() => setShowForgotPasswordModal(false)} />
 	</div>
 	);
 }

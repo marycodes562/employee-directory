@@ -13,31 +13,33 @@ import { Settings } from "@deemlol/next-icons";
 import { XCircle } from "@deemlol/next-icons";
 import { Moon, Menu } from "@deemlol/next-icons";
 import styles from './navBar.module.css';
+import toast from 'react-hot-toast';
 
-import { searchQuery } from '../../firebase/employeeService';
+import { logout, searchQuery } from '../../firebase/employeeService';
+import { useRouter } from 'next/navigation';
 
 function NavBar({onSearch, searchValue, clear}) {
-    const [showX, setShowX] = useState(false);
 
-    const today = new Date();
+    const router = useRouter();
 
-    const date = today.getDate();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
-
+    /*------------------------------- Handle Logout ------------------------*/
+     const handleLogout = async() => {
+        try {
+            await logout();
+            toast.success("User is logged out successfully")
+            router.push("/login");
+        } catch(error) {
+            toast.error("Unable to logout");
+        }
+     }
 
     return (
         <div>
             <Navbar className={styles.navBar}>
-              {/*Logo */}
+              {/* Header */}
               <div>
-                <h4>Dashboard</h4>
+                <h3>Dashboard</h3>
               </div>
-
-              {/*---------------- Date / Day -------------------- 
-                <Card className={styles.dateDay}>
-                    <p>{`${date} / ${month} / ${year}`}</p>
-                </Card>*/}
 
                 {/*---------------- Search Bar -------------------- */}
 
@@ -49,6 +51,7 @@ function NavBar({onSearch, searchValue, clear}) {
                                 type="text"
                                 placeholder="Search..."
                                 onChange={onSearch}
+                                className={styles.searchBar}
                             />
                             {searchValue ? 
                                 <button 
@@ -72,7 +75,7 @@ function NavBar({onSearch, searchValue, clear}) {
                     {/*---------------- Menu Button -------------------- 
                     <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/><br />*/}
                     
-                    <button className={styles.logout}>Logout</button>
+                    <button className={styles.logout} onClick={handleLogout}>Logout</button>
                 </div>
             </Navbar>
         </div>
