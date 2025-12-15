@@ -52,6 +52,7 @@ export default function SignUp() {
 
 				const db = getFirestore()
 				await setDoc(doc(db, "users", user.uid), {
+					uid: user.uid,
 					firstName: values.firstName,
 					lastName: values.lastName,
 					email: values.email,

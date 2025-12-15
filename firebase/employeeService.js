@@ -13,9 +13,10 @@ import {
 } from "firebase/firestore";
 
 import { app, db } from './firebase';
-import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, onAuthStateChanged  } from 'firebase/auth';
 
 const employeesRef = collection(db, 'employees');
+const usersRef = collection(db, 'users');
 const auth = getAuth(app);
 
 /*-------------------- Get all employees ----------------------- */
@@ -133,3 +134,32 @@ export const forgotPassword = async(email) => {
 		return {success: false, message: error.message};
 	}
 }
+
+/*-------------------- Get Logged In user data ----------------------- */
+
+export const getUserUid = () => {
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        resolve(user.uid);
+      } else {
+        resolve(null);
+      }
+    });
+  });
+};
+
+export const getUserLoggedIn = async() => {
+	const userid = await getUserUid();
+	console.log('user id new:', userid);
+
+		
+	const q = query(usersRef, where("uid", "==", userid));
+
+	const snapshot = await getDocs(q);
+
+	 return snapshot.docs.map((doc) => ({
+		id: doc.id,
+		...doc.data(),
+	}));
+};
