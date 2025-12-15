@@ -22,14 +22,6 @@ export default function SignUp() {
 
 	const router = useRouter();
 
-	const [formSignUp, setformSignUp] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		password: '',
-		role: ''
-	});
-
 	const formik = useFormik({
 		initialValues: {
 			firstName: '',
