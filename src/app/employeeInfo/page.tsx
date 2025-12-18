@@ -269,6 +269,7 @@ export default function EmployeeInfo() {
         />
 
       <div className={Styles.contentContainer}>
+        <SideMenu />
         
         <div className={Styles.main}>
           <h2>Welcome back, {user && (

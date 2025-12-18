@@ -7,33 +7,46 @@ import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getUserLoggedIn } from "../../../firebase/employeeService";
+import UserAvatar from "@/components/components/userAvatar";
+import Avatar from "@mui/material/Avatar";
 
 export default function Profile() {
   const router = useRouter();
   const [user, setUser] = useState(null);
 
-  const loadUser = async() => {
-      const userItem = await getUserLoggedIn();
-      console.log('user item:', userItem)
-      setUser(userItem[0]);
-  }
+  const loadUser = async () => {
+    const userItem = await getUserLoggedIn();
+    console.log("user item:", userItem);
+    setUser(userItem[0]);
+  };
 
   useEffect(() => {
     loadUser();
-  }, [])
+  }, []);
 
   return (
     <div>
       <Card className={styles.profileCard} style={{ width: "25rem" }}>
-        <h2 className={styles.header}>Profile Page</h2>
-        <img src="/profile.png" alt="Profile" className={styles.profileImage} />
+        <UserAvatar
+          alt="User profile image"
+          user={user}
+        />
+        <br />
         <div>
           {user && (
             <>
-              <p><strong>First Name:</strong> {user.firstName}</p>
-              <p><strong>Last Name:</strong> {user.lastName}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Role:</strong> {user.role}</p>
+              <p>
+                <strong>First Name:</strong> {user.firstName}
+              </p>
+              <p>
+                <strong>Last Name:</strong> {user.lastName}
+              </p>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+              <p>
+                <strong>Role:</strong> {user.role}
+              </p>
             </>
           )}
         </div>

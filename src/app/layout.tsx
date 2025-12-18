@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="main">
-          <SideMenu />
+      
 		  <div className="children">
             {children}
 		  </div>
