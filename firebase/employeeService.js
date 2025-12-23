@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 
 import { app, db } from './firebase';
+import { getStorage } from 'firebase/storage';
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, onAuthStateChanged  } from 'firebase/auth';
 
 const employeesRef = collection(db, 'employees');

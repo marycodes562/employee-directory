@@ -22,7 +22,7 @@ export default function SignUp() {
 
   const formik = useFormik({
     initialValues: {
-      userPhotoUrl: null,
+	  userPhotoUrl: "",	
       firstName: "",
       lastName: "",
       email: "",
@@ -30,6 +30,7 @@ export default function SignUp() {
       role: "",
     },
     validationSchema: Yup.object({
+	  userPhotoUrl: Yup.string(),
       firstName: Yup.string().required("Required"),
       lastName: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
@@ -40,13 +41,15 @@ export default function SignUp() {
     }),
     onSubmit: async (values) => {
       try {
+		//Create auth user
         const userCredential = await signUp(values.email, values.password);
         const user = userCredential.user;
 
+		//Save user document
         const db = getFirestore();
         await setDoc(doc(db, "users", user.uid), {
           uid: user.uid,
-          userPhotoUrl: values.userPhotoUrl,
+		  userPhotoUrl: values.userPhotoUrl,
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
@@ -55,6 +58,7 @@ export default function SignUp() {
 
         toast.success("Account created successfully, please login");
         router.push("/login");
+
       } catch (error: unknown) {
         const firebaseError = error as { code?: string };
         let errorMessage = "Error creating account";
@@ -89,9 +93,11 @@ export default function SignUp() {
             className="mb-3"
           >
             <Form.Control
-              type="files"
-			  accept="image/*"
-              
+			  name="userPhotoUrl"
+              type="text"
+              placeholder="Paste profile image path or url"
+              onChange={formik.handleChange}
+			  value={formik.values.userPhotoUrl}
             />
           </FloatingLabel>
 

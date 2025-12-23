@@ -3,18 +3,20 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 
-export default function UserAvatar({ alt, user }: any) {
-  let source;
-
-  if (!user.userPhotoUrl) {
-    source = user.lastName;
-  } else {
-    source = user.firstName;
-  }
+export default function UserAvatar({ user, avatarStyle }: any) {
+    if (!user) {
+        return <Avatar />
+    }
 
   return (
     <>
-      <Avatar alt={alt} src={source} />
+      <Avatar 
+        alt={`${user.firstName} ${user.lastName}`} 
+        src={user.userPhotoUrl }
+        sx={avatarStyle}
+        >
+            {!user.userPhotoUrl && user.firstName?.[0]}
+        </Avatar>
     </>
   );
 }
