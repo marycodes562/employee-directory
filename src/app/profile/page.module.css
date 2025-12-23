@@ -1,6 +1,23 @@
+.profilePage {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 .profileCard {
+  max-width: 40rem;
   background-color: #f8f9fa;
-  border-radius: 8px;
+  border-radius: 16px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

@@ -32,37 +32,45 @@ export default function Profile() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.profilePage}>
       <SideMenu />
-      <Card className={styles.profileCard} style={{ width: "50rem" }}>
+      <div className={styles.profileCard}>
         <div>
           {user ? (
             <>
-              <UserAvatar alt="User profile image" user={user} avatarStyle={{ width: 100, height: 100}} />
-              <br />
-              <p>
-                <strong>First Name:</strong> {user.firstName}
-              </p>
-              <p>
-                <strong>Last Name:</strong> {user.lastName}
-              </p>
-              <p>
-                <strong>Email:</strong> {user.email}
-              </p>
-              <p>
-                <strong>Role:</strong> {user.role}
-              </p>
+              <div className={styles.profileContent}>
+                <UserAvatar
+                  alt="User profile image"
+                  user={user}
+                  avatarStyle={{ width: 120, height: 120 }}
+                />
+                <br />
+                <div className={styles.profileText}> 
+                  <p>
+                    <strong>First Name:</strong> {user.firstName}
+                  </p>
+                  <p>
+                    <strong>Last Name:</strong> {user.lastName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {user.email}
+                  </p>
+                  <p>
+                    <strong>Role:</strong> {user.role}
+                  </p>
+                </div>
+              </div>
             </>
           ) : (
             <Loading />
           )}
-        </div>
+        </div><br />
 
-        <Button variant="primary">Edit Profile</Button>
+        <Button variant="primary">Edit Profile</Button><br />
         <Button variant="secondary" onClick={() => router.push("/login")}>
           Logout
         </Button>
-      </Card>
+      </div>
     </div>
   );
 }
