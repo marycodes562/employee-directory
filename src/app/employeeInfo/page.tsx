@@ -12,6 +12,7 @@ import {
   addEmployees,
   findByCountry,
   searchQuery,
+  getUserLoggedIn
 } from "../../../firebase/employeeService";
 import DashboardStats from "@/components/components/dashboardStats";
 
@@ -120,6 +121,7 @@ export default function EmployeeInfo() {
   const [isSearching, setIsSearching] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [user, setUser] = useState(null);
 
   const [employeeInfoLoading, setEmployeeInfoLoading] = useState(true);
 
@@ -133,6 +135,18 @@ export default function EmployeeInfo() {
   useEffect(() => {
     loadEmployees();
   }, []);
+
+  /* ------------- Get User info using a firebase query -------------- */
+
+  
+    const loadUser = async() => {
+        const userItem = await getUserLoggedIn();
+        setUser(userItem[0]);
+    }
+  
+    useEffect(() => {
+      loadUser();
+    }, [])
 
   /*------------------------- Handle Add User Function ----------------------------------*/
   const handleAddUser = async (newUser: any) => {
@@ -255,8 +269,12 @@ export default function EmployeeInfo() {
         />
 
       <div className={Styles.contentContainer}>
+        <SideMenu />
         
         <div className={Styles.main}>
+          <h3>Welcome back, {user && (
+            <>{user.firstName}</>
+          )}</h3>
           <div className={Styles.sideMainContent}>
 
             <div className={Styles.contentandfilter}>

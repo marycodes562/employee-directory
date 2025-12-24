@@ -38,7 +38,6 @@ function NavBar({onSearch, searchValue, clear}) {
             <Navbar className={styles.navBar}>
               {/* Header */}
               <div>
-                <h3>Dashboard</h3>
               </div>
 
                 {/*---------------- Search Bar -------------------- */}
