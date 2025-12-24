@@ -62,11 +62,12 @@ export default function LoginPage() {
       <div className={styles.overlay}></div>
       <Card className={styles.form} style={{ width: "25rem" }}>
         {/*Logo */}
-        <img src="/logo2nobg.png" alt="logo" width={330} height={120} />
-
+        <div className={styles.image}>
+          <img src="/logo3nobg.png" alt="logo" width={310} height={100} />
+        </div>
         {/*Greeting Header */}
         <h4 className={styles.header}>Nice to see you again</h4>
-        <Form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           {/*Email Address */}
           <FloatingLabel
             controlId="floatingInput"
@@ -109,7 +110,7 @@ export default function LoginPage() {
               type="submit"
               text="login"
               style={{
-                width: "10rem",
+                width: "21rem",
                 color: "#fff",
                 background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
               }}
@@ -117,7 +118,7 @@ export default function LoginPage() {
           </div>
           <br />
           <br />
-        </Form>
+        </form>
 
         {/*Create an account link */}
         <a href="/signUp" className={styles.createAccount}>
