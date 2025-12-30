@@ -17,7 +17,7 @@ export default function SideMenu() {
       <ul className={Styles.listContainer}>
         <li>
           <Link
-            className={`${pathname == "/employeeInfo" ? Styles.listItem : ""}`}
+            className={`${Styles.menuLink} ${pathname == "/employeeInfo" ? Styles.listItem : ""}`}
             href="/employeeInfo"
           >
             <img src="/icons8-home-24.png" />
@@ -26,7 +26,7 @@ export default function SideMenu() {
         </li>
         <li>
           <Link
-            className={`${pathname == "/profile" ? Styles.listItem : ""}`}
+            className={`${Styles.menuLink} ${pathname == "/profile" ? Styles.listItem : ""}`}
             href="/profile"
           >
             <img src="/icons8-profile-24.png" />
@@ -35,7 +35,7 @@ export default function SideMenu() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/calender" ? Styles.listItem : ""}`}
+            className={`${Styles.menuLink} ${pathname === "/calender" ? Styles.listItem : ""}`}
             href="/calender"
           >
             <img src="/icons8-date-24.png" />
@@ -44,7 +44,7 @@ export default function SideMenu() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/documents" ? Styles.listItem : ""}`}
+            className={`${Styles.menuLink} ${pathname === "/documents" ? Styles.listItem : ""}`}
             href="/documents"
           >
             <img src="/icons8-document-24.png" />
