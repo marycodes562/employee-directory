@@ -1,84 +1,80 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import ButtonComp from '@/components/profile/button';
-import Image from 'next/image';
-import Card from 'react-bootstrap/Card';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import ButtonComp from "@/components/profile/button";
+import Image from "next/image";
+import Card from "react-bootstrap/Card";
 
 import { Sun } from "@deemlol/next-icons";
 import { Settings } from "@deemlol/next-icons";
 import { XCircle } from "@deemlol/next-icons";
 import { Moon, Menu } from "@deemlol/next-icons";
-import styles from './navBar.module.css';
-import toast from 'react-hot-toast';
+import styles from "./navBar.module.css";
+import toast from "react-hot-toast";
 
-import { logout, searchQuery } from '../../firebase/employeeService';
-import { useRouter } from 'next/navigation';
+import { logout, searchQuery } from "../../firebase/employeeService";
+import { useRouter } from "next/navigation";
 
-function NavBar({onSearch, searchValue, clear}) {
+function NavBar({ onSearch, searchValue, clear }) {
+  const router = useRouter();
 
-    const router = useRouter();
+  /*------------------------------- Handle Logout ------------------------*/
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("User is logged out successfully");
+      router.push("/login");
+    } catch (error) {
+      toast.error("Unable to logout");
+    }
+  };
 
-    /*------------------------------- Handle Logout ------------------------*/
-     const handleLogout = async() => {
-        try {
-            await logout();
-            toast.success("User is logged out successfully")
-            router.push("/login");
-        } catch(error) {
-            toast.error("Unable to logout");
-        }
-     }
+  return (
+    <div>
+      <nav className={styles.navBar}>
+        {/* Header */}
+        <div></div>
 
-    return (
+        {/*---------------- Search Bar -------------------- */}
+
         <div>
-            <Navbar className={styles.navBar}>
-              {/* Header */}
-              <div>
-              </div>
+          <form className={styles.form}>
+            <Form.Control
+              value={searchValue}
+              type="text"
+              placeholder="Search..."
+              onChange={onSearch}
+              className={styles.searchBar}
+            />
+            {searchValue ? (
+              <button type="button" className={styles.searchx} onClick={clear}>
+                <XCircle size={20} color="#090909ff" />
+              </button>
+            ) : (
+              ""
+            )}
+          </form>
+        </div>
 
-                {/*---------------- Search Bar -------------------- */}
+        {/*---------------- Buttons Container -------------------- */}
 
-                <div>
-                        <Form className={styles.form}>
-                            
-                            <Form.Control 
-                                value={searchValue}
-                                type="text"
-                                placeholder="Search..."
-                                onChange={onSearch}
-                                className={styles.searchBar}
-                            />
-                            {searchValue ? 
-                                <button 
-                                    type='button'
-                                    className={styles.searchx} 
-                                    onClick={clear}><XCircle size={20} color="#090909ff" /></button> : ""
-                            }
-                            
-                        </Form>
-
-
-                </div>
-
-                {/*---------------- Buttons Container -------------------- */}
-
-                <div className={styles.buttonsContainer}>
-
-                    {/*---------------- Light / Dark Mode -------------------- 
+        <div className={styles.buttonsContainer}>
+          {/*---------------- Light / Dark Mode -------------------- 
                     <Button className={styles.button}><Sun size={20} color="#FFF" /> / <Moon size={20} color="#FFF"/></Button>*/}
 
-                    {/*---------------- Menu Button -------------------- 
+          {/*---------------- Menu Button -------------------- 
                     <ButtonComp text={<Menu size={20} color="#FFF" />} style={{width: "auto"}}onClick={null}/><br />*/}
-                    
-                    <button className={styles.logout} onClick={handleLogout}>Logout</button>
-                </div>
-            </Navbar>
+
+          <button className={styles.logout} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
-    )
+      </nav>
+    </div>
+  );
 }
 
 export default NavBar;

@@ -45,7 +45,7 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
   };
 
   return (
-    <div >
+    <div>
       <Modal
         show={show}
         onHide={onHide}
@@ -185,15 +185,24 @@ export default function AddUserForm({ show, onHide, onAddUser }: any) {
         <Modal.Footer>
           <div className={styles.buttonsContainer}>
             {/*------------------------- Close Button ----------------------------------*/}
-            <ButtonComp text="Close" onClick={onHide} style={{width: "auto", color: "#fff",
+            <ButtonComp
+              text="Close"
+              onClick={onHide}
+              style={{
+                width: "auto",
+                color: "#fff",
                 background: "grey",
-            }}/>
+                marginRight: "0.5rem",
+              }}
+            />
             {/*------------------------- Add User Button ----------------------------------*/}
             <ButtonComp
               text="Add"
-              style={{ width: "auto", color: "#fff",
-                      background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
-                    }}
+              style={{
+                width: "auto",
+                color: "#fff",
+                background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+              }}
               onClick={handleSubmit}
             />
           </div>
