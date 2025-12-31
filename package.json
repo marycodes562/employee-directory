@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node -r ./scripts/polyfill-localstorage.js ./node_modules/next/dist/bin/next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -15,7 +15,7 @@
     "@ilamy/calendar": "^1.1.1",
     "@mui/material": "^7.3.6",
     "bootstrap": "^5.3.7",
-    "firebase": "^12.0.0",
+    "firebase": "^12.7.0",
     "formik": "^2.4.6",
     "next": "15.3.4",
     "react": "^19.0.0",
