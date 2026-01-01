@@ -20,10 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="main">
-      
-		  <div className="children">
-            {children}
-		  </div>
+          <div className="children">{children}</div>
         </div>
         <Toaster />
       </body>

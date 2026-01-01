@@ -41,7 +41,7 @@ function NavBar({ onSearch, searchValue, clear }) {
         {/*---------------- Search Bar -------------------- */}
 
         <div>
-          <form className={styles.form}>
+          <Form className={styles.form}>
             <Form.Control
               value={searchValue}
               type="text"
@@ -56,7 +56,7 @@ function NavBar({ onSearch, searchValue, clear }) {
             ) : (
               ""
             )}
-          </form>
+          </Form>
         </div>
 
         {/*---------------- Buttons Container -------------------- */}
