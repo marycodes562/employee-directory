@@ -22,8 +22,11 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
+/*-------------------- CollectionReferences ----------------------- */
+
 const employeesRef = collection(db, "employees");
 const usersRef = collection(db, "users");
+const eventsRef = collection(db, "events");
 
 let auth;
 const getAuthClient = () => {
@@ -192,4 +195,23 @@ export const getUserLoggedIn = async () => {
     id: doc.id,
     ...doc.data(),
   }));
+};
+
+/*-------------------- Get all events ----------------------- */
+
+export const getEvents = async () => {
+  const q = query(eventsRef);
+
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
+
+/*-------------------- Add Events ----------------------- */
+export const addEvent = async (eventsData) => {
+  const docRef = await addDoc(eventsRef, eventsData);
+  return docRef;
 };
