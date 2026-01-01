@@ -42,10 +42,10 @@ export default function Profile() {
                 <UserAvatar
                   alt="User profile image"
                   user={user}
-                  avatarStyle={{ width: 120, height: 120 }}
+                  avatarStyle={{ width: 140, height: 140 }}
                 />
                 <br />
-                <div className={styles.profileText}> 
+                <div className={styles.profileText}>
                   <p>
                     <strong>First Name:</strong> {user.firstName}
                   </p>
@@ -64,9 +64,11 @@ export default function Profile() {
           ) : (
             <Loading />
           )}
-        </div><br />
+        </div>
+        <br />
 
-        <Button variant="primary">Edit Profile</Button><br />
+        <Button variant="primary">Edit Profile</Button>
+        <br />
         <Button variant="secondary" onClick={() => router.push("/login")}>
           Logout
         </Button>
