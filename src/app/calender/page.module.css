@@ -1,0 +1,9 @@
+.calendarContainer {
+  margin-left: 250px;
+  padding: 20px;
+  width: 80%;
+}
+
+.fc {
+  background-color: black;
+}

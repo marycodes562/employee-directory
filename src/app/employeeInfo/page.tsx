@@ -12,7 +12,7 @@ import {
   addEmployees,
   findByCountry,
   searchQuery,
-  getUserLoggedIn
+  getUserLoggedIn,
 } from "../../../firebase/employeeService";
 import DashboardStats from "@/components/components/dashboardStats";
 
@@ -138,15 +138,14 @@ export default function EmployeeInfo() {
 
   /* ------------- Get User info using a firebase query -------------- */
 
-  
-    const loadUser = async() => {
-        const userItem = await getUserLoggedIn();
-        setUser(userItem[0]);
-    }
-  
-    useEffect(() => {
-      loadUser();
-    }, [])
+  const loadUser = async () => {
+    const userItem = await getUserLoggedIn();
+    setUser(userItem[0]);
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   /*------------------------- Handle Add User Function ----------------------------------*/
   const handleAddUser = async (newUser: any) => {
@@ -244,39 +243,35 @@ export default function EmployeeInfo() {
 
   return (
     <div>
-
       {/*------------------------- Add User Form ----------------------------------*/}
-        <AddUserForm
-          onAddUser={handleAddUser}
-          show={showAddUserForm}
-          onHide={() => setShowAddUserForm(false)}
-        />
+      <AddUserForm
+        onAddUser={handleAddUser}
+        show={showAddUserForm}
+        onHide={() => setShowAddUserForm(false)}
+      />
 
-        {/*------------------------- Edit User Form ----------------------------------*/}
-        <EditUserForm
-          show={showEditUserForm}
-          employee={selectedEmployee}
-          onAddUser={loadEmployees}
-          onHide={() => setShowEditUserForm(false)}
-        />
+      {/*------------------------- Edit User Form ----------------------------------*/}
+      <EditUserForm
+        show={showEditUserForm}
+        employee={selectedEmployee}
+        onAddUser={loadEmployees}
+        onHide={() => setShowEditUserForm(false)}
+      />
 
-        {/*------------------------- Delete User Form ----------------------------------*/}
-        <DeleteUser
-          show={showDeleteUser}
-          onHide={() => setShowDeleteUser(false)}
-          employee={selectedEmployee}
-          onDeleted={loadEmployees}
-        />
+      {/*------------------------- Delete User Form ----------------------------------*/}
+      <DeleteUser
+        show={showDeleteUser}
+        onHide={() => setShowDeleteUser(false)}
+        employee={selectedEmployee}
+        onDeleted={loadEmployees}
+      />
 
       <div className={Styles.contentContainer}>
         <SideMenu />
-        
-        <div className={Styles.main}>
-          <h3>Welcome back, {user && (
-            <>{user.firstName}</>
-          )}</h3>
-          <div className={Styles.sideMainContent}>
 
+        <div className={Styles.main}>
+          <h3>Welcome back, {user && <>{user.firstName}</>}</h3>
+          <div className={Styles.sideMainContent}>
             <div className={Styles.contentandfilter}>
               <div className={Styles.headerContainer}>
                 {/*------------------------- NavBar component ----------------------------------*/}
