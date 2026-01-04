@@ -47,13 +47,13 @@ export default function AddEvent({
       >
         <div className={styles.addEventContainer}>
           {/* Modal Header and Body */}
-          <Modal.Header>
+          <Modal.Header className={styles.modalHeader} closeButton>
             <Modal.Title>Add New Event</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Form to input event title */}
             <form>
-              <label htmlFor="title">
+              <label htmlFor="title" className={styles.label}>
                 Please enter a title for your event:
               </label>
               <input
@@ -69,8 +69,25 @@ export default function AddEvent({
           {/* Modal Footer with action buttons */}
           <Modal.Footer>
             {/* Buttons to close the modal or submit the form */}
-            <ButtonComp text="Close" style={{}} onClick={onHide} />
-            <ButtonComp text="Add" style={{}} onClick={handleSubmit} />
+            <ButtonComp
+              text="Close"
+              style={{
+                width: "auto",
+                color: "#fff",
+                background: "grey",
+                marginRight: "0.5rem",
+              }}
+              onClick={onHide}
+            />
+            <ButtonComp
+              text="Add"
+              style={{
+                width: "auto",
+                color: "#fff",
+                background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+              }}
+              onClick={handleSubmit}
+            />
           </Modal.Footer>
         </div>
       </Modal>
