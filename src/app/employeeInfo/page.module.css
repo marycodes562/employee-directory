@@ -8,7 +8,7 @@
 .contentContainer {
   width: 80%;
   min-height: 100vh;
-  position: relative; 
+  position: relative;
   background: transparent;
   z-index: 3;
   margin-left: 16rem;
