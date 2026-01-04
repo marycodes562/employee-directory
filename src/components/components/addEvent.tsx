@@ -48,15 +48,13 @@ export default function AddEvent({
         <div className={styles.addEventContainer}>
           {/* Modal Header and Body */}
           <Modal.Header className={styles.modalHeader} closeButton>
-            <Modal.Title>Add New Event</Modal.Title>
+            <Modal.Title>Add Event</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Form to input event title */}
             <form>
-              <label htmlFor="title" className={styles.label}>
-                Please enter a title for your event:
-              </label>
               <input
+                className={styles.input}
                 type="text"
                 id="title"
                 name="title"

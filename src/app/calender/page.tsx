@@ -16,13 +16,17 @@ import {
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import AddEvent from "@/components/components/addEvent";
+import EditEvent from "@/components/components/editEvent";
 
 export default function Calender() {
   // State to hold calendar events
   const [events, setEvents] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [title, setTitle] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  const [newTitle, setNewTitle] = useState("");
+  const [editingEventId, setEditingEventId] = useState(null);
 
   // Fetch events from Firestore on component mount
   useEffect(() => {
@@ -46,7 +50,7 @@ export default function Calender() {
   }, []);
 
   // Enhanced date click handler to add event with Firestore integration
-  const handleDateClick = async (info) => {
+  const handleDateClick = (info) => {
     try {
       setModalShow(true);
       setSelectedDate(info.dateStr);
@@ -60,21 +64,11 @@ export default function Calender() {
   const handleEventClick = async (clickInfo) => {
     const eventId = clickInfo.event.id;
     const currentTitle = clickInfo.event.title;
-
-    const newTitle = prompt("Edit event title:", currentTitle);
-
-    if (!newTitle || newTitle === currentTitle) return;
-
+    setEditingEventId(eventId);
+    setNewTitle(currentTitle);
+    setShowEditModal(true);
     try {
       // 1. Update Firestore
-      await updateEvent(eventId, { title: newTitle });
-
-      // 2. Update React state
-      setEvents((prev) =>
-        prev.map((event) =>
-          event.id === eventId ? { ...event, title: newTitle } : event
-        )
-      );
 
       // 3. Update FullCalendar UI instantly
       clickInfo.event.setProp("title", newTitle);
@@ -98,6 +92,18 @@ export default function Calender() {
         selectedDate={selectedDate}
         setEvents={setEvents}
       />
+
+      {/* Edit Event Modal Component */}
+      <EditEvent
+        show={showEditModal}
+        onHide={() => setShowEditModal(false)}
+        title={title}
+        newTitle={newTitle}
+        setNewTitle={setNewTitle}
+        setEvents={setEvents}
+        editingEventId={editingEventId}
+      />
+
       {/* FullCalendar Component */}
       <div className={Styles.calendarContainer}>
         <FullCalendar
