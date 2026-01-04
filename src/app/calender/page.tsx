@@ -18,9 +18,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import AddEvent from "@/components/components/addEvent";
 
 export default function Calender() {
+  // State to hold calendar events
   const [events, setEvents] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [title, setTitle] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
 
   // Fetch events from Firestore on component mount
   useEffect(() => {
@@ -49,6 +51,8 @@ export default function Calender() {
   const handleDateClick = async (info) => {
     try {
       setModalShow(true);
+      setSelectedDate(info.dateStr);
+      //Reset the title after submission
     } catch (error) {
       console.error("Error adding event:", error);
     }
@@ -83,15 +87,20 @@ export default function Calender() {
 
   return (
     <div>
+      {/* Side Menu Component */}
       <SideMenu />
 
+      {/* Add Event Modal Component */}
       <AddEvent
         show={modalShow}
+        setModalShow={setModalShow}
         onHide={() => setModalShow(false)}
         title={title}
         setTitle={setTitle}
+        selectedDate={selectedDate}
+        setEvents={setEvents}
       />
-
+      {/* FullCalendar Component */}
       <div className={Styles.calendarContainer}>
         <FullCalendar
           events={events}
