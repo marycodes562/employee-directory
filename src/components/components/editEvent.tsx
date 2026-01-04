@@ -16,15 +16,21 @@ export default function EditEvent({
 }: any) {
   // Handle saving the edited event
   const handleSave = async () => {
-    await updateEvent(editingEventId, { title: newTitle });
+    try {
+      // 1. Update Firestore
+      await updateEvent(editingEventId, { title: newTitle });
 
-    // 2. Update React state
-    setEvents((prev: any[]) =>
-      prev.map((event) =>
-        event.id === editingEventId ? { ...event, title: newTitle } : event
-      )
-    );
-    onHide();
+      // 2. Update React state
+      setEvents((prev: any[]) =>
+        prev.map((event) =>
+          event.id === editingEventId ? { ...event, title: newTitle } : event
+        )
+      );
+      // Close the modal
+      onHide();
+    } catch (error) {
+      console.error("Error updating event:", error);
+    }
   };
 
   return (

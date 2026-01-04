@@ -61,20 +61,12 @@ export default function Calender() {
   };
 
   // Enhanced event click handler to edit event title
-  const handleEventClick = async (clickInfo) => {
+  const handleEventClick = (clickInfo) => {
     const eventId = clickInfo.event.id;
     const currentTitle = clickInfo.event.title;
     setEditingEventId(eventId);
     setNewTitle(currentTitle);
     setShowEditModal(true);
-    try {
-      // 1. Update Firestore
-
-      // 3. Update FullCalendar UI instantly
-      clickInfo.event.setProp("title", newTitle);
-    } catch (error) {
-      console.error("Error updating event:", error);
-    }
   };
 
   return (
