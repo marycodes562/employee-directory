@@ -6,9 +6,6 @@ import Button from "react-bootstrap/Button";
 import { useRouter } from "next/navigation";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@fullcalendar/core/main.css";
-import "@fullcalendar/daygrid/main.css";
-import "@fullcalendar/timegrid/main.css";
 
 export default function Home() {
   const router = useRouter();
