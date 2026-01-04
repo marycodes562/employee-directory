@@ -33,9 +33,7 @@ export default function Calender() {
         const formattedEvents = eventsData.map((event) => ({
           id: event.id,
           title: event.title,
-          start: event.date?.toDate
-            ? event.date.toDate() // Firestore Timestamp
-            : event.date, // ISO string
+          start: event.date,
         }));
 
         setEvents(formattedEvents);

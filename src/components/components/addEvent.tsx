@@ -17,7 +17,7 @@ export default function AddEvent({
 }: any) {
   // Handle form submission to add event with Firestore integration
   const handleSubmit = async () => {
-    const newEvent = await addEvent({ title, start: selectedDate });
+    const newEvent = await addEvent({ title, date: selectedDate });
     const newTitle = title;
 
     // Update the events state in the parent component
