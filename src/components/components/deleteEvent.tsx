@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { deleteEvent } from "../../../firebase/employeeService";
 import styles from "./deleteEvent.module.css";
+import ButtonComp from "./button";
 
 export default function DeleteEvent({ eventId, onHide, setEvents }: any) {
   const handleDelete = async (eventId: any) => {
@@ -19,9 +20,11 @@ export default function DeleteEvent({ eventId, onHide, setEvents }: any) {
   return (
     <>
       <div>
-        <Button variant="danger" onClick={() => handleDelete(eventId)}>
-          Delete Event
-        </Button>
+        <ButtonComp
+          text="Delete"
+          onClick={() => handleDelete(eventId)}
+          style={{ width: "auto", backgroundColor: "#C64D24", color: "#fff" }}
+        />
       </div>
     </>
   );

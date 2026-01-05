@@ -59,16 +59,6 @@ export default function EditEvent({
           />
 
           <ButtonComp
-            text="Close"
-            style={{
-              width: "auto",
-              color: "#fff",
-              background: "grey",
-              marginRight: "0.5rem",
-            }}
-            onClick={onHide}
-          />
-          <ButtonComp
             text="Add"
             style={{
               width: "auto",
