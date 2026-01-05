@@ -221,3 +221,9 @@ export const updateEvent = async (id, updatedData) => {
   const editDoc = doc(db, "events", id);
   return await updateDoc(editDoc, updatedData);
 };
+
+/*-------------------- Delete Event ----------------------- */
+export const deleteEvent = async (id) => {
+  const emptyDoc = doc(db, "events", id);
+  return await deleteDoc(emptyDoc);
+};

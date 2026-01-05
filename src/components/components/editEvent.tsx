@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import ButtonComp from "./button";
-import { updateEvent } from "../../../firebase/employeeService";
+import { updateEvent, deleteEvent } from "../../../firebase/employeeService";
+import DeleteEvent from "./deleteEvent";
 import styles from "./editEvent.module.css";
 
 export default function EditEvent({
@@ -51,6 +52,12 @@ export default function EditEvent({
         </Modal.Body>
         <Modal.Footer>
           {/* Buttons to close or save changes */}
+          <DeleteEvent
+            eventId={editingEventId}
+            onHide={onHide}
+            setEvents={setEvents}
+          />
+
           <ButtonComp
             text="Close"
             style={{
