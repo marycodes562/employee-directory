@@ -59,7 +59,7 @@ export default function EditEvent({
           />
 
           <ButtonComp
-            text="Add"
+            text="Update"
             style={{
               width: "auto",
               color: "#fff",
