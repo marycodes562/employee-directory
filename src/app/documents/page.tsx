@@ -7,7 +7,7 @@ export default function Documents() {
   return (
     <div>
       <SideMenu />
-      <h1>Documents</h1>
+      <h1>Announcements</h1>
     </div>
   );
 }

@@ -46,18 +46,25 @@ export default function Profile() {
                 />
                 <br />
                 <div className={styles.profileText}>
-                  <p>
-                    <strong>First Name:</strong> {user.firstName}
-                  </p>
-                  <p>
-                    <strong>Last Name:</strong> {user.lastName}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {user.email}
-                  </p>
-                  <p>
-                    <strong>Role:</strong> {user.role}
-                  </p>
+                  <form>
+                    <label>First Name:</label>
+                    <input type="text" value={user.firstName} readOnly />
+                    <br />
+                    <br />
+
+                    <label>Last Name:</label>
+                    <input type="text" value={user.lastName} readOnly />
+                    <br />
+                    <br />
+
+                    <label>Email:</label>
+                    <input type="text" value={user.email} readOnly />
+                    <br />
+                    <br />
+
+                    <label>Role:</label>
+                    <input type="text" value={user.role} readOnly />
+                  </form>
                 </div>
               </div>
             </>
