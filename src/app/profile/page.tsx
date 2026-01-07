@@ -10,6 +10,8 @@ import { getUserLoggedIn } from "../../../firebase/employeeService";
 import UserAvatar from "@/components/components/userAvatar";
 import SideMenu from "@/components/components/sideMenu";
 import Loading from "@/components/components/loading";
+import { FloatingLabel, Form } from "react-bootstrap";
+import ButtonComp from "@/components/components/button";
 
 export default function Profile() {
   const router = useRouter();
@@ -47,7 +49,7 @@ export default function Profile() {
                 <UserAvatar
                   alt="User profile image"
                   user={user}
-                  avatarStyle={{ width: 140, height: 140 }}
+                  avatarStyle={{ width: 145, height: 145 }}
                 />
                 <br />
                 {/* User Information Section */}
@@ -55,30 +57,81 @@ export default function Profile() {
                   {user.firstName} {user.lastName}
                 </h2>
 
+                <span className={styles.roleBadge}>{user.role}</span>
+                <br />
+
                 <div className={styles.profileText}>
+                  {/* Form displaying user details */}
                   <form>
-                    <span className={styles.roleBadge}>{user.role}</span>
-                    <br />
-                    <br />
+                    {/* First Name Field */}
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="First Name"
+                      className="mb-3"
+                    >
+                      <Form.Control
+                        type="text"
+                        value={user.firstName}
+                        className={styles.input}
+                      />
+                    </FloatingLabel>
 
-                    <label>First Name:</label>
-                    <input type="text" value={user.firstName} readOnly />
-                    <br />
-                    <br />
+                    {/* Last Name Field */}
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Last Name"
+                      className="mb-3"
+                    >
+                      <Form.Control type="text" value={user.lastName} />
+                    </FloatingLabel>
 
-                    <label>Last Name:</label>
-                    <input type="text" value={user.lastName} readOnly />
-                    <br />
-                    <br />
+                    {/* Email Field */}
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Email"
+                      className="mb-3"
+                    >
+                      <Form.Control type="text" value={user.email} />
+                    </FloatingLabel>
 
-                    <label>Email:</label>
-                    <input type="text" value={user.email} readOnly />
-                    <br />
-                    <br />
-
-                    <label>Role:</label>
-                    <input type="text" value={user.role} readOnly />
+                    {/* Role Field */}
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Role"
+                      className="mb-3"
+                    >
+                      <Form.Control type="text" value={user.role} />
+                    </FloatingLabel>
                   </form>
+                </div>
+                <div className={styles.meta}>
+                  <span>Last login: 2 days ago</span>
+                  <span>Status: Active</span>
+                </div>
+                <br />
+                {/* Action Buttons */}
+                <div className={styles.buttonGroup}>
+                  {/* Close Button */}
+                  <ButtonComp
+                    text="Close"
+                    onClick={() => router.push("/profile")}
+                    style={{
+                      width: "auto",
+                      color: "#fff",
+                      background: "grey",
+                      marginRight: "0.5rem",
+                    }}
+                  />
+                  {/* Edit Profile Button */}
+                  <ButtonComp
+                    text="Update"
+                    style={{
+                      width: "auto",
+                      color: "#fff",
+                      background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+                    }}
+                    onClick={() => router.push("/profile/editProfile")}
+                  />
                 </div>
               </div>
             </>
@@ -86,13 +139,6 @@ export default function Profile() {
             <Loading />
           )}
         </div>
-        <br />
-
-        <Button variant="primary">Edit Profile</Button>
-        <br />
-        <Button variant="secondary" onClick={() => router.push("/login")}>
-          Logout
-        </Button>
       </div>
     </div>
   );
