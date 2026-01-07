@@ -39,14 +39,28 @@ export default function Profile() {
           {user ? (
             <>
               <div className={styles.profileContent}>
+                <p className={styles.welcome}>
+                  Welcome back, {user.firstName} 👋
+                </p>
+
+                {/* User Avatar Section */}
                 <UserAvatar
                   alt="User profile image"
                   user={user}
                   avatarStyle={{ width: 140, height: 140 }}
                 />
                 <br />
+                {/* User Information Section */}
+                <h2 className={styles.name}>
+                  {user.firstName} {user.lastName}
+                </h2>
+
                 <div className={styles.profileText}>
                   <form>
+                    <span className={styles.roleBadge}>{user.role}</span>
+                    <br />
+                    <br />
+
                     <label>First Name:</label>
                     <input type="text" value={user.firstName} readOnly />
                     <br />
