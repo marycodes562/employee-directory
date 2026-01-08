@@ -123,8 +123,10 @@ export default function Calender() {
           eventContent={(eventInfo) => {
             return (
               <>
-                <b>{eventInfo.timeText}</b>
-                <i>{eventInfo.event.title}</i>
+                <div className={Styles.eventContent}>
+                  <b>{eventInfo.timeText}</b>
+                  <i>{eventInfo.event.title}</i>
+                </div>
               </>
             );
           }}

@@ -270,7 +270,7 @@ export default function EmployeeInfo() {
         <SideMenu />
 
         <div className={Styles.main}>
-          <h3>Welcome back, {user && <>{user.firstName}</>}</h3>
+          <h3>Welcome back, {user && <>{user.firstName} 👋</>}</h3>
           <div className={Styles.sideMainContent}>
             <div className={Styles.contentandfilter}>
               <div className={Styles.headerContainer}>

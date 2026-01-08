@@ -33,7 +33,7 @@ export default function SideMenu() {
             Profile
           </Link>
         </li>
-        <li>
+        {/*<li>
           <Link
             className={`${Styles.menuLink} ${pathname === "/calender" ? Styles.listItem : ""}`}
             href="/calender"
@@ -41,14 +41,14 @@ export default function SideMenu() {
             <img src="/icons8-date-24.png" />
             Calender
           </Link>
-        </li>
+        </li>*/}
         <li>
           <Link
             className={`${Styles.menuLink} ${pathname === "/documents" ? Styles.listItem : ""}`}
             href="/documents"
           >
             <img src="/icons8-document-24.png" />
-            Documents
+            Announcements
           </Link>
         </li>
       </ul>

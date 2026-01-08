@@ -1,6 +1,16 @@
 .calendarContainer {
-  margin-left: 250px;
+  /*margin-left: 250px;*/
   padding: 20px;
-  width: 80%;
   background-color: #fff;
+  width: 47rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.eventContent {
+  background-color: #1187c2;
+  border-radius: 10px;
+  color: #fff;
+  padding: 5px;
+  border: none;
 }
