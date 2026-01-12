@@ -215,3 +215,9 @@ export const addEvent = async (eventsData) => {
   const docRef = await addDoc(eventsRef, eventsData);
   return docRef;
 };
+
+/*-------------------- Update event ----------------------- */
+export const updateEvent = async (id, updatedData) => {
+  const editDoc = doc(db, "events", id);
+  return await updateDoc(editDoc, updatedData);
+};
