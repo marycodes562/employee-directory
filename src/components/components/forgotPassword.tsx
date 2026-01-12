@@ -7,9 +7,9 @@ import { forgotPassword } from "../../../firebase/employeeService";
 import toast from "react-hot-toast";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import ButtonComp from "./button";
-import Styles from './forgotPassword.module.css';
+import Styles from "./forgotPassword.module.css";
 
-export default function ForgotPasswordModal({ show, handleClose }) {
+export default function ForgotPasswordModal({ show, handleClose }: any) {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async () => {
@@ -28,16 +28,13 @@ export default function ForgotPasswordModal({ show, handleClose }) {
   return (
     <div>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
+        <Modal.Header className={Styles.modalHeader} closeButton>
           <Modal.Title>Reset Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <FloatingLabel
-                controlId="emailAddress"
-                label="Email Address"
-                >
+              <FloatingLabel controlId="emailAddress" label="Email Address">
                 <Form.Control
                   type="email"
                   placeholder="email"
@@ -51,8 +48,26 @@ export default function ForgotPasswordModal({ show, handleClose }) {
         </Modal.Body>
         <Modal.Footer>
           <div className={Styles.buttonCont}>
-            <ButtonComp text="Cancel" style={{}} onClick={handleClose}/>
-            <ButtonComp text="Submit" style={{}} onClick={handleSubmit}/>
+            <ButtonComp
+              text="Cancel"
+              style={{
+                width: "auto",
+                color: "#fff",
+                background: "grey",
+                marginRight: "0.5rem",
+              }}
+              onClick={handleClose}
+            />
+
+            <ButtonComp
+              text="Submit"
+              style={{
+                width: "auto",
+                color: "#fff",
+                background: "linear-gradient(135deg, #6fc7c2, #a185ff)",
+              }}
+              onClick={handleSubmit}
+            />
           </div>
         </Modal.Footer>
       </Modal>
